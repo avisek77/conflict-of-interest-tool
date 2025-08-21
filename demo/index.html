@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contegrity COI Tool - Demo</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+    h1, h2 { color: #003366; }
+    .question-block { margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; }
+    .options { margin-left: 10px; }
+    .flag { padding: 10px; border-radius: 5px; margin-top: 10px; }
+    .flag.red { background-color: #ffcccc; border-left: 5px solid #cc0000; }
+    #report { display: none; margin-top: 30px; padding: 20px; border: 1px solid #444; }
+    button { padding: 10px 20px; background: #003366; color: white; border: none; border-radius: 5px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Conflict of Interest Self-Assessment</h1>
+
+  <div class="question-block">
+    <label for="q1">1. Do you have any personal financial interest related to this decision?</label>
+    <div class="options">
+      <input type="radio" name="q1" value="yes"> Yes<br />
+      <input type="radio" name="q1" value="no"> No
+    </div>
+  </div>
+
+  <div class="question-block">
+    <label for="q2">2. Do you have a close personal relationship with someone affected by this decision?</label>
+    <div class="options">
+      <input type="radio" name="q2" value="yes"> Yes<br />
+      <input type="radio" name="q2" value="no"> No
+    </div>
+  </div>
+
+  <button onclick="generateReport()">Generate Report</button>
+
+  <div id="report">
+    <h2>Your Conflict of Interest Report</h2>
+    <p><strong>Date:</strong> <span id="reportDate"></span></p>
+    <ul id="summary"></ul>
+    <div id="riskLevel"></div>
+  </div>
+
+  <script>
+    function generateReport() {
+      const responses = {
+        q1: document.querySelector('input[name="q1"]:checked')?.value || 'Not Answered',
+        q2: document.querySelector('input[name="q2"]:checked')?.value || 'Not Answered'
+      };
+
+      document.getElementById('reportDate').textContent = new Date().toLocaleDateString();
+
+      const summaryList = document.getElementById('summary');
+      summaryList.innerHTML = '';
+      for (let q in responses) {
+        const li = document.createElement('li');
+        li.textContent = `${q.toUpperCase()}: ${responses[q]}`;
+        summaryList.appendChild(li);
+      }
+
+      const riskBox = document.getElementById('riskLevel');
+      riskBox.innerHTML = '';
+      if (responses.q1 === 'yes' || responses.q2 === 'yes') {
+        riskBox.className = 'flag red';
+        riskBox.textContent = '⚠️ Potential Conflict Identified. Please seek advice.';
+      } else {
+        riskBox.className = '';
+        riskBox.textContent = '✅ No obvious conflict detected.';
+      }
+
+      const report = document.getElementById('report');
+      report.style.display = 'block';
+
+      html2pdf().from(report).save('Conflict_of_Interest_Report.pdf');
+    }
+  </script>
+</body>
+</html>
