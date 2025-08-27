@@ -1,9 +1,10 @@
 /* style.css */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #e0f7fa, #fff);
+  background: linear-gradient(135deg, #ccffe6, #fff);
   margin: 0;
-  padding: 20px;
+  padding: 50px;
+  padding-bottom: 164px;  /* Added some padding here because there was a weird interaction with the locally hosted website and colour, need to make it to scale of device used later */
   color: #222;
   animation: fadeIn 1s ease-in-out;
 }
@@ -19,11 +20,11 @@ body {
 
 h1 {
   text-align: center;
-  color: #0077b6;
+  color: #5fff5a;
 }
 
 .highlight {
-  color: #023e8a;
+  color: #198a02;
   font-weight: bold;
 }
 
@@ -35,9 +36,9 @@ h1 {
 }
 
 .info-box {
-  background-color: #f0f9ff;
+  background-color: #e6fff2;
   padding: 25px;
-  border: 2px solid #cce5ff;
+  border: 2px solid #a8ffb7;
   border-radius: 12px;
   margin-bottom: 30px;
   max-height: 400px;
@@ -47,7 +48,7 @@ h1 {
 }
 
 .info-box h2 {
-  color: #1d3557;
+  color: #0d4412;
   font-size: 1.5rem;
   margin-bottom: 15px;
 }
