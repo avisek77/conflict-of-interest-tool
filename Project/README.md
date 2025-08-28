@@ -8,3 +8,4 @@ please start doing project inside the project folder!!
 27/08/2025  - Revised the comments and made edits to the home page text
             - Made the web page Green instead of Blue as per Wendy's request (Feel free to make any changes as per you see fit)
 
+28/08/2025  - Added images files to the repository (I still need to fix the formatting)

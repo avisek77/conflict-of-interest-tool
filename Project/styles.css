@@ -20,7 +20,7 @@ body {
 
 h1 {
   text-align: center;
-  color: #5fff5a;
+  color: #3dbb38;
 }
 
 .highlight {
@@ -84,4 +84,12 @@ h1 {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0px;
+  width: 5%;
+  display:block;
 }
