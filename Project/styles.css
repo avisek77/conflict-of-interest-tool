@@ -4,7 +4,6 @@ body {
   background: linear-gradient(135deg, #ccffe6, #fff);
   margin: 0;
   padding: 50px;
-  padding-bottom: 164px;  /* Added some padding here because there was a weird interaction with the locally hosted website and colour, need to make it to scale of device used later */
   color: #222;
   animation: fadeIn 1s ease-in-out;
 }
@@ -89,7 +88,43 @@ h1 {
 img {
   border: 1px solid #ddd;
   border-radius: 4px;
-  padding: 0px;
   width: 5%;
   display:block;
+}
+
+.home-button {
+  display: block;
+  margin: 30px fixed 0;
+  padding: 12px 28px;
+  font-size: 1rem;
+  background: #0077b6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.back-button {
+  text-align: left;
+  padding: 12px 28px;
+  font-size: 1rem;
+  background: #0077b6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.next-button {
+  text-align: right;
+  padding: 12px 28px;
+  font-size: 1rem;
+  background: #0077b6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }

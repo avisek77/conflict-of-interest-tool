@@ -9,3 +9,5 @@ please start doing project inside the project folder!!
             - Made the web page Green instead of Blue as per Wendy's request (Feel free to make any changes as per you see fit)
 
 28/08/2025  - Added images files to the repository (I still need to fix the formatting)
+
+30/08/2025  - Began adding a new Page to begin the survey
