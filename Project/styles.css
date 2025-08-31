@@ -63,19 +63,6 @@ h1 {
   text-decoration: underline;
 }
 
-.next-button {
-  display: block;
-  margin: 30px auto 0;
-  padding: 12px 28px;
-  font-size: 1rem;
-  background: #0077b6;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
 .next-button:hover {
   background: #023e8a;
 }
@@ -92,39 +79,54 @@ img {
   display:block;
 }
 
-.home-button {
-  display: block;
-  margin: 30px fixed 0;
-  padding: 12px 28px;
-  font-size: 1rem;
-  background: #0077b6;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
+/* Buttons */
+  .home-button {
+    display: block;
+    margin: 30px fixed 0;
+    padding: 12px 28px;
+    font-size: 1rem;
+    background: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
 
-.back-button {
-  text-align: left;
-  padding: 12px 28px;
-  font-size: 1rem;
-  background: #0077b6;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
+  .back-button {
+    text-align: left;
+    padding: 12px 28px;
+    font-size: 1rem;
+    background: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
 
-.next-button {
-  text-align: left;
-  padding: 12px 28px;
-  font-size: 1rem;
-  background: #0077b6;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
+  .next-button {
+    margin-left: 674px;  /* This specific line is quite janky and will need to fix later */
+    text-align: right;
+    padding: 12px 28px;
+    font-size: 1rem;
+    background: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .Start_Survey-button {
+    display: block;
+    margin: 30px auto 0;
+    padding: 12px 28px;
+    font-size: 1rem;
+    background: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }

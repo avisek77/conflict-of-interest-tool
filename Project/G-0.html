@@ -16,7 +16,7 @@
 
 <body>
   <div class="container">
-    <img src="C-icon.jpg" id = "C-icon">
+    <img src="C-icon.jpg" id = "C-icon"> </img>
 
     <h1><span class="highlight">CONTEGRITY</span></h1>
 
@@ -45,21 +45,25 @@
 
     <a href = "index.html" style="text-decoration: none;">
       <button class="back-button">← Back</button>
-    </href>
+    <a href>
 
     <a href = "G-1.html" style="text-decoration: none;" >
       <button class="next-button">Next ➝</button>
-    </href>
+    </a href>
 
-    <!-- The next button doesn't seem to be formatting correctly, isn't registering under the .next-button class in css -->
+    <form>
+      <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+      <label for="Terms_And_Conditions"> I Accept</label>
+    </form>
 
     <!-- <button class="next-button" onclick="alert('Proceeding to Section 1 Questions...')">Start Survey ➝</button> -->
 
     <!-- 
-      I've disabled the "Next" button so that when the user clicks an "I accept radio button" 
-      the button would then become available and they user will be able to proceed with the survey
-    -->
+      IF The "I Accept" Checkbox isn't selected then the Users can't proceed, possibly an alert
+      at the top of the page?
 
+      Also need to align the checkbox between the "Next Button" & "Back Button"
+    -->
   </div>
 </body>
 </html>
