@@ -154,6 +154,7 @@ img {
   min-height: 80px;
   box-sizing: border-box;
   overflow: hidden;
+  white-space: inherit;
 }
 
 .form-group textarea:focus {
