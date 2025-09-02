@@ -11,8 +11,19 @@ document.addEventListener('DOMContentLoaded', function() {
       // Handle navigation when Next button is clicked
       nextButton.addEventListener('click', function() {
         if (!this.disabled) {
-          alert('Proceeding to Section 2 Questions...');
           window.location.href = 'G-1.html';
         }
       });
     });
+
+// Adjusts the height of the textbox based on the amount of text
+document.addEventListener('DOMContentLoaded', function() {
+  const textareas = document.querySelectorAll('textarea');
+  
+  textareas.forEach(textarea => {
+    textarea.addEventListener('input', () => {
+      textarea.style.height = 'auto'; 
+      textarea.style.height = textarea.scrollHeight + 'px'; 
+    });
+  });
+});

@@ -132,7 +132,7 @@ img {
     transition: background 0.3s ease;
   }
 
-  .form-group {
+.form-group {
   margin-bottom: 1.5rem;
 }
 
@@ -150,9 +150,10 @@ img {
   border-radius: 4px;
   font-family: inherit;
   font-size: 1rem;
-  resize: vertical;
+  resize: none;
   min-height: 80px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .form-group textarea:focus {
