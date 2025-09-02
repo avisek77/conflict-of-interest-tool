@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contegrity Tool – Section 1</title>
+  <title>Contegrity Tool – Section 0</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -41,23 +41,22 @@
 
     </div>
 
-    <form style = "text-align: center;">
+    <div class="checkbox-container">
         <input type="checkbox" id="Terms_And_Conditions_Checkbox">
-        <label for "Terms_And_Conditions_Checkbox"> I Accept</label>
-    </form>
+        <label for="Terms_And_Conditions_Checkbox">I Accept the Terms and Conditions</label>
+    </div>
 
+    <div class="button-container">
+      <a href="index.html" style="text-decoration: none;">
+        <button class="back-button">← Back</button>
+      </a>
 
-    <a href = "index.html" style="text-decoration: none;">
-      <button class="back-button">← Back</button>
-    <a href>
-
-    <a href = "G-1.html" style="text-decoration: none;" >
-      <button class="next-button" onclick="alert('Proceeding to Section 2 Questions...')">Next ➝</button>
-    </a href>
-
+      <button id="next-button" class="next-button" disabled>Next ➝</button>
+    </div>
 
     <!-- <button class="next-button" onclick="alert('Proceeding to Section 1 Questions...')">Start Survey ➝</button> -->
    
   </div>
+  <script src="main.js"></script>
 </body>
 </html>
