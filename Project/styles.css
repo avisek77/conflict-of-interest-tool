@@ -106,16 +106,17 @@ img {
   }
 
   .next-button {
-    margin-left: 674px;  /* This specific line is quite janky and will need to fix later */
-    text-align: right;
-    padding: 12px 28px;
-    font-size: 1rem;
-    background: #0077b6;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
+  margin-left: auto;
+  text-align: right;
+  padding: 12px 28px;
+  font-size: 1rem;
+  background: #0077b6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
   }
 
   .Start_Survey-button {
@@ -130,3 +131,70 @@ img {
     cursor: pointer;
     transition: background 0.3s ease;
   }
+
+  .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 80px;
+  box-sizing: border-box;
+}
+
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+/* New styles for centered checkbox */
+.checkbox-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2); /* Slightly larger checkbox */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .button-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .next-button {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .back-button {
+    width: 100%;
+    text-align: center;
+  }
+}

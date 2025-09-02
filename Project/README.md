@@ -11,3 +11,6 @@ please start doing project inside the project folder!!
 28/08/2025  - Added images files to the repository (I still need to fix the formatting)
 
 30/08/2025  - Began adding a new Page to begin the survey
+
+02/09/2025  - Added G-1 for Q-5 until Q-8
+|   |   |   - Minor Fix to the "Terms and Conditions" checkbox (Still need to display checkbox)

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contegrity Tool – Section G-1</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* G-1 specific styles */
+    .g1-container .info-box {
+      max-height: none;
+      overflow-y: visible;
+      min-height: 500px;
+    }
+    
+    .g1-container .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    
+    .g1-container .back-button,
+    .g1-container .next-button {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container g1-container">
+    <img src="C-icon.jpg" id="C-icon" alt="Contegrity Icon">
+
+    <h1><span class="highlight">CONTEGRITY</span></h1>
+
+    <p class="intro">
+      CONTEGRITY has been written as though you are considering a new activity that could create a conflict of interest.
+    </p>
+
+    <div class="info-box">
+      <p>
+        CONTEGRITY has been written as though you are considering a new activity that could create a conflict of interest. A new activity can be a new role, relationship, agreement, etc.<br><br>
+        CONTEGRITY can also be used to reflect on situations in which you may already have a conflict of interest, and/or in which you are considering taking on several activities simultaneously. Here you should choose one activity as if it were new.<br><br>
+        If you are completing this on behalf of an organisation, consider "you" to mean your organisation in the following questions.
+      </p>
+
+      <form id="g1-form">
+        <div class="form-group">
+          <label for="activity">1. What is the new activity you are considering and what, in broad terms, would it entail?</label>
+          <textarea id="activity" name="activity" rows="4" placeholder="Describe the activity..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="duration">2. How long would the activity last? (e.g. is it time-limited or ongoing?)</label>
+          <textarea id="duration" name="duration" rows="3" placeholder="Describe the duration..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="organizations">3. What, if any, external organisations would you be engaging with? (e.g. commercial, government or non-government organisations).</label>
+          <textarea id="organizations" name="organizations" rows="3" placeholder="List organizations..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="contracts">4. What, if any, contractual arrangements will be entered into?</label>
+          <textarea id="contracts" name="contracts" rows="3" placeholder="Describe contractual arrangements..."></textarea>
+        </div>
+      </form>
+    </div>
+
+    <div class="button-container">
+      <a href="G-0.html" style="text-decoration: none;">
+        <button class="back-button">← Back</button>
+      </a>
+      
+      <a href="G-2.html" style="text-decoration: none;">
+        <button class="next-button">Next ➝</button>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

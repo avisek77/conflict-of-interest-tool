@@ -1,6 +1,18 @@
-    <script>
-        function G-0_Checkbox_Change() {
-          checkbox = document.getElementById('Terms_And_Conditions_Checkbox')           
-            // IF The "I Accept" Checkbox isn't selected then the Users can't proceed, possibly an alert could display?
-          }
-    </script>
+// "I Accept checkbox"
+document.addEventListener('DOMContentLoaded', function() {
+      const checkbox = document.getElementById('Terms_And_Conditions_Checkbox');
+      const nextButton = document.getElementById('next-button');
+      
+      // Enable/disable Next button based on checkbox state
+      checkbox.addEventListener('change', function() {
+        nextButton.disabled = !this.checked;
+      });
+      
+      // Handle navigation when Next button is clicked
+      nextButton.addEventListener('click', function() {
+        if (!this.disabled) {
+          alert('Proceeding to Section 2 Questions...');
+          window.location.href = 'G-1.html';
+        }
+      });
+    });
