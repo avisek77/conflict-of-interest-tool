@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contegrity Tool – Section G-5</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* G-5 specific styles */
+    .g5-container .info-box {
+      max-height: none;
+      overflow-y: visible;
+      min-height: 800px;
+    }
+    
+    .g5-container .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    
+    .g5-container .back-button,
+    .g5-container .next-button {
+      margin: 0;
+    }
+
+    .indent {
+      margin-left: 2rem;
+      padding-left: 1rem;
+      border-left: 3px solid #a8ffb7;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 1rem;
+      margin: 0.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+      margin-bottom: 0;
+    }
+
+    .radio-group input[type="radio"] {
+      margin-right: 0.5rem;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+      margin-bottom: 0;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      margin-right: 0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container g5-container">
+    <img src="C-icon.jpg" id="C-icon" alt="Contegrity Icon">
+
+    <h1><span class="highlight">CONTEGRITY</span></h1>
+
+    <p class="intro">
+      Section G-5: Developing a management plan
+    </p>
+
+    <div class="info-box">
+      <p>
+        This section helps you develop a plan for managing the conflict of interest. Consider strategies for avoidance, minimisation, disclosure, monitoring, and compliance.
+      </p>
+
+      <form id="g5-form">
+        
+        <div class="form-group">
+          <label for="q27">27. Can the conflict of interest be avoided entirely?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q27" value="yes"> Yes</label>
+            <label><input type="radio" name="q27" value="no"> No</label>
+            <label><input type="radio" name="q27" value="unsure"> Unsure</label>
+          </div>
+          <div class="indent" data-show-if="q27=yes">
+            <label for="q27_how">How can the conflict be avoided?</label>
+            <textarea id="q27_how" name="q27_how" rows="3" placeholder="Describe how the conflict can be avoided..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="q28">28. If the conflict cannot be avoided, can it be minimised?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q28" value="yes"> Yes</label>
+            <label><input type="radio" name="q28" value="no"> No</label>
+            <label><input type="radio" name="q28" value="unsure"> Unsure</label>
+          </div>
+          <div class="indent" data-show-if="q28=yes">
+            <label for="q28_how">How can the conflict be minimised?</label>
+            <textarea id="q28_how" name="q28_how" rows="3" placeholder="Describe how the conflict can be minimised..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="q29">29. What management strategies could be implemented?</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="q29_strategies" value="disclosure"> Disclosure to relevant parties</label>
+            <label><input type="checkbox" name="q29_strategies" value="supervision"> Independent supervision or oversight</label>
+            <label><input type="checkbox" name="q29_strategies" value="separation"> Separation of roles or responsibilities</label>
+            <label><input type="checkbox" name="q29_strategies" value="recusal"> Recusal from decision-making</label>
+            <label><input type="checkbox" name="q29_strategies" value="monitoring"> Regular monitoring and review</label>
+            <label><input type="checkbox" name="q29_strategies" value="other"> Other strategies</label>
+          </div>
+          <div class="indent" data-show-if="q29_strategies=other">
+            <label for="q29_other">Please describe other management strategies:</label>
+            <textarea id="q29_other" name="q29_other" rows="3" placeholder="Describe other management strategies..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="q30">30. To whom should the conflict of interest be disclosed?</label>
+          <textarea id="q30" name="q30" rows="4" placeholder="Identify who should be informed of the conflict..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q31">31. When should disclosure occur?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q31" value="immediately"> Immediately</label>
+            <label><input type="radio" name="q31" value="before_activity"> Before commencing the activity</label>
+            <label><input type="radio" name="q31" value="ongoing"> On an ongoing basis</label>
+            <label><input type="radio" name="q31" value="other"> Other timing</label>
+          </div>
+          <div class="indent" data-show-if="q31=other">
+            <label for="q31_timing">Please specify the timing for disclosure:</label>
+            <textarea id="q31_timing" name="q31_timing" rows="2" placeholder="Specify timing for disclosure..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="q32">32. How will the management of this conflict be monitored?</label>
+          <textarea id="q32" name="q32" rows="4" placeholder="Describe monitoring arrangements..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q33">33. Who will be responsible for monitoring compliance?</label>
+          <textarea id="q33" name="q33" rows="3" placeholder="Identify who will monitor compliance..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q34">34. How often will the management plan be reviewed?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q34" value="monthly"> Monthly</label>
+            <label><input type="radio" name="q34" value="quarterly"> Quarterly</label>
+            <label><input type="radio" name="q34" value="annually"> Annually</label>
+            <label><input type="radio" name="q34" value="as_needed"> As needed</label>
+            <label><input type="radio" name="q34" value="other"> Other frequency</label>
+          </div>
+          <div class="indent" data-show-if="q34=other">
+            <label for="q34_frequency">Please specify the review frequency:</label>
+            <textarea id="q34_frequency" name="q34_frequency" rows="2" placeholder="Specify review frequency..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="q35">35. What documentation will be maintained regarding this conflict and its management?</label>
+          <textarea id="q35" name="q35" rows="4" placeholder="Describe documentation requirements..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q36">36. Are there any legal or regulatory requirements that must be considered?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q36" value="yes"> Yes</label>
+            <label><input type="radio" name="q36" value="no"> No</label>
+            <label><input type="radio" name="q36" value="unsure"> Unsure</label>
+          </div>
+          <div class="indent" data-show-if="q36=yes||q36=unsure">
+            <label for="q36_details">Please describe the legal or regulatory requirements:</label>
+            <textarea id="q36_details" name="q36_details" rows="3" placeholder="Describe legal or regulatory requirements..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="q37">37. Based on your analysis, what is your overall assessment of this conflict of interest?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q37" value="proceed"> Proceed with the activity as planned</label>
+            <label><input type="radio" name="q37" value="proceed_managed"> Proceed with management strategies in place</label>
+            <label><input type="radio" name="q37" value="seek_advice"> Seek additional advice before proceeding</label>
+            <label><input type="radio" name="q37" value="do_not_proceed"> Do not proceed with the activity</label>
+            <label><input type="radio" name="q37" value="other"> Other recommendation</label>
+          </div>
+          <div class="indent" data-show-if="q37=proceed_managed||q37=seek_advice||q37=other">
+            <label for="q37_rationale">Please provide your rationale for this assessment:</label>
+            <textarea id="q37_rationale" name="q37_rationale" rows="4" placeholder="Provide rationale for your assessment..."></textarea>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="button-container">
+      <a href="G-4.html" style="text-decoration: none;">
+        <button class="back-button">← Back</button>
+      </a>
+      
+      <button class="next-button" onclick="alert('Survey Complete! Thank you for using CONTEGRITY.')">Complete Survey ➝</button>
+    </div>
+  
+    <script src="main.js"></script>
+
+  </div>
+</body>
+</html>

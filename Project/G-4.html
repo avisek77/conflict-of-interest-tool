@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contegrity Tool – Section G-4</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* G-4 specific styles */
+    .g4-container .info-box {
+      max-height: none;
+      overflow-y: visible;
+      min-height: 600px;
+    }
+    
+    .g4-container .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    
+    .g4-container .back-button,
+    .g4-container .next-button {
+      margin: 0;
+    }
+
+    .indent {
+      margin-left: 2rem;
+      padding-left: 1rem;
+      border-left: 3px solid #a8ffb7;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 1rem;
+      margin: 0.5rem 0;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+      margin-bottom: 0;
+    }
+
+    .radio-group input[type="radio"] {
+      margin-right: 0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container g4-container">
+    <img src="C-icon.jpg" id="C-icon" alt="Contegrity Icon">
+
+    <h1><span class="highlight">CONTEGRITY</span></h1>
+
+    <p class="intro">
+      Section G-4: Risks associated with conflicts of interest
+    </p>
+
+    <div class="info-box">
+      <p>
+        This section focuses on the specific risks that may arise from conflicts of interest. Consider how the conflict might affect your judgement, independence, and the trust others place in you.
+      </p>
+
+      <form id="g4-form">
+        
+        <div class="form-group">
+          <label for="q21">21. Could the new activity compromise your professional judgement?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q21" value="yes"> Yes</label>
+            <label><input type="radio" name="q21" value="no"> No</label>
+            <label><input type="radio" name="q21" value="unsure"> Unsure</label>
+          </div>
+          <div class="indent" data-show-if="q21=yes||q21=unsure">
+            <label for="q21_details">Please explain how your judgement might be compromised:</label>
+            <textarea id="q21_details" name="q21_details" rows="3" placeholder="Explain how judgement might be compromised..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="q22">22. Could the new activity compromise your independence?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q22" value="yes"> Yes</label>
+            <label><input type="radio" name="q22" value="no"> No</label>
+            <label><input type="radio" name="q22" value="unsure"> Unsure</label>
+          </div>
+          <div class="indent" data-show-if="q22=yes||q22=unsure">
+            <label for="q22_details">Please explain how your independence might be compromised:</label>
+            <textarea id="q22_details" name="q22_details" rows="3" placeholder="Explain how independence might be compromised..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="q23">23. Could the new activity undermine trust in you or your organisation?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q23" value="yes"> Yes</label>
+            <label><input type="radio" name="q23" value="no"> No</label>
+            <label><input type="radio" name="q23" value="unsure"> Unsure</label>
+          </div>
+          <div class="indent" data-show-if="q23=yes||q23=unsure">
+            <label for="q23_details">Please explain how trust might be undermined:</label>
+            <textarea id="q23_details" name="q23_details" rows="3" placeholder="Explain how trust might be undermined..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="q24">24. Could the new activity create unfair advantage or disadvantage for any party?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q24" value="yes"> Yes</label>
+            <label><input type="radio" name="q24" value="no"> No</label>
+            <label><input type="radio" name="q24" value="unsure"> Unsure</label>
+          </div>
+          <div class="indent" data-show-if="q24=yes||q24=unsure">
+            <label for="q24_details">Please explain what unfair advantages or disadvantages might arise:</label>
+            <textarea id="q24_details" name="q24_details" rows="3" placeholder="Explain unfair advantages or disadvantages..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="q25">25. Could the new activity result in misuse of your position, resources, or information?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q25" value="yes"> Yes</label>
+            <label><input type="radio" name="q25" value="no"> No</label>
+            <label><input type="radio" name="q25" value="unsure"> Unsure</label>
+          </div>
+          <div class="indent" data-show-if="q25=yes||q25=unsure">
+            <label for="q25_details">Please explain how misuse might occur:</label>
+            <textarea id="q25_details" name="q25_details" rows="3" placeholder="Explain how misuse might occur..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="q26">26. Are there any other risks associated with this conflict of interest?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q26" value="yes"> Yes</label>
+            <label><input type="radio" name="q26" value="no"> No</label>
+            <label><input type="radio" name="q26" value="unsure"> Unsure</label>
+          </div>
+          <div class="indent" data-show-if="q26=yes||q26=unsure">
+            <label for="q26_details">Please describe these other risks:</label>
+            <textarea id="q26_details" name="q26_details" rows="3" placeholder="Describe other risks..."></textarea>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="button-container">
+      <a href="G-3.html" style="text-decoration: none;">
+        <button class="back-button">← Back</button>
+      </a>
+      
+      <a href="G-5.html" style="text-decoration: none;">
+        <button class="next-button">Next ➝</button>
+      </a>
+    </div>
+  
+    <script src="main.js"></script>
+
+  </div>
+</body>
+</html>
