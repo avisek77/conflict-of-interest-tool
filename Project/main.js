@@ -15,15 +15,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     });
-
-// Adjusts the height of the textbox based on the amount of text
-document.addEventListener('DOMContentLoaded', function() {
-  const textareas = document.querySelectorAll('textarea');
-  
-  textareas.forEach(textarea => {
-    textarea.addEventListener('input', () => {
-      textarea.style.height = 'auto'; 
-      textarea.style.height = textarea.scrollHeight + 'px'; 
-    });
-  });
-});
