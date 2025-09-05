@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contegrity Tool – Section G-2</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* G-2 specific styles */
+    .g2-container .info-box {
+      max-height: none;
+      overflow-y: visible;
+      min-height: 600px;
+    }
+    
+    .g2-container .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    
+    .g2-container .back-button,
+    .g2-container .next-button {
+      margin: 0;
+    }
+
+    .indent {
+      margin-left: 2rem;
+      padding-left: 1rem;
+      border-left: 2px solid #a8ffb7;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container g2-container">
+    <img src="C-icon.jpg" id="C-icon" alt="Contegrity Icon">
+
+    <h1><span class="highlight">CONTEGRITY</span></h1>
+
+    <p class="intro">
+      Step 2 of 5 - Identifying conflicts of interest
+    </p>
+
+    <div class="info-box">
+      <p>
+        This section helps you to identify whether a conflict of interest exists. A conflict of interest exists when you have competing interests that could impair your judgement or decision-making, or when others could reasonably perceive that this might be the case.
+      </p>
+
+      <form id="g2-form">
+        
+        <div class="form-group">
+          <label for="q2_1">5. Do you have any personal interests that could be advanced by the new activity?</label>
+          <div class="options">
+            <input type="radio" name="q2_1" value="yes" id="q2_1_yes"> <label for="q2_1_yes">Yes</label><br>
+            <input type="radio" name="q2_1" value="no" id="q2_1_no"> <label for="q2_1_no">No</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q2_1=yes">
+          <label for="q2_1_details">Please describe these interests:</label>
+          <textarea id="q2_1_details" name="q2_1_details" rows="3" placeholder="Describe your personal interests..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q2_2">6. Do you have any personal interests that could be harmed by the new activity?</label>
+          <div class="options">
+            <input type="radio" name="q2_2" value="yes" id="q2_2_yes"> <label for="q2_2_yes">Yes</label><br>
+            <input type="radio" name="q2_2" value="no" id="q2_2_no"> <label for="q2_2_no">No</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q2_2=yes">
+          <label for="q2_2_details">Please describe these interests:</label>
+          <textarea id="q2_2_details" name="q2_2_details" rows="3" placeholder="Describe your personal interests..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q2_3">7. Do you have any professional interests that could be advanced by the new activity?</label>
+          <div class="options">
+            <input type="radio" name="q2_3" value="yes" id="q2_3_yes"> <label for="q2_3_yes">Yes</label><br>
+            <input type="radio" name="q2_3" value="no" id="q2_3_no"> <label for="q2_3_no">No</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q2_3=yes">
+          <label for="q2_3_details">Please describe these interests:</label>
+          <textarea id="q2_3_details" name="q2_3_details" rows="3" placeholder="Describe your professional interests..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q2_4">8. Do you have any professional interests that could be harmed by the new activity?</label>
+          <div class="options">
+            <input type="radio" name="q2_4" value="yes" id="q2_4_yes"> <label for="q2_4_yes">Yes</label><br>
+            <input type="radio" name="q2_4" value="no" id="q2_4_no"> <label for="q2_4_no">No</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q2_4=yes">
+          <label for="q2_4_details">Please describe these interests:</label>
+          <textarea id="q2_4_details" name="q2_4_details" rows="3" placeholder="Describe your professional interests..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q2_5">9. Do you have any financial interests that could be advanced by the new activity?</label>
+          <div class="options">
+            <input type="radio" name="q2_5" value="yes" id="q2_5_yes"> <label for="q2_5_yes">Yes</label><br>
+            <input type="radio" name="q2_5" value="no" id="q2_5_no"> <label for="q2_5_no">No</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q2_5=yes">
+          <label for="q2_5_details">Please describe these interests:</label>
+          <textarea id="q2_5_details" name="q2_5_details" rows="3" placeholder="Describe your financial interests..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q2_6">10. Do you have any financial interests that could be harmed by the new activity?</label>
+          <div class="options">
+            <input type="radio" name="q2_6" value="yes" id="q2_6_yes"> <label for="q2_6_yes">Yes</label><br>
+            <input type="radio" name="q2_6" value="no" id="q2_6_no"> <label for="q2_6_no">No</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q2_6=yes">
+          <label for="q2_6_details">Please describe these interests:</label>
+          <textarea id="q2_6_details" name="q2_6_details" rows="3" placeholder="Describe your financial interests..."></textarea>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="button-container">
+      <a href="G-1.html" style="text-decoration: none;">
+        <button class="back-button">← Back</button>
+      </a>
+      
+      <a href="G-3.html" style="text-decoration: none;">
+        <button class="next-button">Next ➝</button>
+      </a>
+    </div>
+  
+    <script src="main.js"></script>
+
+  </div>
+</body>
+</html>

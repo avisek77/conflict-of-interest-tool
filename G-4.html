@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contegrity Tool – Section G-4</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* G-4 specific styles */
+    .g4-container .info-box {
+      max-height: none;
+      overflow-y: visible;
+      min-height: 800px;
+    }
+    
+    .g4-container .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    
+    .g4-container .back-button,
+    .g4-container .next-button {
+      margin: 0;
+    }
+
+    .indent {
+      margin-left: 2rem;
+      padding-left: 1rem;
+      border-left: 2px solid #a8ffb7;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container g4-container">
+    <img src="C-icon.jpg" id="C-icon" alt="Contegrity Icon">
+
+    <h1><span class="highlight">CONTEGRITY</span></h1>
+
+    <p class="intro">
+      Step 4 of 5 - Risks associated with conflicts of interest
+    </p>
+
+    <div class="info-box">
+      <p>
+        This section helps you to identify and assess the specific risks that may arise from any conflicts of interest.
+      </p>
+
+      <form id="g4-form">
+        
+        <div class="form-group">
+          <label for="q4_1">21. Could the conflict of interest compromise your professional judgement?</label>
+          <div class="options">
+            <input type="radio" name="q4_1" value="yes" id="q4_1_yes"> <label for="q4_1_yes">Yes</label><br>
+            <input type="radio" name="q4_1" value="no" id="q4_1_no"> <label for="q4_1_no">No</label><br>
+            <input type="radio" name="q4_1" value="unsure" id="q4_1_unsure"> <label for="q4_1_unsure">Unsure</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q4_1=yes||q4_1=unsure">
+          <label for="q4_1_details">Please explain how:</label>
+          <textarea id="q4_1_details" name="q4_1_details" rows="3" placeholder="Explain how your judgement could be compromised..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q4_2">22. Could the conflict of interest compromise your professional independence?</label>
+          <div class="options">
+            <input type="radio" name="q4_2" value="yes" id="q4_2_yes"> <label for="q4_2_yes">Yes</label><br>
+            <input type="radio" name="q4_2" value="no" id="q4_2_no"> <label for="q4_2_no">No</label><br>
+            <input type="radio" name="q4_2" value="unsure" id="q4_2_unsure"> <label for="q4_2_unsure">Unsure</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q4_2=yes||q4_2=unsure">
+          <label for="q4_2_details">Please explain how:</label>
+          <textarea id="q4_2_details" name="q4_2_details" rows="3" placeholder="Explain how your independence could be compromised..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q4_3">23. Could the conflict of interest compromise your ability to act in the best interests of those you serve?</label>
+          <div class="options">
+            <input type="radio" name="q4_3" value="yes" id="q4_3_yes"> <label for="q4_3_yes">Yes</label><br>
+            <input type="radio" name="q4_3" value="no" id="q4_3_no"> <label for="q4_3_no">No</label><br>
+            <input type="radio" name="q4_3" value="unsure" id="q4_3_unsure"> <label for="q4_3_unsure">Unsure</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q4_3=yes||q4_3=unsure">
+          <label for="q4_3_details">Please explain how:</label>
+          <textarea id="q4_3_details" name="q4_3_details" rows="3" placeholder="Explain how your ability to serve others could be compromised..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q4_4">24. Could the conflict of interest damage trust in you?</label>
+          <div class="options">
+            <input type="radio" name="q4_4" value="yes" id="q4_4_yes"> <label for="q4_4_yes">Yes</label><br>
+            <input type="radio" name="q4_4" value="no" id="q4_4_no"> <label for="q4_4_no">No</label><br>
+            <input type="radio" name="q4_4" value="unsure" id="q4_4_unsure"> <label for="q4_4_unsure">Unsure</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q4_4=yes||q4_4=unsure">
+          <label for="q4_4_details">Please explain how:</label>
+          <textarea id="q4_4_details" name="q4_4_details" rows="3" placeholder="Explain how trust could be damaged..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q4_5">25. Could the conflict of interest damage trust in your organisation?</label>
+          <div class="options">
+            <input type="radio" name="q4_5" value="yes" id="q4_5_yes"> <label for="q4_5_yes">Yes</label><br>
+            <input type="radio" name="q4_5" value="no" id="q4_5_no"> <label for="q4_5_no">No</label><br>
+            <input type="radio" name="q4_5" value="unsure" id="q4_5_unsure"> <label for="q4_5_unsure">Unsure</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q4_5=yes||q4_5=unsure">
+          <label for="q4_5_details">Please explain how:</label>
+          <textarea id="q4_5_details" name="q4_5_details" rows="3" placeholder="Explain how trust in your organisation could be damaged..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q4_6">26. Could the conflict of interest damage trust in your profession more broadly?</label>
+          <div class="options">
+            <input type="radio" name="q4_6" value="yes" id="q4_6_yes"> <label for="q4_6_yes">Yes</label><br>
+            <input type="radio" name="q4_6" value="no" id="q4_6_no"> <label for="q4_6_no">No</label><br>
+            <input type="radio" name="q4_6" value="unsure" id="q4_6_unsure"> <label for="q4_6_unsure">Unsure</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q4_6=yes||q4_6=unsure">
+          <label for="q4_6_details">Please explain how:</label>
+          <textarea id="q4_6_details" name="q4_6_details" rows="3" placeholder="Explain how trust in your profession could be damaged..."></textarea>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="button-container">
+      <a href="G-3.html" style="text-decoration: none;">
+        <button class="back-button">← Back</button>
+      </a>
+      
+      <a href="G-5.html" style="text-decoration: none;">
+        <button class="next-button">Next ➝</button>
+      </a>
+    </div>
+  
+    <script src="main.js"></script>
+
+  </div>
+</body>
+</html>

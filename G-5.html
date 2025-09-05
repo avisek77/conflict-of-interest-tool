@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contegrity Tool – Section G-5</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* G-5 specific styles */
+    .g5-container .info-box {
+      max-height: none;
+      overflow-y: visible;
+      min-height: 900px;
+    }
+    
+    .g5-container .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    
+    .g5-container .back-button,
+    .g5-container .next-button {
+      margin: 0;
+    }
+
+    .indent {
+      margin-left: 2rem;
+      padding-left: 1rem;
+      border-left: 2px solid #a8ffb7;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container g5-container">
+    <img src="C-icon.jpg" id="C-icon" alt="Contegrity Icon">
+
+    <h1><span class="highlight">CONTEGRITY</span></h1>
+
+    <p class="intro">
+      Step 5 of 5 - Developing a management plan
+    </p>
+
+    <div class="info-box">
+      <p>
+        This final section helps you to develop a comprehensive plan for managing any conflicts of interest that have been identified.
+      </p>
+
+      <form id="g5-form">
+        
+        <div class="form-group">
+          <label for="q5_1">27. What steps could you take to avoid the conflict of interest?</label>
+          <textarea id="q5_1" name="q5_1" rows="4" placeholder="Describe steps to avoid the conflict..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q5_2">28. What steps could you take to minimise the conflict of interest?</label>
+          <textarea id="q5_2" name="q5_2" rows="4" placeholder="Describe steps to minimise the conflict..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q5_3">29. What steps could you take to manage the conflict of interest?</label>
+          <textarea id="q5_3" name="q5_3" rows="4" placeholder="Describe steps to manage the conflict..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q5_4">30. Who should be informed about the conflict of interest?</label>
+          <textarea id="q5_4" name="q5_4" rows="4" placeholder="List who should be informed..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q5_5">31. How should they be informed?</label>
+          <textarea id="q5_5" name="q5_5" rows="4" placeholder="Describe how they should be informed..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q5_6">32. When should they be informed?</label>
+          <textarea id="q5_6" name="q5_6" rows="3" placeholder="Describe timing for disclosure..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q5_7">33. What ongoing monitoring or review processes should be put in place?</label>
+          <textarea id="q5_7" name="q5_7" rows="4" placeholder="Describe monitoring and review processes..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q5_8">34. Are there any legal or regulatory requirements that need to be considered?</label>
+          <div class="options">
+            <input type="radio" name="q5_8" value="yes" id="q5_8_yes"> <label for="q5_8_yes">Yes</label><br>
+            <input type="radio" name="q5_8" value="no" id="q5_8_no"> <label for="q5_8_no">No</label><br>
+            <input type="radio" name="q5_8" value="unsure" id="q5_8_unsure"> <label for="q5_8_unsure">Unsure</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q5_8=yes||q5_8=unsure">
+          <label for="q5_8_details">Please describe these requirements:</label>
+          <textarea id="q5_8_details" name="q5_8_details" rows="4" placeholder="Describe legal or regulatory requirements..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q5_9">35. Are there any organisational policies or procedures that need to be followed?</label>
+          <div class="options">
+            <input type="radio" name="q5_9" value="yes" id="q5_9_yes"> <label for="q5_9_yes">Yes</label><br>
+            <input type="radio" name="q5_9" value="no" id="q5_9_no"> <label for="q5_9_no">No</label><br>
+            <input type="radio" name="q5_9" value="unsure" id="q5_9_unsure"> <label for="q5_9_unsure">Unsure</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q5_9=yes||q5_9=unsure">
+          <label for="q5_9_details">Please describe these policies or procedures:</label>
+          <textarea id="q5_9_details" name="q5_9_details" rows="4" placeholder="Describe organisational policies or procedures..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q5_10">36. What is your overall assessment of whether you should proceed with the new activity?</label>
+          <div class="options">
+            <input type="radio" name="q5_10" value="proceed" id="q5_10_proceed"> <label for="q5_10_proceed">Proceed with the activity</label><br>
+            <input type="radio" name="q5_10" value="proceed_conditions" id="q5_10_conditions"> <label for="q5_10_conditions">Proceed with conditions</label><br>
+            <input type="radio" name="q5_10" value="not_proceed" id="q5_10_not"> <label for="q5_10_not">Do not proceed</label><br>
+            <input type="radio" name="q5_10" value="seek_advice" id="q5_10_advice"> <label for="q5_10_advice">Seek further advice</label>
+          </div>
+        </div>
+
+        <div class="form-group indent" data-show-if="q5_10=proceed_conditions">
+          <label for="q5_10_conditions_details">Please describe the conditions:</label>
+          <textarea id="q5_10_conditions_details" name="q5_10_conditions_details" rows="4" placeholder="Describe the conditions for proceeding..."></textarea>
+        </div>
+
+        <div class="form-group indent" data-show-if="q5_10=not_proceed">
+          <label for="q5_10_reasons">Please explain your reasons:</label>
+          <textarea id="q5_10_reasons" name="q5_10_reasons" rows="4" placeholder="Explain why you should not proceed..."></textarea>
+        </div>
+
+        <div class="form-group indent" data-show-if="q5_10=seek_advice">
+          <label for="q5_10_advice_details">What advice do you need and from whom?</label>
+          <textarea id="q5_10_advice_details" name="q5_10_advice_details" rows="4" placeholder="Describe what advice you need and from whom..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q5_11">37. Additional comments or considerations:</label>
+          <textarea id="q5_11" name="q5_11" rows="4" placeholder="Any additional comments or considerations..."></textarea>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="button-container">
+      <a href="G-4.html" style="text-decoration: none;">
+        <button class="back-button">← Back</button>
+      </a>
+      
+      <button class="next-button" onclick="completeSurvey()">Complete Survey ➝</button>
+    </div>
+  
+    <script src="main.js"></script>
+    <script>
+      function completeSurvey() {
+        alert('Thank you for completing the Contegrity survey. Your responses have been recorded.');
+        // In a real implementation, this would save/submit the data
+        window.location.href = 'index.html';
+      }
+    </script>
+
+  </div>
+</body>
+</html>
