@@ -213,10 +213,48 @@
         <button class="back-button">← Back</button>
       </a>
       
-      <button class="next-button" onclick="alert('Survey Complete! Thank you for using CONTEGRITY.')">Complete Survey ➝</button>
+      <button id="g5-complete-button" class="next-button">Complete Survey ➝</button>
     </div>
   
     <script src="main.js"></script>
+    <script>
+      // Handle completion based on Q37 response
+      document.getElementById('g5-complete-button').addEventListener('click', function() {
+        const q37Value = document.querySelector('input[name="q37"]:checked');
+        
+        if (!q37Value) {
+          alert('Please complete your final assessment before finishing.');
+          return;
+        }
+        
+        let completionMessage = '';
+        
+        switch(q37Value.value) {
+          case 'proceed':
+            completionMessage = 'Based on your assessment, you may proceed with the activity as planned. Thank you for using CONTEGRITY.';
+            break;
+          case 'proceed_managed':
+            completionMessage = 'Based on your assessment, you may proceed with the activity using the management strategies you have identified. Thank you for using CONTEGRITY.';
+            break;
+          case 'seek_advice':
+            completionMessage = 'Based on your assessment, you should seek additional advice before proceeding with this activity. Thank you for using CONTEGRITY.';
+            break;
+          case 'do_not_proceed':
+            completionMessage = 'Based on your assessment, you have decided not to proceed with this activity. Thank you for using CONTEGRITY.';
+            break;
+          case 'other':
+            completionMessage = 'Thank you for completing the CONTEGRITY assessment. Please review your responses and take appropriate action based on your assessment.';
+            break;
+          default:
+            completionMessage = 'Survey Complete! Thank you for using CONTEGRITY.';
+        }
+        
+        alert(completionMessage);
+        
+        // Could redirect to a completion page or generate PDF report here
+        // For now, just show the completion message
+      });
+    </script>
 
   </div>
 </body>

@@ -107,4 +107,85 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initial evaluation
   handleSkipLogic();
+
+  // Enhanced skip logic for complex branching based on PDF logic document
+  function handleComplexSkipLogic() {
+    // Question 10 branching logic
+    const q10Value = getFormValue('q10');
+    
+    // If Q10 = "no", skip to potential conflicts section
+    if (q10Value === 'no') {
+      // Hide sections G-3, G-4, G-5 and show potential conflicts questions
+      hideSection('g3-form');
+      hideSection('g4-form');
+      hideSection('g5-form');
+      // Would show potential conflicts section if it exists
+    }
+    
+    // Question 37 final assessment logic
+    const q37Value = getFormValue('q37');
+    
+    if (q37Value === 'do_not_proceed') {
+      // If "do not proceed", show completion message
+      showCompletionMessage('Based on your assessment, you have decided not to proceed with this activity.');
+    } else if (q37Value === 'seek_advice') {
+      // If "seek advice", show recommendation to consult
+      showCompletionMessage('Based on your assessment, you should seek additional advice before proceeding.');
+    }
+  }
+
+  function getFormValue(fieldName) {
+    // Check radio buttons
+    const radioButton = document.querySelector(`input[name="${fieldName}"]:checked`);
+    if (radioButton) {
+      return radioButton.value;
+    }
+    
+    // Check text inputs
+    const textInput = document.querySelector(`input[name="${fieldName}"], textarea[name="${fieldName}"], select[name="${fieldName}"]`);
+    if (textInput) {
+      return textInput.value;
+    }
+    
+    return null;
+  }
+
+  function hideSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.style.display = 'none';
+    }
+  }
+
+  function showSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.style.display = 'block';
+    }
+  }
+
+  function showCompletionMessage(message) {
+    // Create or update completion message
+    let messageDiv = document.getElementById('completion-message');
+    if (!messageDiv) {
+      messageDiv = document.createElement('div');
+      messageDiv.id = 'completion-message';
+      messageDiv.className = 'info-box';
+      messageDiv.style.marginTop = '2rem';
+      messageDiv.style.backgroundColor = '#e6fff2';
+      messageDiv.style.border = '2px solid #a8ffb7';
+      document.querySelector('.container').appendChild(messageDiv);
+    }
+    messageDiv.innerHTML = `<h2>Assessment Complete</h2><p>${message}</p>`;
+  }
+
+  // Add event listeners for complex logic
+  const allFormInputs = document.querySelectorAll('input, textarea, select');
+  allFormInputs.forEach(input => {
+    input.addEventListener('change', handleComplexSkipLogic);
+    input.addEventListener('input', handleComplexSkipLogic);
+  });
+
+  // Initial evaluation of complex logic
+  handleComplexSkipLogic();
 });

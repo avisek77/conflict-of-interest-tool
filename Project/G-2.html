@@ -148,12 +148,30 @@
         <button class="back-button">← Back</button>
       </a>
       
-      <a href="G-3.html" style="text-decoration: none;">
-        <button class="next-button">Next ➝</button>
-      </a>
+      <button id="g2-next-button" class="next-button">Next ➝</button>
     </div>
   
     <script src="main.js"></script>
+    <script>
+      // Handle navigation based on Q10 response
+      document.getElementById('g2-next-button').addEventListener('click', function() {
+        const q10Value = document.querySelector('input[name="q10"]:checked');
+        
+        if (!q10Value) {
+          alert('Please answer question 10 before proceeding.');
+          return;
+        }
+        
+        if (q10Value.value === 'no') {
+          // Skip to potential conflicts section (would be implemented later)
+          // For now, go to G-3 but could be modified
+          window.location.href = 'G-3.html';
+        } else {
+          // Continue to G-3 for conflict analysis
+          window.location.href = 'G-3.html';
+        }
+      });
+    </script>
 
   </div>
 </body>
