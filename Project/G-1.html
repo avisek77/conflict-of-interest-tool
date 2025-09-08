@@ -19,7 +19,7 @@
       justify-content: space-between;
       margin-top: 2rem;
     }
-    
+
     .g1-container .back-button,
     .g1-container .next-button {
       margin: 0;
@@ -44,11 +44,35 @@
         If you are completing this on behalf of an organisation, consider "you" to mean your organisation in the following questions.
       </p>
 
-      <form id="g1-form">
-        
-        <!-- May need to implement later Help Box with related text (refer to Wendy's Tool Document) - It's definitely more important to do this later so let's focus on the other pages -->
+      <form id="g1-form">   
+
         <div class="form-group">
-          <label for="activity">1. What is the new activity you are considering and what, in broad terms, would it entail?</label>
+
+          <!-- Help icon image styling and html -->
+            <div id = "Help_Styling"style="display: flex; align-items: center;">
+              <label for="activity">1. What is the new activity you are considering and what, in broad terms, would it entail? </label>
+              <div class="tooltip-container" style="margin-left: auto;">
+              <img src="Help_Icon.svg" id="Help_Icon" alt="Help Image"> 
+                <span class="tooltip-text">
+                  Examples of professional activities include being:
+                    <ul>
+                      <li>A recipient, supplier or procurer of funding, goods or services (including gifts) </li>
+                      <li>A committee or panel member </li>
+                      <li>An assessor, reviewer or evaluator </li>
+                      <li>An employer, manager, supervisor, or mentor </li>
+                      <li>A member of a professional organisation </li>
+                      <li>A collaborator </li>
+                      <li>A consultant or employee </li>
+                      <li>An organisational officeholder, shareholder or owner </li>
+                      <li>Examples of personal activities include being: </li>
+                      <li>A friend, intimate partner or other type of personal relationship </li>
+                      <li>An advocate for a cause </li>
+                      <li>A member of a community organisation </li>
+                    </ul>
+                  </span>
+                </div>
+              </div>
+            <!-- End of Icon & Styling html & Css (Im going to simplify this a bit later) -->
           <textarea id="activity" name="activity" rows="4" placeholder="Describe the activity..."></textarea>
         </div>
 

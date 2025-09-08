@@ -72,12 +72,53 @@ h1 {
   to { opacity: 1; transform: translateY(0); }
 }
 
-img {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 5%;
-  display:block;
-}
+/* Images */
+  #C-icon {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 5%;
+    display:block;
+  }
+
+  #Help_Icon {
+      display: block;
+  }
+
+/* Tooltip CSS */
+  .tooltip-container {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+  }
+
+  .tooltip-text {
+      visibility: hidden;
+      width: 350px;
+      background-color: #555;
+      color: #fff;
+      text-align: left;
+      border-radius: 6px;
+      padding: 10px;
+
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      right: 125%; 
+      transform: translateY(-50%);
+
+      opacity: 0;
+      transition: opacity 0.3s;
+  }
+
+  .tooltip-text ul {
+      margin: 0;
+      padding-left: 15px;
+  }
+
+  .tooltip-container:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+  }
 
 /* Buttons */
   .home-button {
@@ -171,32 +212,32 @@ img {
 }
 
 /* New styles for centered checkbox */
-.checkbox-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
-}
+  .checkbox-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
 
-.checkbox-container input[type="checkbox"] {
-  margin-right: 10px;
-  transform: scale(1.2); /* Slightly larger checkbox */
-}
+  .checkbox-container input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2); /* Slightly larger checkbox */
+  }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  .button-container {
-    flex-direction: column;
-    gap: 10px;
+  @media (max-width: 768px) {
+    .button-container {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .next-button {
+      margin-left: 0;
+      width: 100%;
+    }
+    
+    .back-button {
+      width: 100%;
+      text-align: center;
+    }
   }
-  
-  .next-button {
-    margin-left: 0;
-    width: 100%;
-  }
-  
-  .back-button {
-    width: 100%;
-    text-align: center;
-  }
-}
