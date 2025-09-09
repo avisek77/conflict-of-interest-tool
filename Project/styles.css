@@ -71,27 +71,27 @@ h1 {
 }
 
 /* Progress bar styling */
-.progress-bar {
-  flex-grow: 1;
-  height: 10px;
-  background-color: #e0e0e0;
-  border-radius: 5px;
-  margin: 0 10px;
-  overflow: hidden;
-}
+  .progress-bar {
+    flex-grow: 1;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: 0 10px;
+    overflow: hidden;
+  }
 
-.progress-fill {
-  height: 100%;
-  background-color: #3dbb38;
-  transition: width 0.5s ease-in-out;
-  border-radius: 5px;
-}
+  .progress-fill {
+    height: 100%;
+    background-color: #3dbb38;
+    transition: width 0.5s ease-in-out;
+    border-radius: 5px;
+  }
 
-.progress-text {
-  font-weight: 600;
-  color: #198a02;
-  white-space: nowrap;
-}
+  .progress-text {
+    font-weight: 600;
+    color: #198a02;
+    white-space: nowrap;
+  }
 
 .instruction-note {
   margin-bottom: 20px;
@@ -171,38 +171,37 @@ h1 {
 }
 
 /* Button styles */
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
-  flex-wrap: wrap;
-  gap: 10px;
-}
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 
-.button-container button {
-  padding: 12px 28px;
-  font-size: 1rem;
-  background: #0077b6;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
+  .button-container button {
+    padding: 12px 28px;
+    font-size: 1rem;
+    background: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
 
-.button-container button:hover {
-  background: #005f9b;
-}
+  .button-container button:hover {
+    background: #005f9b;
+  }
 
-.back-button,
-.next-button {
-  min-width: 150px;
-}
+  .back-button,
+  .next-button {
+    min-width: 150px;
+  }
 
 /* Images */
 #C-icon {
   width: 40px;
-  /* Fixed size for consistency */
   height: 40px;
   object-fit: contain;
 }
@@ -213,39 +212,38 @@ h1 {
 }
 
 /* Tooltip styles */
-.tooltip-wrapper {
-  position: relative;
-  display: inline-block;
-}
+  .tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+  }
 
-.tooltip-text {
-  visibility: hidden;
-  width: 350px;
-  background-color: #555;
-  color: #fff;
-  text-align: left;
-  border-radius: 6px;
-  padding: 10px;
-  position: absolute;
-  z-index: 10;
-  top: 50%;
-  right: 110%;
-  transform: translateY(-50%);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
+  .tooltip-text {
+    visibility: hidden;
+    width: 350px;
+    background-color: #555;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    right: 110%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
 
-.tooltip-text ul {
-  margin: 0;
-  padding-left: 15px;
-}
+  .tooltip-text ul {
+    margin: 0;
+    padding-left: 15px;
+  }
 
-.tooltip-wrapper:hover .tooltip-text {
-  visibility: visible;
-  opacity: 1;
-}
+  .tooltip-wrapper:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
 
-/* Centering the checkbox container */
 .checkbox-container {
   display: flex;
   justify-content: center;
@@ -254,9 +252,11 @@ h1 {
 }
 
 /* G-0 specific styles */
-.g0-container .info-box {
-  text-align: left;
-}
+  .g0-container .info-box {
+    text-align: left;
+  }
+
+/* Not sure about the consistency with the other containers */
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

@@ -1,4 +1,4 @@
-// --- Autosize Textarea Logic ---t
+// --- Autosize Textarea Logic - FOR TEXTBOXES ---t
 document.addEventListener('DOMContentLoaded', function () {
   const textareas = document.querySelectorAll('textarea');
   const resizeTextarea = (textarea) => {
