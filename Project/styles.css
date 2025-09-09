@@ -1,25 +1,33 @@
-/* style.css */
+/* CONTEGRITY Styles */
+
+/* Base styles for the body */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #ccffe6, #fff);
   margin: 0;
-  padding: 50px;
+  padding: 20px;
   color: #222;
   animation: fadeIn 1s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
+/* Main container for the form */
 .container {
   max-width: 900px;
-  margin: auto;
+  width: 95%;
   background: white;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
   color: #3dbb38;
+  margin-top: 0;
 }
 
 .highlight {
@@ -40,148 +48,101 @@ h1 {
   border: 2px solid #a8ffb7;
   border-radius: 12px;
   margin-bottom: 30px;
-  max-height: 400px;
+  max-height: 600px;
   overflow-y: auto;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   line-height: 1.6;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-.info-box h2 {
+.info-box::-webkit-scrollbar {
+  display: none;
+}
+
+/* Header with progress bar */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Progress bar styling */
+.progress-bar {
+  flex-grow: 1;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  margin: 0 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #3dbb38;
+  transition: width 0.5s ease-in-out;
+  border-radius: 5px;
+}
+
+.progress-text {
+  font-weight: 600;
+  color: #198a02;
+  white-space: nowrap;
+}
+
+.instruction-note {
+  margin-bottom: 20px;
+}
+
+.instruction-note h3 {
   color: #0d4412;
-  font-size: 1.5rem;
-  margin-bottom: 15px;
+  font-size: 1.25rem;
+  margin-bottom: 10px;
 }
 
-.info-box p,
-.info-box ol {
-  margin-bottom: 15px;
+.instruction-note p {
+  margin-bottom: 10px;
 }
 
-.info-box a {
-  color: #1d3557;
-  font-weight: 500;
-  text-decoration: underline;
-}
-
-.next-button:hover {
-  background: #023e8a;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Images */
-  #C-icon {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 5%;
-    display:block;
-  }
-
-  #Help_Icon {
-      display: block;
-  }
-
-/* Tooltip CSS */
-  .tooltip-container {
-      position: relative;
-      display: inline-block;
-      cursor: pointer;
-  }
-
-  .tooltip-text {
-      visibility: hidden;
-      width: 350px;
-      background-color: #555;
-      color: #fff;
-      text-align: left;
-      border-radius: 6px;
-      padding: 10px;
-
-      position: absolute;
-      z-index: 1;
-      top: 50%;
-      right: 125%; 
-      transform: translateY(-50%);
-
-      opacity: 0;
-      transition: opacity 0.3s;
-  }
-
-  .tooltip-text ul {
-      margin: 0;
-      padding-left: 15px;
-  }
-
-  .tooltip-container:hover .tooltip-text {
-      visibility: visible;
-      opacity: 1;
-  }
-
-/* Buttons */
-  .home-button {
-    display: block;
-    margin: 30px fixed 0;
-    padding: 12px 28px;
-    font-size: 1rem;
-    background: #0077b6;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-
-  .back-button {
-    text-align: left;
-    padding: 12px 28px;
-    font-size: 1rem;
-    background: #0077b6;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-
-  .next-button {
-  margin-left: auto;
-  text-align: right;
-  padding: 12px 28px;
-  font-size: 1rem;
-  background: #0077b6;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 10px;
-  }
-
-  .Start_Survey-button {
-    display: block;
-    margin: 30px auto 0;
-    padding: 12px 28px;
-    font-size: 1rem;
-    background: #0077b6;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-
+/* Form group styles */
 .form-group {
   margin-bottom: 1.5rem;
 }
 
 .form-group label {
-  display: block;
+  display: flex;
+  align-items: center;
   font-weight: 600;
   margin-bottom: 0.5rem;
   color: #2c3e50;
+  gap: 5px;
+}
+
+.question-number {
+  font-size: 1.1em;
+  color: #198a02;
+  font-weight: bold;
+}
+
+.help-text {
+  background-color: #f0fff4;
+  border-left: 3px solid #66bb6a;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 0.9em;
+  border-radius: 4px;
+}
+
+.help-text ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.help-text li {
+  margin-bottom: 5px;
 }
 
 .form-group textarea {
@@ -191,11 +152,16 @@ h1 {
   border-radius: 4px;
   font-family: inherit;
   font-size: 1rem;
-  resize: none;
+  resize: vertical;
   min-height: 80px;
   box-sizing: border-box;
-  overflow: hidden;
-  white-space: inherit;
+  overflow-y: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.form-group textarea::-webkit-scrollbar {
+  display: none;
 }
 
 .form-group textarea:focus {
@@ -204,40 +170,129 @@ h1 {
   box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
+/* Button styles */
 .button-container {
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
-/* New styles for centered checkbox */
-  .checkbox-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
-  }
+.button-container button {
+  padding: 12px 28px;
+  font-size: 1rem;
+  background: #0077b6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
 
-  .checkbox-container input[type="checkbox"] {
-    margin-right: 10px;
-    transform: scale(1.2); /* Slightly larger checkbox */
-  }
+.button-container button:hover {
+  background: #005f9b;
+}
+
+.back-button,
+.next-button {
+  min-width: 150px;
+}
+
+/* Images */
+#C-icon {
+  width: 40px;
+  /* Fixed size for consistency */
+  height: 40px;
+  object-fit: contain;
+}
+
+#Help_Icon {
+  height: 20px;
+  width: 20px;
+}
+
+/* Tooltip styles */
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: 350px;
+  background-color: #555;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  right: 110%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-text ul {
+  margin: 0;
+  padding-left: 15px;
+}
+
+.tooltip-wrapper:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Centering the checkbox container */
+.checkbox-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* G-0 specific styles */
+.g0-container .info-box {
+  text-align: left;
+}
 
 /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .button-container {
-      flex-direction: column;
-      gap: 10px;
-    }
-    
-    .next-button {
-      margin-left: 0;
-      width: 100%;
-    }
-    
-    .back-button {
-      width: 100%;
-      text-align: center;
-    }
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
   }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .progress-bar {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .button-container {
+    flex-direction: column;
+  }
+
+  .back-button,
+  .next-button {
+    width: 100%;
+  }
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

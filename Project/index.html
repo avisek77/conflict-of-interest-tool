@@ -6,11 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contegrity Tool – Section 1</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Specific styles for the Start Survey button container */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    /* Style for the button inside the container */
+    .Start_Survey-button {
+      padding: 12px 28px;
+      font-size: 1rem;
+      background: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      text-decoration: none; /* Removed the inline style */
+      min-width: 150px;
+    }
+
+    .Start_Survey-button:hover {
+      background: #005f9b;
+    }
+  </style>
 </head>
 
 <body>
   <div class="container">
-    <img src="C-icon.jpg" id = "C-icon">
+    <img src="C-icon.jpg" id="C-icon">
 
     <h1>Welcome to <span class="highlight">CONTEGRITY</span></h1>
 
@@ -49,14 +75,15 @@
         Unless you are participating in a research project and submit the survey, it is important that you print the PDF of your responses as once you exit, you will no longer be able to access the survey and it will be permanently deleted from all systems.
         Additionally, you may receive a prompt or email requesting you to complete an optional user experience survey.
       </p>
-       
+        
       <p>For further queries feel free to contact Wendy at: <b>wendy@contegrityethics.com.au</b></p>
     </div>
 
-
-    <a href = "G-0.html" style="text-decoration: none;">
-      <button class="Start_Survey-button">Start Survey ➝</button>
-    </href>
+    <div class="button-container">
+      <a href="G-0.html">
+        <button class="Start_Survey-button">Start Survey ➝</button>
+      </a>
+    </div>
     
   </div>
 </body>
