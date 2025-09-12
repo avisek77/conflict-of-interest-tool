@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
      */
     async function initializeSurvey() {
         try {
-            const response = await fetch('survey.JSON');
+            const response = await fetch("survey.JSON");
             if (!response.ok) throw new Error('Could not load survey configuration.');
             surveyConfig = await response.json();
 

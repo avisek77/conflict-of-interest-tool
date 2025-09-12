@@ -52,6 +52,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                     inputElement.type = item.type;
                     inputElement.id = item.id;
                     inputElement.name = item.id;
+
+                    // --- START: Added code ---
+                    if (item.type === 'date') {
+                        const today = new Date();
+                        const year = today.getFullYear();
+                        // Months are 0-indexed, so add 1 and pad with a '0' if needed
+                        const month = String(today.getMonth() + 1).padStart(2, '0');
+                        const day = String(today.getDate()).padStart(2, '0');
+                        inputElement.value = `${year}-${month}-${day}`;
+                    }
+                    // --- END: Added code ---
+
                     formGroup.appendChild(label);
                     formGroup.appendChild(inputElement);
                     break;
@@ -138,7 +150,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Save answers to localStorage and proceed to the main survey
             localStorage.setItem('surveyAnswers', JSON.stringify(answers));
-            window.location.href = 'q_page.html';
+            window.location.href = "./Questions_page/q_page.html";
         });
     }
 
