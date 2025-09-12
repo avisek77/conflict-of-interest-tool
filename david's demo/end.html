@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CONTEGRITY - Survey Complete</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Header for the Final Page -->
+        <div class="header">
+            <img src="https://placehold.co/40x40/0077b6/ffffff?text=C" id="C-icon" alt="Contegrity Icon">
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill" style="width: 100%;"></div>
+            </div>
+            <span id="progress-text" class="progress-text">Completed</span>
+        </div>
+
+        <h1 id="page-title"><span class="highlight">Survey Complete</span></h1>
+        
+        <div class="info-display" style="text-align: left;">
+            <p>Thank you for completing the CONTEGRITY assessment. Your responses are summarized below. You can download a copy for your records.</p>
+            <!-- The 'end.js' script will populate this area with answers -->
+            <div id="summary-content"></div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-container" style="justify-content: center; gap: 20px;">
+            <button id="download-button" class="next-button">Download Responses</button>
+            <a href="index.html" style="text-decoration: none;">
+                <button class="back-button">Start Over</button>
+            </a>
+        </div>
+    </div>
+    <script src="end.js"></script>
+</body>
+</html>

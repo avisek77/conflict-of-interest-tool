@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CONTEGRITY - Survey</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Header for the Main Survey -->
+        <div class="header">
+            <img src="https://placehold.co/40x40/0077b6/ffffff?text=C" id="C-icon" alt="Contegrity Icon">
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill" style="width: 50%;"></div>
+            </div>
+            <span id="progress-text" class="progress-text">Step 2 of 2 - Assessment</span>
+        </div>
+
+        <h1 id="page-title"><span class="highlight">CONTEGRITY</span></h1>
+
+        <!-- Form where the main survey questions will be injected by JavaScript -->
+        <form id="survey-form">
+            <div id="survey-content">
+                <!-- The 'survey.js' script will populate this area with questions -->
+            </div>
+        </form>
+
+        <!-- Navigation Buttons -->
+        <div class="button-container">
+            <button id="back-button" class="back-button">← Back</button>
+            <button id="next-button" class="next-button">Finish Survey ➝</button>
+        </div>
+    </div>
+
+    <!-- The main survey engine JavaScript -->
+    <script src="survey.js"></script>
+</body>
+</html>
