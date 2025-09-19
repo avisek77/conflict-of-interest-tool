@@ -1,0 +1,244 @@
+/* CONTEGRITY Styles */
+
+/* Base styles for the body */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #ccffe6, #fff);
+  margin: 0;
+  padding: 20px;
+  color: #222;
+  animation: fadeIn 1s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Main container for the form */
+.container {
+  max-width: 900px;
+  width: 95%;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #3dbb38;
+  margin-top: 0;
+}
+
+.highlight {
+  color: #198a02;
+  font-weight: bold;
+}
+
+.intro {
+  text-align: center;
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.info-box {
+  background-color: #e6fff2;
+  padding: 25px;
+  border: 2px solid #a8ffb7;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  max-height: 600px;
+  overflow-y: auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  line-height: 1.6;
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.info-box::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+/* Header with progress bar */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Progress bar styling */
+.progress-bar {
+  flex-grow: 1;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  margin: 0 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #3dbb38;
+  transition: width 0.5s ease-in-out;
+  border-radius: 5px;
+}
+
+.progress-text {
+  font-weight: 600;
+  color: #198a02;
+  white-space: nowrap;
+}
+
+/* Button styles */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button-container button {
+  padding: 12px 28px;
+  font-size: 1rem;
+  background: #0077b6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button-container button:hover {
+  background: #005f9b;
+}
+
+.back-button,
+.next-button {
+  min-width: 150px;
+}
+
+/* Images */
+#C-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Checkbox in disclaimer.html */
+.checkbox-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* disclaimer.html specific styling */
+.g0-container .info-box {
+  text-align: left;
+}
+
+/* Form elements */
+.form-group,
+.info-display {
+  margin-bottom: 1.75rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #2c3e50;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+  box-sizing: border-box;
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.form-group textarea::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+
+.form-group textarea {
+  resize: none; /* Disable manual resizing by the user */
+  min-height: 100px;
+  overflow: hidden; /* Hide the scrollbar while text wraps */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Radio / Yes/No options */
+.options-container {
+  display: flex;
+  gap: 15px;
+}
+
+.options-container label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: normal;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .progress-bar {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .button-container {
+    flex-direction: column;
+  }
+
+  .back-button,
+  .next-button {
+    width: 100%;
+  }
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

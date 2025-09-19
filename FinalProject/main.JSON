@@ -1,0 +1,308 @@
+{
+  "id": "contegrity-survey-v2.1.1",
+  "title": "CONTEGRITY Decision-Support Tool",
+  "startQuestionId": "G0_Page",
+  "questions": [
+    {
+      "id": "G0_Page",
+      "type": "page",
+      "title": "Introduction and agreements",
+      "next": "Main_Survey_Page",
+      "items": [
+        {
+          "id": "ParticipantName",
+          "text": "Please enter your name.",
+          "type": "text",
+          "isRequired": true
+        },
+        {
+          "id": "DateOfCompletion",
+          "text": "Date of Completion",
+          "type": "date",
+          "isRequired": true
+        },
+        {
+          "id": "EULA",
+          "text": "I Accept the End-User License Agreement",
+          "type": "checkbox",
+          "isRequired": true
+        },
+        {
+          "id": "PCN",
+          "text": "I Accept the Privacy Agreement",
+          "type": "checkbox",
+          "isRequired": true
+        },
+        {
+          "id": "Disclaimer",
+          "text": "I Accept the Terms and Conditions",
+          "type": "checkbox",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "id": "G1",
+      "type": "page",
+      "title": "Characterising the new activity",
+      "next": "end",
+      "items": [
+        {
+          "id": "G1_Header",
+          "type": "heading",
+          "text": "Step 1: Describe the Activity"
+        },
+        {
+          "id": "G1_Intro",
+          "text": "CONTEGRITY has been written as though you are considering a new activity that could create a conflict of interest. A new activity can be a new role, relationship, agreement, etc. CONTEGRITY can also be used to reflect on situations in which you may already have a conflict of interest, and/or in which you are considering taking on several activities simultaneously. Here you should choose one activity as if it were new. If you are completing this on behalf of an organisation, consider 'you' to mean your organisation in the following questions."
+        },
+        {
+          "id": "G1_Q1",
+          "text": "What is the new activity you are considering and what, in broad terms, would it entail?",
+          "type": "textarea"
+        },
+        {
+          "id": "G1_Q2",
+          "text": "How long would the activity last? (e.g. is it time-limited or ongoing?)",
+          "type": "textarea"
+        },
+        {
+          "id": "G1_Q3",
+          "text": "What, if any, external organisations would you be engaging with? (e.g. commercial, government or non-government organisations).",
+          "type": "textarea"
+        },
+        {
+          "id": "G1_Q4",
+          "text": "What, if any, contractual arrangements will be entered into?",
+          "type": "textarea"
+        },
+        {
+          "id": "G2_Header",
+          "type": "heading",
+          "text": "Step 2: Actual Conflict of Interest"
+        },
+        {
+          "id": "ActualYN",
+          "text": "Based on what you have considered so far, could the situation create an ACTUAL conflict of interest?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ]
+        },
+        {
+          "id": "ActualNo",
+          "type": "info",
+          "text": "There is no ACTUAL conflict of interest.",
+          "logic": {
+            "condition": { "questionId": "ActualYN", "operator": "equals", "value": "2" }
+          }
+        },
+        {
+          "id": "ActualPrivate",
+          "text": "What are your private interests that give rise to the conflict?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "ActualYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "ActualOfficial",
+          "text": "What are your official duties that give rise to the conflict?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "ActualYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "ActualNature",
+          "text": "What is the nature and significance of the conflict?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "ActualYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "ActualEffects",
+          "text": "What are the potential or actual effects of the conflict?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "ActualYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "ActualManagement",
+          "text": "How will you manage the conflict?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "ActualYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "G3_Header",
+          "type": "heading",
+          "text": "Step 3: Potential Conflict of Interest"
+        },
+        {
+          "id": "PotentialYN",
+          "text": "Based on what you have considered so far, could the situation create a POTENTIAL conflict of interest?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ]
+        },
+        {
+          "id": "PotentialNo",
+          "type": "info",
+          "text": "There is no POTENTIAL conflict of interest.",
+          "logic": {
+            "condition": { "questionId": "PotentialYN", "operator": "equals", "value": "2" }
+          }
+        },
+        {
+          "id": "PotentialPrivate",
+          "text": "What are your private interests that give rise to the conflict?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "PotentialYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "PotentialOfficial",
+          "text": "What are your official duties that give rise to the conflict?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "PotentialYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "PotentialNature",
+          "text": "What is the nature and significance of the conflict?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "PotentialYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "PotentialEffects",
+          "text": "What are the potential or actual effects of the conflict?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "PotentialYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "PotentialManagement",
+          "text": "How will you manage the conflict?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "PotentialYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "G4_Header",
+          "type": "heading",
+          "text": "Step 4: Perceived Conflict of Interest"
+        },
+        {
+          "id": "ToPerceived",
+          "type": "info",
+          "text": "You have indicated there is an actual or potential conflict of interest that needs to be managed. The next question asks you to consider whether there may be a perceived conflict of interest.",
+          "logic": {
+            "condition": {
+              "type": "OR",
+              "clauses": [
+                { "questionId": "ActualYN", "operator": "equals", "value": "1" },
+                { "questionId": "PotentialYN", "operator": "equals", "value": "1" }
+              ]
+            }
+          }
+        },
+        {
+          "id": "ToPerceivedSkip",
+          "type": "info",
+          "text": "You have indicated there is no actual or potential conflict of interest. The next question asks you to consider whether there may be a perceived conflict of interest.",
+          "logic": {
+            "condition": {
+              "type": "AND",
+              "clauses": [
+                { "questionId": "ActualYN", "operator": "not_equals", "value": "1" },
+                { "questionId": "PotentialYN", "operator": "not_equals", "value": "1" }
+              ]
+            }
+          }
+        },
+        {
+          "id": "PerceivedYN",
+          "text": "Based on what you have considered so far, could the situation create a PERCEIVED conflict of interest?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ]
+        },
+        {
+          "id": "PerceivedNo",
+          "type": "info",
+          "text": "There is no PERCEIVED conflict of interest.",
+          "logic": {
+            "condition": { "questionId": "PerceivedYN", "operator": "equals", "value": "2" }
+          }
+        },
+        {
+          "id": "PerceivedWhoWhat",
+          "text": "Who might perceive there is a conflict of interest, and what concerns might they have?",
+          "type": "textarea",
+          "help": "You might already have addressed this under actual conflict(s) of interest. If so, you could simply write 'See above'.",
+          "logic": {
+            "condition": { "questionId": "PerceivedYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "PerceivedEffects",
+          "text": "What negative effects could this perception have?",
+          "type": "textarea",
+          "help": "For example, effects on your reputation, that of your organisation and/or that of other stakeholders. (This might have been addressed in your appraisal of an actual conflict of interest. If so, you could simply write 'See above'.)",
+          "logic": {
+            "condition": { "questionId": "PerceivedYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "PerceivedManagement",
+          "text": "How will you manage the reputational or other risks associated with the perceived conflict of interest?",
+          "type": "textarea",
+          "help": "Management of perceptions might already have been addressed in your management plan for an actual conflict of interest. If so, you can simply write 'See above'.",
+          "logic": {
+            "condition": { "questionId": "PerceivedYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "G7_Header",
+          "type": "heading",
+          "text": "Step 5: Conclusion"
+        },
+        {
+          "id": "AdditionalInfoClose",
+          "text": "You have completed the CONTEGRITY questionnaire. If there is any additional information you would like to include, please add it here.",
+          "type": "textarea",
+          "help": "You may be sent a follow up user-experience survey by email. We would be most grateful if you would take 5-10 minutes to complete it to help us improve CONTEGRITY."
+        },
+        {
+          "id": "Keep",
+          "text": "If you are using CONTEGRITY as part of a research or quality assurance project, please confirm that we can keep responses for these purposes by choosing 'Yes'. You will have been asked in advance to participate, so if you have not been asked, please select 'No'.",
+          "type": "yesno",
+          "help": "If you select 'No', a PDF will still be available on the next page and you will be able to print your responses, but your response data will be deleted from our system as soon as the PDF is downloaded (and we will not be able to retrieve it).",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ]
+        }
+      ]
+    }
+  ],
+  "end": {
+    "id": "end",
+    "text": "Thank you for completing the survey! You can now save or print your responses."
+  }
+}
