@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CONTEGRITY - Identifying Conflicts of Interest</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="C-icon.jpg" id="C-icon" alt="Contegrity Logo">
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 50%"></div>
+      </div>
+      <span class="progress-text">Step 4 of 8 - Identifying Conflicts of Interest</span>
+    </div>
+
+    <h1><span class="highlight">CONTEGRITY</span></h1>
+
+    <p class="intro">
+      Section G-2.1: Identifying Conflicts of Interest
+    </p>
+
+    <div class="info-box">
+      <div class="definitions-section">
+        <h3>Key Definitions</h3>
+        <p>
+          Before proceeding with the conflict identification questions, please review these important definitions that will guide your assessment:
+        </p>
+        
+        <div class="definition-box">
+          <h4>Interest</h4>
+          <p>
+            An interest is a commitment or concern that you have. It can be something that you care about, are responsible for, or that affects you in some way. Interests can be financial, professional, personal, or relational in nature.
+          </p>
+        </div>
+        
+        <div class="definition-box">
+          <h4>Competing Interest</h4>
+          <p>
+            A competing interest exists when you have two or more interests that could potentially conflict with each other or require different courses of action. These interests may pull you in different directions or create tension in your decision-making.
+          </p>
+        </div>
+        
+        <div class="definition-box">
+          <h4>Conflict of Interest</h4>
+          <p>
+            A conflict of interest exists when your ability to fulfill one commitment or responsibility could be compromised by your other interests, relationships, or obligations. This occurs when competing interests could reasonably be perceived to influence your professional judgment or decision-making.
+          </p>
+        </div>
+      </div>
+
+      <form id="g3-form">
+        
+        <div class="form-group">
+          <label for="q2-1">
+            <span class="question-number">Q2.1</span>
+            Do you have any interests that are primarily self-oriented that could be affected by the new activity?
+          </label>
+          
+          <div class="help-text">
+            <strong>Self-oriented interests include (but are not limited to):</strong>
+            <ul>
+              <li><strong>Financial interests:</strong> salary, fees, bonuses, investments, shareholdings, business interests</li>
+              <li><strong>Career advancement:</strong> promotion opportunities, professional development, skill building</li>
+              <li><strong>Professional reputation:</strong> recognition, awards, publications, speaking opportunities</li>
+              <li><strong>Personal relationships:</strong> networking opportunities, social connections that could benefit you</li>
+              <li><strong>Access and resources:</strong> information, facilities, equipment, databases, networks</li>
+              <li><strong>Personal beliefs and values:</strong> ideological commitments, political views, religious beliefs</li>
+              <li><strong>Family interests:</strong> spouse's career, children's education, family financial security</li>
+              <li><strong>Personal convenience:</strong> location preferences, schedule flexibility, work-life balance</li>
+            </ul>
+          </div>
+          
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="q2_1" value="yes" id="q2-1-yes">
+              <span>Yes - I have self-oriented interests that could be affected</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="q2_1" value="no" id="q2-1-no">
+              <span>No - I do not have relevant self-oriented interests</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group conditional-question" id="q2-1-explanation" data-show-if="q2_1=yes" style="display: none;">
+          <label for="q2-1-details">
+            <span class="question-number">Q2.1a</span>
+            Please describe your self-oriented interests that could be affected by the new activity:
+          </label>
+          <div class="help-text">
+            Be specific about how these interests could be positively or negatively affected by the new activity. Consider both direct and indirect impacts.
+          </div>
+          <textarea id="q2-1-details" name="q2_1_details" rows="4" placeholder="Describe specifically how your personal interests (financial, career, reputation, etc.) could be affected by engaging in the new activity..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="q2-2">
+            <span class="question-number">Q2.2</span>
+            Do you have any interests that are primarily other-oriented that could be affected by the new activity?
+          </label>
+          
+          <div class="help-text">
+            <strong>Other-oriented interests include (but are not limited to):</strong>
+            <ul>
+              <li><strong>Employer commitments:</strong> duties to your current employer, contractual obligations, loyalty requirements</li>
+              <li><strong>Client/patient obligations:</strong> duties of care, confidentiality, best interests of those you serve</li>
+              <li><strong>Student/research responsibilities:</strong> educational duties, research integrity, participant welfare</li>
+              <li><strong>Professional body duties:</strong> obligations to professional associations, regulatory bodies, licensing authorities</li>
+              <li><strong>Community commitments:</strong> responsibilities to community groups, charitable organizations, volunteer roles</li>
+              <li><strong>Family obligations:</strong> duties to dependents, caregiving responsibilities, family business interests</li>
+              <li><strong>Collaborative commitments:</strong> obligations arising from partnerships, joint ventures, team responsibilities</li>
+              <li><strong>Public interest duties:</strong> responsibilities to the broader public or specific communities</li>
+            </ul>
+          </div>
+          
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="q2_2" value="yes" id="q2-2-yes">
+              <span>Yes - I have other-oriented interests that could be affected</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="q2_2" value="no" id="q2-2-no">
+              <span>No - I do not have relevant other-oriented interests</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group conditional-question" id="q2-2-explanation" data-show-if="q2_2=yes" style="display: none;">
+          <label for="q2-2-details">
+            <span class="question-number">Q2.2a</span>
+            Please describe your other-oriented interests that could be affected by the new activity:
+          </label>
+          <div class="help-text">
+            Be specific about your commitments to others and how the new activity might impact your ability to fulfill these obligations.
+          </div>
+          <textarea id="q2-2-details" name="q2_2_details" rows="4" placeholder="Describe specifically how your commitments and obligations to others (employer, clients, students, etc.) could be affected by the new activity..."></textarea>
+        </div>
+
+        <div class="form-group conditional-question" id="no-conflict-note" data-show-if="q2_1=no&&q2_2=no" style="display: none;">
+          <div class="info-note">
+            <h4>✅ No Immediate Conflicts Identified</h4>
+            <p>
+              Based on your responses, no immediate conflicts of interest have been identified at this stage. However, it's important to continue with the remaining sections of the assessment to ensure comprehensive consideration of all potential and perceived conflicts.
+            </p>
+            <p>
+              <strong>Note:</strong> Conflicts can be subtle and may not be immediately apparent. The remaining questions will help identify potential issues that might not be obvious at first consideration.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group conditional-question" id="conflict-explanation-section" data-show-if="q2_1=yes||q2_2=yes" style="display: none;">
+          <label for="conflict-impact-explanation">
+            <span class="question-number">Q2.3</span>
+            Please describe how an existing circumstance could have a negative impact on the new activity (i.e. explain why you answered 'yes' to the previous questions):
+          </label>
+          <div class="help-text">
+            <strong>Provide a detailed explanation covering:</strong>
+            <ul>
+              <li>Specific ways your existing interests could interfere with the new activity</li>
+              <li>How competing priorities might compromise your performance or judgment</li>
+              <li>Potential conflicts between different sets of obligations or loyalties</li>
+              <li>Time, attention, or resource conflicts that could arise</li>
+              <li>Situations where you might face competing pressures or expectations</li>
+              <li>Any circumstances that could create bias or compromise objectivity</li>
+            </ul>
+          </div>
+          <textarea id="conflict-impact-explanation" name="conflict_impact_explanation" rows="6" placeholder="Provide a comprehensive explanation of how your existing circumstances, interests, or commitments could negatively impact your ability to properly engage in the new activity. Be specific about the nature and potential severity of these impacts..."></textarea>
+        </div>
+
+        <div class="form-group conditional-question" id="conflict-severity-section" data-show-if="q2_1=yes||q2_2=yes" style="display: none;">
+          <label for="conflict-severity">
+            <span class="question-number">Q2.4</span>
+            How significant do you consider this potential negative impact to be?
+          </label>
+          <div class="help-text">
+            Consider the severity, likelihood, and potential consequences of the negative impact you described above.
+          </div>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="conflict_severity" value="minor" id="severity-minor">
+              <span>Minor - Unlikely to significantly affect performance or outcomes</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="conflict_severity" value="moderate" id="severity-moderate">
+              <span>Moderate - Could affect performance but manageable with appropriate measures</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="conflict_severity" value="significant" id="severity-significant">
+              <span>Significant - Likely to substantially impact performance or create serious conflicts</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="conflict_severity" value="severe" id="severity-severe">
+              <span>Severe - Would fundamentally compromise ability to fulfill obligations</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group conditional-question" id="management-consideration-section" data-show-if="q2_1=yes||q2_2=yes" style="display: none;">
+          <label for="initial-management-thoughts">
+            <span class="question-number">Q2.5</span>
+            What initial thoughts do you have about how this conflict might be managed or mitigated?
+          </label>
+          <div class="help-text">
+            <strong>Consider potential management strategies such as:</strong>
+            <ul>
+              <li>Disclosure to relevant parties</li>
+              <li>Recusal from specific decisions or activities</li>
+              <li>Supervision or oversight arrangements</li>
+              <li>Structural changes to roles or responsibilities</li>
+              <li>Time management or scheduling adjustments</li>
+              <li>Third-party review or approval processes</li>
+            </ul>
+          </div>
+          <textarea id="initial-management-thoughts" name="initial_management_thoughts" rows="4" placeholder="Describe any initial ideas you have for managing or mitigating the potential conflicts you've identified..."></textarea>
+        </div>
+      </form>
+    </div>
+
+    <div class="button-container">
+      <a href="G-2.html" style="text-decoration: none;">
+        <button class="back-button">← Previous</button>
+      </a>
+      
+      <button id="next-button-g3" class="next-button">
+        Continue ➝
+      </button>
+    </div>
+  
+    <script src="main.js"></script>
+
+  </div>
+</body>
+</html>

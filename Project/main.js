@@ -42,4 +42,50 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+  const form = document.getElementById("g3-form");
+if (form) { // Only run if this page has the form
+  function updateConditionalQuestions() {
+    const conditionalQuestions = document.querySelectorAll(".conditional-question");
+    const noConflictNote = document.getElementById("no-conflict-note");
+
+    // Check selected values for Q2.1 and Q2.2
+    const q2_1 = form.querySelector('input[name="q2_1"]:checked')?.value;
+    const q2_2 = form.querySelector('input[name="q2_2"]:checked')?.value;
+
+    conditionalQuestions.forEach((question) => {
+      // Skip the no-conflict note here; we handle it separately
+      if (question.id === "no-conflict-note") return;
+
+      const condition = question.dataset.showIf;
+      if (!condition) return;
+
+      let show = false;
+      const conditions = condition.split("&&");
+      show = conditions.every((cond) => {
+        const [name, value] = cond.split("=");
+        const selected = form.querySelector(`input[name="${name}"]:checked`);
+        return selected && selected.value === value;
+      });
+
+      question.style.display = show ? "block" : "none";
+    });
+
+    // Show "No Immediate Conflicts Identified" only if both Q2.1 and Q2.2 are "no"
+    if (q2_1 === "no" && q2_2 === "no") {
+      noConflictNote.style.display = "block";
+    } else {
+      noConflictNote.style.display = "none";
+    }
+  }
+
+  // Add event listeners to all radio buttons in the form
+  const radios = form.querySelectorAll('input[type="radio"]');
+  radios.forEach((radio) => {
+    radio.addEventListener("change", updateConditionalQuestions);
+  });
+
+  // Initial check on page load
+  updateConditionalQuestions();
+}
+  
 });
