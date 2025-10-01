@@ -209,38 +209,58 @@ class SurveyEngine {
 
     /*************** Visibility and completion ***************/
     evaluateAllVisibility() {
-        // For each section card, decide if section should be rendered (visible) and toggle question visibility
+        // Track which questions should be visible
+        const visibleQuestionIds = new Set();
+
         this.sectionCards.forEach(card => {
             const section = card.section;
             const sectionVisible = this.isSectionVisible(section);
             card.visible = sectionVisible;
+            
             if (!sectionVisible) {
                 card.el.classList.add('hidden');
-                // return from forEach callback to emulate 'continue'
+                // Clear answers for all questions in hidden sections
+                const items = section.items || [];
+                items.forEach(item => {
+                    delete this.answers[item.id];
+                });
                 return;
             }
-            // ensure section is present (not hidden)
+            
             card.el.classList.remove('hidden');
 
-            // evaluate each question's visibility and toggle DOM display
+            // Evaluate each question's visibility
             const items = section.items || [];
             items.forEach(item => {
                 const questionEl = card.contentEl.querySelector(`[data-question-id="${item.id}"]`);
                 if (!questionEl) return;
-                if (this.isQuestionVisible(item)) {
+                
+                const shouldBeVisible = this.isQuestionVisible(item);
+                
+                if (shouldBeVisible) {
                     questionEl.style.display = '';
-                    // If the question is a textarea that just became visible, auto-grow it
+                    visibleQuestionIds.add(item.id);
+                    // Auto-grow textarea if needed
                     if (item.type === 'textarea') {
                         const textarea = questionEl.querySelector('textarea');
                         if (textarea) this.autoGrowTextarea(textarea);
                     }
                 } else {
                     questionEl.style.display = 'none';
-                    // optional: remove answers for hidden questions to avoid stale data
-                    // delete this.answers[item.id];
+                    // CLEAR THE ANSWER WHEN QUESTION BECOMES HIDDEN
+                    delete this.answers[item.id];
                 }
             });
         });
+
+        // Save the updated answers
+        localStorage.setItem('surveyAnswers', JSON.stringify(this.answers));
+        
+        // Update UI state
+        this.sectionCards.forEach(card => this.updateSectionHeader(card));
+        this.revealFirstUnrevealedSection();
+        this.updateProgress();
+        this.checkAndShowCompletionButton();
     }
 
     isSectionComplete(card) {
