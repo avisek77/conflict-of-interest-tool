@@ -127,7 +127,7 @@ class SurveyEngine {
                         ${question.help ? `<p class="help-text">${question.help}</p>` : ''}
                     </div>`;
                 }
-            case 'yesno':   
+            case 'yesno':   
                 {
                     const options = question.options || [{label:'Yes',value:'1'},{label:'No',value:'2'}];
                     const current = this.answers[question.id] || '';
@@ -229,6 +229,11 @@ class SurveyEngine {
                 if (!questionEl) return;
                 if (this.isQuestionVisible(item)) {
                     questionEl.style.display = '';
+                    // If the question is a textarea that just became visible, auto-grow it
+                    if (item.type === 'textarea') {
+                        const textarea = questionEl.querySelector('textarea');
+                        if (textarea) this.autoGrowTextarea(textarea);
+                    }
                 } else {
                     questionEl.style.display = 'none';
                     // optional: remove answers for hidden questions to avoid stale data
@@ -246,7 +251,7 @@ class SurveyEngine {
             const qEl = card.contentEl.querySelector(`[data-question-id="${item.id}"]`);
             if (!qEl) continue;
             if (qEl.style.display === 'none') continue; // not visible due to logic
-            if (item.type === 'info') continue; // info always considered satisfied
+            if (item.type === 'info' || item.type === 'subheader') continue; // info/subheader always considered satisfied
             if (!item.required) continue; // not required
             const stored = this.answers[item.id];
             // evaluate requiredness depending on type
@@ -288,6 +293,11 @@ class SurveyEngine {
 
         // scroll the card into view smoothly
         card.el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Auto-grow all textareas in the revealed section
+        card.el.querySelectorAll('textarea').forEach(textarea => {
+            this.autoGrowTextarea(textarea);
+        });
     }
 
     updateSectionHeader(card) {
@@ -326,8 +336,23 @@ class SurveyEngine {
                 break;
             }
         }
+
+        // Auto-grow all textareas after restoring state
+        document.querySelectorAll('textarea').forEach(textarea => {
+            this.autoGrowTextarea(textarea);
+        });
+
         this.checkAndShowCompletionButton();
     }
+
+    /*************** Textarea Auto-Grow ***************/
+    autoGrowTextarea(element) {
+        // Temporarily set height to 0 to calculate the necessary scrollHeight accurately
+        element.style.height = '0px'; 
+        // Set height to scrollHeight (the height of the content) plus a small buffer
+        element.style.height = (element.scrollHeight + 2) + 'px';
+    }
+
 
     /*************** Events and saving ***************/
     setupEventListeners() {
@@ -337,6 +362,10 @@ class SurveyEngine {
 
         container.addEventListener('input', (e) => {
             this.handleInputChange(e.target);
+            // Also check if the input is a textarea for auto-grow
+            if (e.target.tagName === 'TEXTAREA') {
+                this.autoGrowTextarea(e.target);
+            }
         });
 
         container.addEventListener('change', (e) => {
@@ -364,6 +393,11 @@ class SurveyEngine {
                 toggle.textContent = '−';
                 // scroll it into view so user sees opened content
                 card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                // Auto-grow textareas when expanding
+                card.querySelectorAll('textarea').forEach(textarea => {
+                    this.autoGrowTextarea(textarea);
+                });
             }
         });
     }
@@ -440,7 +474,7 @@ class SurveyEngine {
     checkAndShowCompletionButton() {
         const visibleCards = this.sectionCards.filter(card => card.visible);
         const allComplete = visibleCards.length > 0 && 
-                        visibleCards.every(card => this.isSectionComplete(card));
+                            visibleCards.every(card => this.isSectionComplete(card));
         
         const button = document.getElementById('complete-survey-button');
         if (button) {
