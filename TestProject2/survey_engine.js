@@ -480,7 +480,6 @@ class SurveyEngine {
         if (button) {
             if (allComplete) {
                 button.classList.remove('hidden');
-                button.scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else {
                 button.classList.add('hidden');
             }
