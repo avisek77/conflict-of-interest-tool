@@ -11,6 +11,7 @@ class SurveyEngine {
         try {
             await this.loadSurveyConfig();
             if (!this.surveyConfig) throw new Error('Survey configuration not found');
+            this.cleanupInvalidData();
             this.renderSections();
             this.evaluateAllVisibility(); // sets which sections should exist & which questions visible
             this.restoreUIState();
@@ -139,6 +140,8 @@ class SurveyEngine {
                 {
                     const options = question.options || [{label:'Yes',value:'1'},{label:'No',value:'2'}];
                     const current = this.answers[question.id] || '';
+                    const isValid = current === '1' || current === '2' || current === '';
+                    
                     const opts = options.map(o => `
                         <label>
                         <input type="radio" name="${question.id}" value="${o.value}" ${current == o.value ? 'checked' : ''}>
@@ -151,11 +154,11 @@ class SurveyEngine {
                     return `
                     <div class="form-group question-item" data-question-id="${question.id}" data-question-type="yesno" role="group" aria-labelledby="${legendId}">
                         <div id="${legendId}" class="yesno-legend">${question.text}${question.required ? ' *' : ''}</div>
-                        <div class="options-container" role="radiogroup" aria-labelledby="${legendId}">${opts}</div>
+                        <div class="options-container ${!isValid ? 'invalid' : ''}" role="radiogroup" aria-labelledby="${legendId}">${opts}</div>
+                        ${!isValid ? `<p class="error-message">Please select either Yes or No</p>` : ''}
                         ${question.help ? `<p class="help-text">${question.help}</p>` : ''}
                     </div>`;
                 }
-
             case 'subheader':
                 return `
                 <div class="sub-section-header question-item" data-question-id="${question.id}" data-question-type="subheader">
@@ -358,22 +361,106 @@ class SurveyEngine {
     isSectionComplete(card) {
         const section = card.section;
         const items = section.items || [];
-        // for each visible question, if required then it must have an answer
+        
         for (const item of items) {
             const qEl = card.contentEl.querySelector(`[data-question-id="${item.id}"]`);
             if (!qEl) continue;
             if (qEl.style.display === 'none') continue; // not visible due to logic
-            if (item.type === 'info' || item.type === 'subheader') continue; // info/subheader always considered satisfied
+            if (item.type === 'info') continue; // info always considered satisfied
             if (!item.required) continue; // not required
+            
             const stored = this.answers[item.id];
-            // evaluate requiredness depending on type
+            
+            // Enhanced validation based on question type
             if (item.type === 'checkbox') {
                 if (!(stored === true || stored === 'true')) return false;
+            } else if (item.type === 'yesno') {
+                // Validate yesno questions only accept "1" or "2"
+                if (stored !== '1' && stored !== '2') return false;
             } else {
+                // For text/textarea, check it's not empty
                 if (stored === undefined || stored === null || String(stored).trim() === '') return false;
             }
         }
         return true;
+    }
+
+    validateInputValue(questionId, value, questionType) {
+        if (questionType === 'yesno') {
+            // Only allow "1" or "2" for yesno questions
+            if (value !== '1' && value !== '2') {
+                console.warn(`Invalid value for yesno question ${questionId}: ${value}`);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    cleanupInvalidData() {
+        const yesNoFields = ['NewAffectingOld', 'OldAffectingNew', 'DisclosureChoiceYN', 
+                            'ModificChoiceYN', 'MonitorChoiceYN', 'HarmMgmtChoiceYN', 
+                            'OtherChoiceYN', 'EliminationChoiceYN', 'PotentialYN', 
+                            'PerceivedYN', 'Keep'];
+        
+        let cleaned = false;
+        
+        yesNoFields.forEach(field => {
+            if (this.answers[field] && this.answers[field] !== '1' && this.answers[field] !== '2') {
+                console.log(`Cleaning invalid value for ${field}: ${this.answers[field]}`);
+                delete this.answers[field];
+                cleaned = true;
+            }
+        });
+        
+        if (cleaned) {
+            localStorage.setItem('surveyAnswers', JSON.stringify(this.answers));
+        }
+    }
+
+    // Update the handleInputChange function
+    handleInputChange(target) {
+        if (!target || !target.name) return;
+        const qid = target.name;
+        
+        // Find the question type
+        const questionEl = target.closest('.question-item');
+        const questionType = questionEl ? questionEl.dataset.questionType : null;
+        
+        let value;
+        if (target.type === 'checkbox') {
+            value = target.checked;
+        } else if (target.type === 'radio') {
+            const checked = document.querySelector(`[name="${qid}"]:checked`);
+            value = checked ? checked.value : null;
+        } else {
+            value = target.value;
+        }
+
+        // Validate the input
+        if (!this.validateInputValue(qid, value, questionType)) {
+            // Invalid input - don't save and show error state
+            target.classList.add('invalid-input');
+            return;
+        }
+        
+        // Remove error state if valid
+        target.classList.remove('invalid-input');
+        
+        // trim strings
+        if (typeof value === 'string') value = value.trim();
+
+        if (value === null || value === '' || value === false) {
+            delete this.answers[qid];
+        } else {
+            this.answers[qid] = value;
+        }
+
+        localStorage.setItem('surveyAnswers', JSON.stringify(this.answers));
+        this.evaluateAllVisibility();
+        this.sectionCards.forEach(card => this.updateSectionHeader(card));
+        this.revealFirstUnrevealedSection();
+        this.updateProgress();
+        this.checkAndShowCompletionButton();
     }
 
     revealFirstUnrevealedSection() {

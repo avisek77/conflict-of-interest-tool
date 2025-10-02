@@ -462,6 +462,17 @@ textarea {
   color: #8a1f1f;
 }
 
+.invalid-input {
+    border: 2px solid #ff4444 !important;
+    background-color: #fff8f8 !important;
+}
+
+.yesno-options.invalid {
+    border: 2px solid #ff4444;
+    padding: 8px;
+    border-radius: 4px;
+}
+
 /* -------------------
 -- Color Completion --
 ----------------------*/
