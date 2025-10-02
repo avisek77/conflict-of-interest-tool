@@ -461,3 +461,56 @@ textarea {
   border: 1px solid #ffcccc;
   color: #8a1f1f;
 }
+
+/* -------------------
+-- Color Completion --
+----------------------*/
+
+/* Green glow for answered questions when they have content */
+.form-group input:not([type="checkbox"]):not([type="radio"]).has-content,
+.form-group textarea.has-content {
+  box-shadow: 0 0 8px rgba(25, 138, 2, 0.4);
+  border-color: #198a02;
+}
+
+/* Red glow for required fields that are empty — only after user has touched the field */
+.form-group input:not([type="checkbox"]):not([type="radio"]).touched:required:invalid,
+.form-group textarea.touched:required:invalid {
+  box-shadow: 0 0 8px rgba(204, 0, 0, 0.4);
+  border-color: #cc0000;
+}
+
+/* Remove glow from empty non-required fields */
+.form-group input:not([type="checkbox"]):not([type="radio"]):not(.has-content),
+.form-group textarea:not(.has-content) {
+  box-shadow: none;
+  border-color: #ddd;
+}
+
+/* For checkboxes - green when checked */
+.form-group input[type="checkbox"]:checked {
+  box-shadow: 0 0 8px rgba(25, 138, 2, 0.4);
+}
+
+/* For radio buttons - green when checked */
+.options-container input[type="radio"]:checked {
+  box-shadow: 0 0 8px rgba(25, 138, 2, 0.4);
+}
+
+/* Section completion status colors */
+.section-complete-hint {
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.section-status-complete {
+  color: #198a02 !important;
+  text-shadow: 0 0 8px rgba(25, 138, 2, 0.6) !important;
+  font-weight: bold !important;
+}
+
+.section-status-incomplete {
+  color: #cc0000 !important;
+  text-shadow: 0 0 8px rgba(204, 0, 0, 0.4) !important;
+  font-weight: bold !important;
+}

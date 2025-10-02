@@ -60,7 +60,9 @@ class SurveyEngine {
             header.innerHTML = `
                 <h2>${section.title || section.id}</h2>
                 <div style="display:flex; align-items:center; gap:8px;">
-                    <span class="section-status"><span class="section-complete-hint">Incomplete</span></span>
+                    <span class="section-status">
+                        <span class="section-complete-hint section-status-incomplete">Incomplete</span>
+                    </span>
                     <button class="collapse-toggle" aria-expanded="true" title="Collapse section">−</button>
                 </div>
             `;
@@ -95,26 +97,32 @@ class SurveyEngine {
         // NOTE: we intentionally avoid inline handlers and use delegated event listeners
         switch (question.type) {
             case 'text':
+                const textValue = this.answers[question.id] || '';
+                const textClass = textValue && textValue.toString().trim() !== '' ? 'has-content' : '';
                 return `
                 <div class="form-group question-item" data-question-id="${question.id}" data-question-type="text">
                     <label for="${question.id}">${question.text}${question.required ? ' *' : ''}</label>
-                    <input type="text" id="${question.id}" name="${question.id}" value="${this.escape(this.answers[question.id] || '')}">
+                    <input type="text" id="${question.id}" name="${question.id}" value="${this.escape(textValue)}" class="${textClass}" ${question.required ? 'required' : ''}>
                     ${question.help ? `<p class="help-text">${question.help}</p>` : ''}
                 </div>`;
             case 'textarea':
+                const textareaValue = this.answers[question.id] || '';
+                const textareaClass = textareaValue && textareaValue.toString().trim() !== '' ? 'has-content' : '';
                 return `
                 <div class="form-group question-item" data-question-id="${question.id}" data-question-type="textarea">
                     <label for="${question.id}">${question.text}${question.required ? ' *' : ''}</label>
-                    <textarea id="${question.id}" name="${question.id}">${this.escape(this.answers[question.id] || '')}</textarea>
+                    <textarea id="${question.id}" name="${question.id}" class="${textareaClass}" ${question.required ? 'required' : ''}>${this.escape(textareaValue)}</textarea>
                     ${question.help ? `<p class="help-text">${question.help}</p>` : ''}
                 </div>`;
             case 'date':
-                return `
-                <div class="form-group question-item" data-question-id="${question.id}" data-question-type="date">
-                    <label for="${question.id}">${question.text}${question.required ? ' *' : ''}</label>
-                    <input type="date" id="${question.id}" name="${question.id}" value="${this.escape(this.answers[question.id] || '')}">
-                    ${question.help ? `<p class="help-text">${question.help}</p>` : ''}
-                </div>`;
+                    const dateValue = this.answers[question.id] || '';
+                    const dateClass = dateValue && dateValue.toString().trim() !== '' ? 'has-content' : '';
+                    return `
+                    <div class="form-group question-item" data-question-id="${question.id}" data-question-type="date">
+                        <label for="${question.id}">${question.text}${question.required ? ' *' : ''}</label>
+                        <input type="date" id="${question.id}" name="${question.id}" value="${this.escape(dateValue)}" class="${dateClass}" ${question.required ? 'required' : ''}>
+                        ${question.help ? `<p class="help-text">${question.help}</p>` : ''}
+                    </div>`;
             case 'checkbox':
                 {
                     const checked = (this.answers[question.id] === true || this.answers[question.id] === 'true') ? 'checked' : '';
@@ -127,7 +135,7 @@ class SurveyEngine {
                         ${question.help ? `<p class="help-text">${question.help}</p>` : ''}
                     </div>`;
                 }
-            case 'yesno':   
+            case 'yesno':   
                 {
                     const options = question.options || [{label:'Yes',value:'1'},{label:'No',value:'2'}];
                     const current = this.answers[question.id] || '';
@@ -240,6 +248,10 @@ class SurveyEngine {
                 if (shouldBeVisible) {
                     questionEl.style.display = '';
                     visibleQuestionIds.add(item.id);
+                    
+                    // When question becomes visible again, sync DOM with current answers
+                    this.syncQuestionDOM(item, questionEl);
+                    
                     // Auto-grow textarea if needed
                     if (item.type === 'textarea') {
                         const textarea = questionEl.querySelector('textarea');
@@ -249,6 +261,8 @@ class SurveyEngine {
                     questionEl.style.display = 'none';
                     // CLEAR THE ANSWER WHEN QUESTION BECOMES HIDDEN
                     delete this.answers[item.id];
+                    // Also reset the DOM element immediately
+                    this.resetQuestionDOM(item, questionEl);
                 }
             });
         });
@@ -261,6 +275,84 @@ class SurveyEngine {
         this.revealFirstUnrevealedSection();
         this.updateProgress();
         this.checkAndShowCompletionButton();
+    }
+
+    /* Syncs the DOM element with the current answer state */
+    syncQuestionDOM(item, questionEl) {
+        const currentAnswer = this.answers[item.id];
+        
+        switch (item.type) {
+            case 'text':
+            case 'date':
+                const input = questionEl.querySelector('input');
+                if (input) {
+                    input.value = currentAnswer || '';
+                    this.updateContentClass(input);
+                }
+                break;
+            case 'textarea':
+                const textarea = questionEl.querySelector('textarea');
+                if (textarea) {
+                    textarea.value = currentAnswer || '';
+                    this.updateContentClass(textarea);
+                    this.autoGrowTextarea(textarea);
+                }
+                break;
+            case 'checkbox':
+                const checkbox = questionEl.querySelector('input[type="checkbox"]');
+                if (checkbox) {
+                    checkbox.checked = currentAnswer === true || currentAnswer === 'true';
+                    this.updateContentClass(checkbox);
+                }
+                break;
+            case 'yesno':
+                const radios = questionEl.querySelectorAll('input[type="radio"]');
+                radios.forEach(radio => {
+                    radio.checked = radio.value === currentAnswer;
+                    this.updateContentClass(radio);
+                });
+                break;
+        }
+    }
+
+    /* Resets the DOM element when question becomes hidden */
+    resetQuestionDOM(item, questionEl) {
+        switch (item.type) {
+            case 'text':
+            case 'date':
+                const input = questionEl.querySelector('input');
+                if (input) {
+                    input.value = '';
+                    input.classList.remove('has-content');
+                    input.classList.remove('touched');
+                }
+                break;
+            case 'textarea':
+                const textarea = questionEl.querySelector('textarea');
+                if (textarea) {
+                    textarea.value = '';
+                    textarea.classList.remove('has-content');
+                    textarea.classList.remove('touched');
+                    this.autoGrowTextarea(textarea); // Reset height
+                }
+                break;
+            case 'checkbox':
+                const checkbox = questionEl.querySelector('input[type="checkbox"]');
+                if (checkbox) {
+                    checkbox.checked = false;
+                    checkbox.classList.remove('has-content');
+                    checkbox.classList.remove('touched');
+                }
+                break;
+            case 'yesno':
+                const radios = questionEl.querySelectorAll('input[type="radio"]');
+                radios.forEach(radio => {
+                    radio.checked = false;
+                    radio.classList.remove('has-content');
+                    radio.classList.remove('touched');
+                });
+                break;
+        }
     }
 
     isSectionComplete(card) {
@@ -323,11 +415,16 @@ class SurveyEngine {
     updateSectionHeader(card) {
         const hint = card.headerEl.querySelector('.section-complete-hint');
         if (!hint) return;
+        
         if (this.isSectionComplete(card)) {
             hint.textContent = 'Complete';
+            hint.classList.remove('section-status-incomplete');
+            hint.classList.add('section-status-complete');
             card.el.classList.add('completed');
         } else {
             hint.textContent = 'Incomplete';
+            hint.classList.remove('section-status-complete');
+            hint.classList.add('section-status-incomplete');
             card.el.classList.remove('completed');
         }
     }
@@ -362,6 +459,11 @@ class SurveyEngine {
             this.autoGrowTextarea(textarea);
         });
 
+        // Initialize content classes for all inputs
+        document.querySelectorAll('input, textarea').forEach(input => {
+            this.updateContentClass(input);
+        });
+
         this.checkAndShowCompletionButton();
     }
 
@@ -386,10 +488,14 @@ class SurveyEngine {
             if (e.target.tagName === 'TEXTAREA') {
                 this.autoGrowTextarea(e.target);
             }
+            // Update the has-content class for text inputs and textareas
+            this.updateContentClass(e.target);
         });
 
         container.addEventListener('change', (e) => {
             this.handleInputChange(e.target);
+            // Update the has-content class for radio buttons and checkboxes
+            this.updateContentClass(e.target);
         });
 
         // collapse/expand toggle (delegated)
@@ -420,6 +526,63 @@ class SurveyEngine {
                 });
             }
         });
+
+        // Optional: trim on blur to normalise stored answers (keeps live typing behaviour,
+        // but removes accidental leading/trailing spaces when user leaves the field)
+        container.addEventListener('blur', (e) => {
+            const t = e.target;
+            if (!t || !t.name) return;
+            if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') {
+                if (typeof t.value === 'string') {
+                    const trimmed = t.value.trim();
+                    if (trimmed !== t.value) {
+                        // update the visible DOM value to the trimmed version
+                        t.value = trimmed;
+                        // propagate trimmed value to answers via input event
+                        const ev = new Event('input', { bubbles: true });
+                        t.dispatchEvent(ev);
+                    }
+                }
+            }
+        }, true); // use capture so blur is caught on inputs inside container
+
+        // Mark fields as touched on user focus (so we only show validation styling after interaction)
+        container.addEventListener('focusin', (e) => {
+            const t = e.target;
+            if (!t) return;
+            if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') {
+                t.classList.add('touched');
+            }
+        });
+    }
+
+    /* Updates the has-content class based on input value */
+    updateContentClass(target) {
+        if (!target) return;
+        
+        if (target.type === 'text' || target.type === 'textarea' || target.type === 'date') {
+            if (target.value && target.value.trim() !== '') {
+                target.classList.add('has-content');
+            } else {
+                target.classList.remove('has-content');
+            }
+        } else if (target.type === 'checkbox') {
+            if (target.checked) {
+                target.classList.add('has-content');
+            } else {
+                target.classList.remove('has-content');
+            }
+        } else if (target.type === 'radio') {
+            // For radio groups, update all radios in the same group
+            const radios = document.querySelectorAll(`[name="${target.name}"]`);
+            radios.forEach(radio => {
+                if (radio.checked) {
+                    radio.classList.add('has-content');
+                } else {
+                    radio.classList.remove('has-content');
+                }
+            });
+        }
     }
 
     handleInputChange(target) {
@@ -436,8 +599,15 @@ class SurveyEngine {
             value = target.value;
         }
 
-        // trim strings
-        if (typeof value === 'string') value = value.trim();
+        // Preserve internal and trailing spaces while the user types.
+        // But treat strings that are only whitespace as empty.
+        if (typeof value === 'string') {
+            if (value.trim() === '') {
+                // convert pure-whitespace to empty string so we don't store "   "
+                value = '';
+            }
+            // otherwise keep the user's spaces exactly as typed (don't .trim())
+        }
 
         if (value === null || value === '' || value === false) {
             // delete the answer to keep storage clean
