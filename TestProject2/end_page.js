@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const systemDate = new Date();
         const isoDate = systemDate.toLocaleString(); // display in user's locale
         doc.setFontSize(11);
-        doc.text(`Date of completion (system): ${isoDate}`, margin, cursorY);
+        doc.text(`Date of completion: ${isoDate}`, margin, cursorY);
         cursorY += 18;
 
         doc.setLineWidth(0.5);
