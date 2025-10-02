@@ -163,7 +163,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const summaryItem = document.createElement('div');
             summaryItem.className = 'summary-item';
-            summaryItem.innerHTML = `<p><strong>${escapeHtml(question.text)}</strong></p><p>${escapeHtml(String(answer))}</p>`;
+
+            // Escape then convert newlines to <br/> to preserve blank lines and line breaks.
+            // We use replace(/\r\n|\r|\n/g, '\n') to normalise line endings, then convert first.
+            const escapedAnswer = escapeHtml(String(answer || ''));
+            const normalized = escapedAnswer.replace(/\r\n|\r|\n/g, '\n');
+            const htmlAnswer = normalized.replace(/\n/g, '<br/>');
+
+            summaryItem.innerHTML = `<p><strong>${escapeHtml(question.text)}</strong></p><p>${htmlAnswer}</p>`;
             summaryContent.appendChild(summaryItem);
         }
 
@@ -294,19 +301,37 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 doc.setFontSize(11);
                 doc.setFont(undefined, 'normal');
-                const aLines = doc.splitTextToSize(String(answer), pageWidth - margin * 2);
-                for (const line of aLines) {
-                    if (cursorY > doc.internal.pageSize.getHeight() - 60) {
-                        doc.addPage();
-                        cursorY = 60;
-                    }
-                    doc.text(line, margin + 10, cursorY);
-                    cursorY += 14;
-                }
+                // Normalize and respect newlines: split answer into paragraphs by newline,
+                // then wrap each paragraph with splitTextToSize so long lines are wrapped.
+                const rawAnswer = String(answer === undefined || answer === null ? '' : answer);
+                const normalizedAnswer = rawAnswer.replace(/\r\n|\r/g, '\n'); // normalize line endings
+                const paragraphs = normalizedAnswer.split('\n');
 
+                for (const para of paragraphs) {
+                    // treat empty paragraph as an intentional blank line
+                    if (para === '') {
+                        cursorY += 14; // add a blank line gap
+                        if (cursorY > doc.internal.pageSize.getHeight() - 60) {
+                            doc.addPage();
+                            cursorY = 60;
+                        }
+                        continue;
+                    }
+
+                    const wrapped = doc.splitTextToSize(para, pageWidth - margin * 2);
+                    for (const line of wrapped) {
+                        if (cursorY > doc.internal.pageSize.getHeight() - 60) {
+                            doc.addPage();
+                            cursorY = 60;
+                        }
+                        doc.text(line, margin + 10, cursorY);
+                        cursorY += 14;
+                    }
+                    // small gap after paragraph
+                    cursorY += 6;
+                }
                 cursorY += 8;
             }
-
             cursorY += 6;
         }
 

@@ -258,6 +258,19 @@ h1 {
     margin-top: 8px;
 }
 
+/* Summary page: ensure answers wrap and respect newlines */
+#summary-content,
+#summary-content .summary-item {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+#summary-content .summary-item p {
+  white-space: pre-wrap; /* preserve newlines and wrap long lines */
+  margin: 0 0 0.8rem 0;
+}
+
+
 /* Auto-resize textareas */
 textarea {
     resize: vertical;
