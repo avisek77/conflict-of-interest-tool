@@ -93,37 +93,45 @@ class SurveyEngine {
         });
     }
 
-
+    // START: Updated createQuestionHTML with Help Icon Logic
     createQuestionHTML(question) {
-        // NOTE: we intentionally avoid inline handlers and use delegated event listeners
+        // Helper function to generate the icon HTML
+        const getHelpIcon = (id, help) => help ? `
+            <span class="help-icon-container" data-help-target="${id}">
+                <img src="QuestionMark.png" alt="Help" class="help-icon">
+            </span>` : '';
+
+        // Helper function to generate the help text HTML
+        const getHelpText = (id, help) => help ? `<p class="help-text" id="help-${id}">${question.help}</p>` : '';
+
         switch (question.type) {
             case 'text':
                 const textValue = this.answers[question.id] || '';
                 const textClass = textValue && textValue.toString().trim() !== '' ? 'has-content' : '';
                 return `
                 <div class="form-group question-item" data-question-id="${question.id}" data-question-type="text">
-                    <label for="${question.id}">${question.text}${question.required ? ' *' : ''}</label>
+                    <label for="${question.id}">${question.text}${question.required ? ' *' : ''}${getHelpIcon(question.id, question.help)}</label>
                     <input type="text" id="${question.id}" name="${question.id}" value="${this.escape(textValue)}" class="${textClass}" ${question.required ? 'required' : ''}>
-                    ${question.help ? `<p class="help-text">${question.help}</p>` : ''}
+                    ${getHelpText(question.id, question.help)}
                 </div>`;
             case 'textarea':
                 const textareaValue = this.answers[question.id] || '';
                 const textareaClass = textareaValue && textareaValue.toString().trim() !== '' ? 'has-content' : '';
                 return `
                 <div class="form-group question-item" data-question-id="${question.id}" data-question-type="textarea">
-                    <label for="${question.id}">${question.text}${question.required ? ' *' : ''}</label>
+                    <label for="${question.id}">${question.text}${question.required ? ' *' : ''}${getHelpIcon(question.id, question.help)}</label>
                     <textarea id="${question.id}" name="${question.id}" class="${textareaClass}" ${question.required ? 'required' : ''}>${this.escape(textareaValue)}</textarea>
-                    ${question.help ? `<p class="help-text">${question.help}</p>` : ''}
+                    ${getHelpText(question.id, question.help)}
                 </div>`;
             case 'date':
-                    const dateValue = this.answers[question.id] || '';
-                    const dateClass = dateValue && dateValue.toString().trim() !== '' ? 'has-content' : '';
-                    return `
-                    <div class="form-group question-item" data-question-id="${question.id}" data-question-type="date">
-                        <label for="${question.id}">${question.text}${question.required ? ' *' : ''}</label>
-                        <input type="date" id="${question.id}" name="${question.id}" value="${this.escape(dateValue)}" class="${dateClass}" ${question.required ? 'required' : ''}>
-                        ${question.help ? `<p class="help-text">${question.help}</p>` : ''}
-                    </div>`;
+                const dateValue = this.answers[question.id] || '';
+                const dateClass = dateValue && dateValue.toString().trim() !== '' ? 'has-content' : '';
+                return `
+                <div class="form-group question-item" data-question-id="${question.id}" data-question-type="date">
+                    <label for="${question.id}">${question.text}${question.required ? ' *' : ''}${getHelpIcon(question.id, question.help)}</label>
+                    <input type="date" id="${question.id}" name="${question.id}" value="${this.escape(dateValue)}" class="${dateClass}" ${question.required ? 'required' : ''}>
+                    ${getHelpText(question.id, question.help)}
+                </div>`;
             case 'checkbox':
                 {
                     const checked = (this.answers[question.id] === true || this.answers[question.id] === 'true') ? 'checked' : '';
@@ -131,12 +139,12 @@ class SurveyEngine {
                     <div class="form-group question-item" data-question-id="${question.id}" data-question-type="checkbox">
                         <label class="checkbox-label">
                             <input type="checkbox" id="${question.id}" name="${question.id}" ${checked}>
-                            ${question.text}${question.required ? ' *' : ''}
+                            ${question.text}${question.required ? ' *' : ''}${getHelpIcon(question.id, question.help)}
                         </label>
-                        ${question.help ? `<p class="help-text">${question.help}</p>` : ''}
+                        ${getHelpText(question.id, question.help)}
                     </div>`;
                 }
-            case 'yesno':   
+            case 'yesno':
                 {
                     const options = question.options || [{label:'Yes',value:'1'},{label:'No',value:'2'}];
                     const current = this.answers[question.id] || '';
@@ -153,10 +161,10 @@ class SurveyEngine {
 
                     return `
                     <div class="form-group question-item" data-question-id="${question.id}" data-question-type="yesno" role="group" aria-labelledby="${legendId}">
-                        <div id="${legendId}" class="yesno-legend">${question.text}${question.required ? ' *' : ''}</div>
+                        <div id="${legendId}" class="yesno-legend">${question.text}${question.required ? ' *' : ''}${getHelpIcon(question.id, question.help)}</div>
                         <div class="options-container ${!isValid ? 'invalid' : ''}" role="radiogroup" aria-labelledby="${legendId}">${opts}</div>
                         ${!isValid ? `<p class="error-message">Please select either Yes or No</p>` : ''}
-                        ${question.help ? `<p class="help-text">${question.help}</p>` : ''}
+                        ${getHelpText(question.id, question.help)}
                     </div>`;
                 }
             case 'subheader':
@@ -173,6 +181,7 @@ class SurveyEngine {
                 return `<div class="question-item"><p>Unknown question type: ${this.escape(String(question.type))}</p></div>`;
         }
     }
+    // END: Updated createQuestionHTML with Help Icon Logic
 
     escape(s) {
         if (s === null || s === undefined) return '';
@@ -354,8 +363,14 @@ class SurveyEngine {
                     radio.classList.remove('has-content');
                     radio.classList.remove('touched');
                 });
+                // Ensure help text is hidden on reset
+                const helpTextEl = document.getElementById(`help-${item.id}`);
+                if (helpTextEl) helpTextEl.classList.remove('active');
                 break;
         }
+        // Ensure help text is hidden on reset for all types
+        const helpTextEl = document.getElementById(`help-${item.id}`);
+        if (helpTextEl) helpTextEl.classList.remove('active');
     }
 
     isSectionComplete(card) {
@@ -366,7 +381,7 @@ class SurveyEngine {
             const qEl = card.contentEl.querySelector(`[data-question-id="${item.id}"]`);
             if (!qEl) continue;
             if (qEl.style.display === 'none') continue; // not visible due to logic
-            if (item.type === 'info') continue; // info always considered satisfied
+            if (item.type === 'info' || item.type === 'subheader') continue; // info/subheader always considered satisfied
             if (!item.required) continue; // not required
             
             const stored = this.answers[item.id];
@@ -378,7 +393,7 @@ class SurveyEngine {
                 // Validate yesno questions only accept "1" or "2"
                 if (stored !== '1' && stored !== '2') return false;
             } else {
-                // For text/textarea, check it's not empty
+                // For text/textarea/date, check it's not empty
                 if (stored === undefined || stored === null || String(stored).trim() === '') return false;
             }
         }
@@ -398,9 +413,9 @@ class SurveyEngine {
 
     cleanupInvalidData() {
         const yesNoFields = ['NewAffectingOld', 'OldAffectingNew', 'DisclosureChoiceYN', 
-                            'ModificChoiceYN', 'MonitorChoiceYN', 'HarmMgmtChoiceYN', 
-                            'OtherChoiceYN', 'EliminationChoiceYN', 'PotentialYN', 
-                            'PerceivedYN', 'Keep'];
+                             'ModificChoiceYN', 'MonitorChoiceYN', 'HarmMgmtChoiceYN', 
+                             'OtherChoiceYN', 'EliminationChoiceYN', 'PotentialYN', 
+                             'PerceivedYN', 'Keep'];
         
         let cleaned = false;
         
@@ -417,7 +432,6 @@ class SurveyEngine {
         }
     }
 
-    // Update the handleInputChange function
     handleInputChange(target) {
         if (!target || !target.name) return;
         const qid = target.name;
@@ -446,10 +460,17 @@ class SurveyEngine {
         // Remove error state if valid
         target.classList.remove('invalid-input');
         
-        // trim strings
-        if (typeof value === 'string') value = value.trim();
+        // Preserve internal and trailing spaces while the user types.
+        if (typeof value === 'string') {
+            if (value.trim() === '') {
+                // convert pure-whitespace to empty string so we don't store "    "
+                value = '';
+            }
+            // otherwise keep the user's spaces exactly as typed (don't .trim())
+        }
 
         if (value === null || value === '' || value === false) {
+            // delete the answer to keep storage clean
             delete this.answers[qid];
         } else {
             this.answers[qid] = value;
@@ -614,6 +635,31 @@ class SurveyEngine {
             }
         });
 
+        // START: NEW CLICK HANDLER FOR THE HELP ICON
+        container.addEventListener('click', (e) => {
+            const iconContainer = e.target.closest('.help-icon-container');
+            if (!iconContainer) return;
+
+            e.preventDefault(); 
+            e.stopPropagation(); // Stop propagation to prevent collapsing the card if icon is in the header
+
+            // Get the question ID from the container's data attribute
+            const qid = iconContainer.dataset.helpTarget;
+            const helpTextEl = document.getElementById(`help-${qid}`);
+
+            if (helpTextEl) {
+                // Toggle the 'active' class to show/hide the text
+                helpTextEl.classList.toggle('active');
+                // Close other help texts if open (optional but helpful)
+                document.querySelectorAll('.help-text.active').forEach(el => {
+                    if (el.id !== `help-${qid}`) {
+                        el.classList.remove('active');
+                    }
+                });
+            }
+        });
+        // END: NEW CLICK HANDLER FOR THE HELP ICON
+
         // Optional: trim on blur to normalise stored answers (keeps live typing behaviour,
         // but removes accidental leading/trailing spaces when user leaves the field)
         container.addEventListener('blur', (e) => {
@@ -639,6 +685,11 @@ class SurveyEngine {
             if (!t) return;
             if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') {
                 t.classList.add('touched');
+            }
+            // For radio/checkbox, mark the closest question-item as touched
+            const questionItem = t.closest('.question-item');
+            if (questionItem) {
+                questionItem.classList.add('touched');
             }
         });
     }
@@ -670,48 +721,6 @@ class SurveyEngine {
                 }
             });
         }
-    }
-
-    handleInputChange(target) {
-        if (!target || !target.name) return;
-        const qid = target.name;
-        let value;
-        if (target.type === 'checkbox') {
-            value = target.checked;
-        } else if (target.type === 'radio') {
-            // find checked radio for that name
-            const checked = document.querySelector(`[name="${qid}"]:checked`);
-            value = checked ? checked.value : null;
-        } else {
-            value = target.value;
-        }
-
-        // Preserve internal and trailing spaces while the user types.
-        // But treat strings that are only whitespace as empty.
-        if (typeof value === 'string') {
-            if (value.trim() === '') {
-                // convert pure-whitespace to empty string so we don't store "   "
-                value = '';
-            }
-            // otherwise keep the user's spaces exactly as typed (don't .trim())
-        }
-
-        if (value === null || value === '' || value === false) {
-            // delete the answer to keep storage clean
-            delete this.answers[qid];
-        } else {
-            this.answers[qid] = value;
-        }
-
-        localStorage.setItem('surveyAnswers', JSON.stringify(this.answers));
-        // re-evaluate logic-driven visibility and section completion
-        this.evaluateAllVisibility();
-        // update headers and reveal next sections if applicable
-        this.sectionCards.forEach(card => this.updateSectionHeader(card));
-        this.revealFirstUnrevealedSection();
-        this.updateProgress();
-        // show completion button
-        this.checkAndShowCompletionButton();
     }
 
     /*************** Progress ***************/
@@ -751,21 +760,22 @@ class SurveyEngine {
     checkAndShowCompletionButton() {
         const visibleCards = this.sectionCards.filter(card => card.visible);
         const allComplete = visibleCards.length > 0 && 
-                            visibleCards.every(card => this.isSectionComplete(card));
+                             visibleCards.every(card => this.isSectionComplete(card));
         
         const button = document.getElementById('complete-survey-button');
         if (button) {
             if (allComplete) {
                 button.classList.remove('hidden');
+                button.removeAttribute('disabled');
             } else {
                 button.classList.add('hidden');
+                button.setAttribute('disabled', 'true');
             }
         }
     }
-}
+} // End of class SurveyEngine
 
-// init
+// Instantiate the class to start the survey
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing survey engine (cards)...');
     window.surveyEngine = new SurveyEngine();
 });
