@@ -1,0 +1,905 @@
+{
+  "id": "contegrity-survey-v2.1.1",
+  "title": "CONTEGRITY Decision-Support Tool",
+  "questions": [
+    {
+      "id": "G0",
+      "type": "section",
+      "title": "Introduction and agreements",
+      "items": [
+        {
+          "id": "ParticipantName",
+          "text": "Please enter your name:",
+          "type": "text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "G1",
+      "type": "section",
+      "title": "Characterising the new activity",
+      "text": "CONTEGRITY has been written as though you are considering a new activity that could create a conflict of interest. A new activity can be a new role, relationship, agreement, etc. CONTEGRITY can also be used to reflect on situations in which you may already have a conflict of interest, and/or in which you are considering taking on several activities simultaneously. Here you should choose one activity as if it were new. If you are completing this on behalf of an organisation, consider you to mean your organisation in the following questions.",
+      "items": [
+        {
+          "id": "NewRoleDescription",
+          "text": "What is the new activity you are considering and what, in broad terms, would it entail?",
+          "type": "textarea",
+          "help": "Examples of professional activities include being: A recipient, supplier or procurer of funding, goods or services; A committee or panel member; An assessor, reviewer or evaluator; etc.",
+          "required": true
+        },
+        {
+          "id": "RoleTime",
+          "text": "How long would the activity last? (e.g., is it time-limited or ongoing?)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "RoleExtOrg",
+          "text": "What, if any, external organizations would you be engaging with?",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "RoleContract",
+          "text": "What, if any, contractual arrangements will be entered into?",
+          "type": "textarea",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "G2",
+      "type": "section",
+      "title": "Identifying conflicts of interest",
+      "items": [
+        {
+          "id": "NewAffectingOldHeader",
+          "text": "New affecting old",
+          "type": "subheader"
+        },
+        {
+          "id": "NewAffectingOldIntro",
+          "text": "You will now be led through a series of questions that will help you determine if you have a conflict of interest in which taking on the new role could adversely affect an existing role.",
+          "type": "info"
+        },
+        {
+          "id": "NewAffectingOldHelp",
+          "text": "For each of these questions, consider whether the new role might make you less willing or able to: Devote time and resources to an existing role; Carry out an existing role effectively, efficiently and/or ethically (e.g. objectively, fairly); Make appropriate use of information and/or other resources that you have access to in an existing role (including tangible resources such as money, equipment, or facilities, and intangibles such as data, time, policies, procedures or brands); Show loyalty to individuals, groups or organisations in existing roles (e.g. promoting their goals, interests, values and beliefs; protecting their reputations; not assisting or favouring their competitors; reciprocating for goods and services received)",
+          "type": "help"
+        },
+        {
+          "id": "NewFinOpp",
+          "text": "Could the new role provide financial opportunities that could impair your ability or willingness to meet the obligations of an existing role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": false
+        },
+        {
+          "id": "NewFinOppDesc",
+          "text": "Please provide a brief explanation of this challenge:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "NewFinOpp", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "NewRelationships",
+          "text": "Could the new role create personal or professional relationships that could impair your ability or willingness to meet the obligations of an existing role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": false
+        },
+        {
+          "id": "NewRelationshipsDesc",
+          "text": "Please provide a brief explanation of this challenge:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "NewRelationships", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "NewBeliefs",
+          "text": "Could the new role create opportunities to promote beliefs (religious or secular) that could impair your ability or willingness to meet the obligations of an existing role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": false
+        },
+        {
+          "id": "NewBeliefsDesc",
+          "text": "Please provide a brief explanation of this challenge:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "NewBeliefs", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "NewPersonalNeeds",
+          "text": "Could the new role create any personal needs (for you or someone close to you) that could impair your ability or willingness to meet the obligations of an existing role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": false
+        },
+        {
+          "id": "NewPersonalNeedsDesc",
+          "text": "Please provide a brief explanation of this challenge:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "NewPersonalNeeds", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "NewAnythingElse",
+          "text": "Is there anything else about the new role that could impair your ability or willingness to meet the obligations of an existing role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": false
+        },
+        {
+          "id": "NewAnythingElseDesc",
+          "text": "Please provide a brief explanation of this challenge:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "NewAnythingElse", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "NewAffectingOldFinal",
+          "text": "Based on your answers to the previous questions, do you believe that you have a conflict of interest in which taking on the new role could adversely affect an existing role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        },
+        {
+          "id": "OldAffectingNewHeader",
+          "text": "Old affecting new",
+          "type": "subheader"
+        },
+        {
+          "id": "OldAffectingNewIntro",
+          "text": "You will now be led through a series of questions that will help you determine if you have a conflict of interest in which taking an existing role or circumstance could adversely affect the new role.",
+          "type": "info"
+        },
+        {
+          "id": "OldAffectingNewHelp",
+          "text": "For each of these questions, consider whether this is a circumstance that might make you less willing or able to: Devote time and resources to the new role; Conduct the new role effectively, efficiently and/or ethically (e.g. objectively, fairly); Make appropriate use of information and/or other resources that you have access to in the new role (including tangible resources such as money, equipment, or facilities, and intangibles such as data, time, policies, procedures or brands); Show loyalty to individuals, groups or organisations in the new role (e.g. promoting their goals, interests, values and beliefs; protecting their reputations; not assisting or favouring their competitors; reciprocating for goods and services received)",
+          "type": "help"
+        },
+        {
+          "id": "OldFunding",
+          "text": "Are you receiving funding or in-kind support that could impair your ability or willingness to fulfil the obligations of the new role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": false
+        },
+        {
+          "id": "OldFundingDesc",
+          "text": "Please provide a brief explanation of this challenge:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OldFunding", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OldEmployment",
+          "text": "Are you in any employment arrangements that could impair your ability or willingness to fulfil the obligations of the new role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": false
+        },
+        {
+          "id": "OldEmploymentDesc",
+          "text": "Please provide a brief explanation of this challenge:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OldEmployment", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OldShareholding",
+          "text": "Do you have any shareholdings or organisational ownership that could impair your ability or willingness to fulfil the obligations of the new role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": false
+        },
+        {
+          "id": "OldShareholdingDesc",
+          "text": "Please provide a brief explanation of this challenge:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OldShareholding", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OldMemberships",
+          "text": "Do you have any organisational or committee memberships that could impair your ability or willingness to fulfil the obligations of the new role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": false
+        },
+        {
+          "id": "OldMembershipsDesc",
+          "text": "Please provide a brief explanation of this challenge:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OldMemberships", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OldConsultancy",
+          "text": "Do you have any consultancy roles (paid or unpaid) that could impair your ability or willingness to fulfil the obligations of the new role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": false
+        },
+        {
+          "id": "OldConsultancyDesc",
+          "text": "Please provide a brief explanation of this challenge:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OldConsultancy", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OldRelationships",
+          "text": "Do you have any personal or professional relationships that could impair your ability or willingness to fulfil the obligations of the new role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": false
+        },
+        {
+          "id": "OldRelationshipsDesc",
+          "text": "Please provide a brief explanation of this challenge:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OldRelationships", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OldBeliefs",
+          "text": "Do you hold any beliefs (religious or secular) that could impair your ability or willingness to fulfil the obligations of the new role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": false
+        },
+        {
+          "id": "OldBeliefsDesc",
+          "text": "Please provide a brief explanation of this challenge:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OldBeliefs", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OldPersonalNeeds",
+          "text": "Do you (or does someone close to you) have any personal needs that could impair your ability or willingness to fulfil the obligations of the new role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": false
+        },
+        {
+          "id": "OldPersonalNeedsDesc",
+          "text": "Please provide a brief explanation of this challenge:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OldPersonalNeeds", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OldAnythingElse",
+          "text": "Is there anything else that could impair your ability or willingness to fulfil the obligations of the new role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": false
+        },
+        {
+          "id": "OldAnythingElseDesc",
+          "text": "Please provide a brief explanation of this challenge:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OldAnythingElse", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OldAffectingNewFinal",
+          "text": "Based on your answers to the previous questions, do you believe that you have a conflict of interest in which an existing role or circumstance could adversely affect the new role?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        },
+        {
+          "id": "TransIfNoCOI",
+          "text": "You have not identified any ACTUAL conflicts of interest. The next section will focus on POTENTIAL conflicts of interest.",
+          "type": "info",
+          "logic": {
+            "condition": {
+              "type": "AND",
+              "clauses": [
+                { "questionId": "NewAffectingOldFinal", "operator": "equals", "value": "2" },
+                { "questionId": "OldAffectingNewFinal", "operator": "equals", "value": "2" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "G3",
+      "type": "section",
+      "title": "Actual conflict of interest: Characterising risks and benefits",
+      "logic": {
+        "condition": {
+          "type": "OR",
+          "clauses": [
+            { "questionId": "NewAffectingOldFinal", "operator": "equals", "value": "1" },
+            { "questionId": "OldAffectingNewFinal", "operator": "equals", "value": "1" }
+          ]
+        }
+      },
+      "items": [
+        {
+          "id": "BenefitsHeader",
+          "text": "In this section, you will consider the possible 'downstream' harms that might arise if the conflict of interest you have identified is unmanaged or inadequately managed and you therefore fail to fulfil your obligations to a new and/or pre-existing role. You should consider these as possible harms that exist even if you believe you could prevent or manage them. In a later section you will have the opportunity to consider management strategies. Discussions of COI generally focus on harms, but it is important also to consider the benefits in order to establish whether the proposed new activity provides enough benefit to justify the risk of harms and the effort it takes to manage them. Before you consider harms, you will therefore be asked about the likely benefits of taking on the new activity. The following taxonomy will help you to assess benefits and harms: Strategic benefits/harms: Positive/negative effects on your ability to conduct your work and achieve your occupational goals or obligations. (Financial risks/benefits to you or to an organisation belong in this category.) Ethical benefits/harms: Positive/negative effects on your ability to fulfil your moral obligations Relational benefits/harms: Positive/negative effects on interpersonal or group relationships Reputational benefits/harms: Positive/negative effects on trust in you or your organisation, or on your/its reputation",
+          "type": "subheader"
+        },
+        {
+          "id": "BenefitStrategic",
+          "text": "Describe any strategic benefits associated with the new activity.",
+          "type": "textarea",
+          "help": "i.e. positive effects on your ability to achieve your occupational goals.",
+          "required": true
+        },
+        {
+          "id": "BenefitEthical",
+          "text": "Describe any ethical benefits associated with the new activity.",
+          "type": "textarea",
+          "help": "i.e. positive effects on your integrity or ability to fulfil your moral obligations",
+          "required": true
+        },
+        {
+          "id": "BenefitRelational",
+          "text": "Describe any relational benefits associated with the new activity.",
+          "type": "textarea",
+          "help": "i.e. positive effects on interpersonal or group relationships.",
+          "required": true
+        },
+        {
+          "id": "BenefitReputational",
+          "text": "Describe any reputational benefits associated with the new activity.",
+          "type": "textarea",
+          "help": "i.e. positive effects on trust in an individual or organisation.",
+          "required": true
+        },
+        {
+          "id": "BenefitOther",
+          "text": "Describe any other benefits associated with the new activity.",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "Necessity",
+          "text": "Is this particular activity necessary to achieve the above benefits, or could they be achieved some other way? Please explain.",
+          "type": "textarea",
+          "help": "If the activity you are considering is both risky and unnecessary, you should seriously consider not taking it—i.e. to consider 'elimination' as a management strategy in the next section of CONTEGRITY.",
+          "required": true
+        },
+        {
+          "id": "RisksHeader",
+          "text": "Risks associated with the conflict of interest",
+          "type": "subheader"
+        },
+        {
+          "id": "HarmStrategic",
+          "text": "Describe any strategic harms that could arise if the COI was inadequately managed.",
+          "type": "textarea",
+          "help": "i.e. negative effects on your ability to achieve your occupational goals.",
+          "required": true
+        },
+        {
+          "id": "HarmEthical",
+          "text": "Describe any ethical harms that could arise if the COI was inadequately managed.",
+          "type": "textarea",
+          "help": "i.e. negative effects on your integrity or ability to fulfil your moral obligations.",
+          "required": true
+        },
+        {
+          "id": "HarmRelational",
+          "text": "Describe any relational harms that could arise if the COI was inadequately managed.",
+          "type": "textarea",
+          "help": "i.e. negative effects on interpersonal or group relationships",
+          "required": true
+        },
+        {
+          "id": "HarmReputational",
+          "text": "Describe any reputational harms that could arise if the COI was inadequately managed.",
+          "type": "textarea",
+          "help": "i.e. negative effects on trust in an individual or organisation.",
+          "required": true
+        },
+        {
+          "id": "HarmOther",
+          "text": "Describe any other harms that could arise if the COI was inadequately managed.",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "RiskFactors",
+          "text": "There are some elements of a situation that raise additional 'red flags'. Please describe any elements of your situation that make it more likely that harms will occur or that they will be severe?",
+          "type": "textarea",
+          "help": "Some examples of red flags are: 1. The activity would require or encourage breaking of rules or contravening of ethical or professional norms 2. The activity would entail engaging with individuals or organisations who have a history of ethical transgressions and/or lack clear governance processes 3. The activity would be long-standing or multi-faceted (versus a simple arrangement) 4. There would be conditions or expectations attached to the activity that would constrain your ability to make independent decisions or be transparent 5. You are, or would be, in a position of power or influence (particularly over people who are vulnerable) 6. There could be significant and/or irreversible impacts of the conflict of interest",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "G4",
+      "type": "section",
+      "title": "Actual conflicts of interest: Developing a management plan",
+      "text": "The next set of questions will guide you through a range of management strategies. These include: A. DISCLOSING the conflict of interest B. MODIFYING a role or activity so that there is less of a conflict or it has less of an effect C. OPENING UP to external scrutiny processes that could be impacted by a conflict of interest D. ADDRESSING HARMS resulting from a conflict of interest E. OTHER MANAGEMENT strategies you might think of F. ELIMINATING the conflict of interest altogether. ",
+      "logic": {
+        "condition": {
+          "type": "OR",
+          "clauses": [
+            { "questionId": "NewAffectingOldFinal", "operator": "equals", "value": "1" },
+            { "questionId": "OldAffectingNewFinal", "operator": "equals", "value": "1" }
+          ]
+        }
+      },
+      "items": [
+        {
+          "id": "DisclosureHeader",
+          "text": "Disclosure of COIs is often an important component of a COI management plan. Some benefits of disclosure include that it enhances your credibility and trustworthiness and enables people to judge for themselves what effect a conflict of interest might have. Disclosure can also form the basis of productive discussion. It is, however, important to note that disclosure is often insufficient on its own and usually needs to be accompanied by more active management strategies.",
+          "type": "subheader"
+        },
+        {
+          "id": "DisclosureChoiceYN",
+          "text": "Do you wish to use disclosure in your management plan?",
+          "type": "yesno",
+          "help": "In answering this question, you should consider whether disclosure is: relevant to, and theoretically possible in your circumstances; feasible (e.g. you would have, or could obtain the authority, knowledge and skills, resources and support to do it); likely to have benefits that outweigh harms (e.g. loss of privacy, loss of expertise, discrimination, misunderstandings)",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        },
+        {
+          "id": "DisclosureDetails",
+          "text": "DETAILS OF DISCLOSURE",
+          "type": "subheader",
+          "logic": {
+            "condition": { "questionId": "DisclosureChoiceYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "DisclosureDet1",
+          "text": "a) Precisely what will be done (and how, when and by whom)?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "DisclosureChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "DisclosureDet2",
+          "text": "b) What resources, structures and processes (e.g. training) will be put in place to support the strategy?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "DisclosureChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "DisclosureDet3",
+          "text": "c) How will the strategy be monitored (and revised if needed) for fairness, compliance and effectiveness?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "DisclosureChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "DisclosureDet4",
+          "text": "d) What are the potential harms of the strategy and what steps will be taken to ensure that people who might be adversely affected are protected (e.g. protecting privacy)?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "DisclosureChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "ModificationHeader",
+          "text": "MODIFICATION - It may at times be possible and beneficial to manage a conflict of interest (at least in part) by modification of a new or existing role or activity so that there is less of a conflict of interest and/or conflicts of interest have less impact. You may be able reduce the impact of a conflict of interest by modifying: a) what is done (e.g. not working on with particular people or on particular topics or issues; not communicating with particular people; not sharing particular types of information or resources) b) who does what (e.g. recusal from activities or involving other people who are either not conflicted or who have different conflicts of interest in order to create 'firewalls' or 'balance out' the effects of the conflict of interest). It may also be possible to align previously competing interests, so that fulfilment of one interest also promotes fulfilment of another.",
+          "type": "subheader"
+        },
+        {
+          "id": "ModificChoiceYN",
+          "text": "Do you wish to use modification in your management plan?",
+          "type": "yesno",
+          "help": "In answering this question, you should consider whether modification is: relevant to, and theoretically possible in your circumstances; feasible (e.g. you would have, or could obtain the authority, knowledge and skills, resources and support to do it); likely to have benefits that outweigh harms (e.g. loss of privacy, loss of expertise, discrimination, misunderstandings)",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        },
+        {
+          "id": "ModificationDetails",
+          "text": "DETAILS OF MODIFICATION",
+          "type": "subheader",
+          "logic": {
+            "condition": { "questionId": "ModificChoiceYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "ModificationDet1",
+          "text": "a) Precisely what will be done (and how, when and by whom)?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "ModificChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "ModificationDet2",
+          "text": "b) What resources, structures and processes (e.g. training) will be put in place to support the strategy?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "ModificChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "ModificationDet3",
+          "text": "c) How will the strategy be monitored (and revised if needed) for fairness, compliance and effectiveness?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "ModificChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "ModificationDet4",
+          "text": "d) What are the potential harms of the strategy and what steps will be taken to ensure that people who might be adversely affected are protected (e.g. protecting privacy)?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "ModificChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "MonitoringHeader",
+          "text": "MONITORING - It is sometimes possible to manage conflicts of interest (at least in part) by putting in place monitoring of roles, activities, or relationships that could be impacted by the conflict of interest. Examples might include: peer review processes, managerial review processes, transparency-enhancing processes. In some cases, those monitoring the role, activity or relationship might be able to assess whether it adheres to formal rules, principles, protocols or standards. Like disclosure, being willing to open your processes up to scrutiny can enhance your credibility and protect you from unfounded claims that conflicts of interest have distorted your reasoning or behaviour. It can also be beneficial to receive independent feedback.",
+          "type": "subheader"
+        },
+        {
+          "id": "MonitorChoiceYN",
+          "text": "Do you wish to use monitoring in your management plan?",
+          "type": "yesno",
+          "help": "In answering this question, you should consider whether monitoring is: relevant to, and theoretically possible in your circumstances; feasible (e.g. you would have, or could obtain the authority, knowledge and skills, resources and support to do it); likely to have benefits that outweigh harms (e.g. loss of privacy, loss of expertise, discrimination, misunderstandings)",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        },
+        {
+          "id": "MonitoringDetails",
+          "text": "DETAILS OF MONITORING",
+          "type": "subheader",
+          "logic": {
+            "condition": { "questionId": "MonitorChoiceYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "MonitoringDet1",
+          "text": "a) Precisely what will be done (and how, when and by whom)?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "MonitorChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "MonitoringDet2",
+          "text": "b) What resources, structures and processes (e.g. training) will be put in place to support the strategy?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "MonitorChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "MonitoringDet3",
+          "text": "c) How will the strategy be monitored (and revised if needed) for fairness, compliance and effectiveness?",
+          "type": "textarea",
+          "help": "i.e. how will monitoring itself be monitored.",
+          "logic": {
+            "condition": { "questionId": "MonitorChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "MonitoringDet4",
+          "text": "d) What are the potential harms of the strategy and what steps will be taken to ensure that people who might be adversely affected are protected (e.g. protecting privacy)?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "MonitorChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "HarmMgmtHeader",
+          "text": "HARM MANAGEMENT - It is sometimes possible to manage conflicts of interest (at least in part) by pre-empting and/or addressing harms when they arise. Examples might include taking out insurance policies or planning public relations strategies. These strategies should generally be used in addition to other strategies.",
+          "type": "subheader"
+        },
+        {
+          "id": "HarmMgmtChoiceYN",
+          "text": "Do you wish to use harm management in your management plan?",
+          "type": "yesno",
+          "help": "In answering this question, you should consider whether harm management is: relevant to, and theoretically possible in your circumstances; feasible (e.g. you would have, or could obtain the authority, knowledge and skills, resources and support to do it); likely to have benefits that outweigh harms (e.g. loss of privacy, loss of expertise, discrimination, misunderstandings)",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        },
+        {
+          "id": "HarmMgmtDetail",
+          "text": "DETAILS OF HARM MANAGEMENT",
+          "type": "subheader",
+          "logic": {
+            "condition": { "questionId": "HarmMgmtChoiceYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "HarmMgmtDet1",
+          "text": "a) Precisely what will be done (and how, when and by whom)?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "HarmMgmtChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "HarmMgmtDet2",
+          "text": "b) What resources, structures and processes (e.g. training) will be put in place to support the strategy?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "HarmMgmtChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "HarmMgmtDet3",
+          "text": "c) How will the strategy be monitored (and revised if needed) for fairness, compliance and effectiveness?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "HarmMgmtChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "HarmMgmtDet4",
+          "text": "d) What are the potential harms of the strategy and what steps will be taken to ensure that people who might be adversely affected are protected (e.g. protecting privacy)?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "HarmMgmtChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OtherMgmtHeader",
+          "text": "OTHER MANAGEMENT STRATEGIES - You might be able to think of other ways of managing the conflict of interest (other than eliminating it, which is considered below).",
+          "type": "subheader"
+        },
+        {
+          "id": "OtherChoiceYN",
+          "text": "Do you wish to use another management strategy in your management plan?",
+          "type": "yesno",
+          "help": "In answering this question, you should consider whether the alternative strategy you are considering is: relevant to, and theoretically possible in your circumstances; feasible (e.g. you would have, or could obtain the authority, knowledge and skills, resources and support to do it); likely to have benefits that outweigh harms (e.g. loss of privacy, loss of expertise, discrimination, misunderstandings)",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        },
+        {
+          "id": "OtherMgmtDetail",
+          "text": "DETAILS OF OTHER STRATEGY/STRATEGIES",
+          "type": "subheader",
+          "logic": {
+            "condition": { "questionId": "OtherChoiceYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "OtherDet1",
+          "text": "a) Precisely what will be done (and how, when and by whom)?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OtherChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OtherDet2",
+          "text": "b) What resources, structures and processes (e.g. training) will be put in place to support the strategy?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OtherChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OtherDet3",
+          "text": "c) How will the strategy be monitored (and revised if needed) for fairness, compliance and effectiveness?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OtherChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OtherDet4",
+          "text": "d) What are the potential harms of the strategy and what steps will be taken to ensure that people who might be adversely affected are protected (e.g. protecting privacy)?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OtherChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "EliminationHeader",
+          "text": "ELIMINATION - Sometimes it is preferable to simply not take on the new activity or to eliminate the existing circumstance with which it conflicts. You might come to the conclusion that this is the best thing to do if 1. the risks of the COI clearly outweigh the benefits of the new activity and/or 2. the COI cannot be managed effectively enough. The advantage of elimination is that it does away with any risk of harm and you cannot be criticised for failing to adequately manage a conflict of interest. However, benefits might also be lost.",
+          "type": "subheader"
+        },
+        {
+          "id": "EliminationChoiceYN",
+          "text": "On the basis of your assessment, do you wish to eliminate the conflict of interest?",
+          "type": "yesno",
+          "help": "In answering this question, you should consider whether elimination is: relevant to, and theoretically possible in your circumstances; feasible (e.g. you would have, or could obtain the authority, knowledge and skills, resources and support to do it); likely to have benefits that outweigh harms (e.g. loss of privacy, loss of expertise, discrimination, misunderstandings). If you select this option, you might want to delete any other management strategies you have identified, or you may wish to retain these as options for discussion with your colleagues or manager.",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        },
+        {
+          "id": "EliminationDetails",
+          "text": "Details of elimination",
+          "type": "textarea",
+          "help": "Please describe what steps you will take to eliminate the conflict of interest and how risks and harms of doing so will be managed.",
+          "logic": {
+            "condition": { "questionId": "EliminationChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "FinalReflections",
+          "text": "Before proceeding, it is worth reflecting on your management plan and asking yourself whether you are satisfied with it.",
+          "type": "subheader",
+          "help": "Some things to consider: Have you been able to generate a management plan that you believe is adequate? Is your management plan consistent with your own beliefs and values? Is your management plan consistent with the rules and regulations set out by your organisation (if relevant)? Would your management plan be perceived as adequate by your peers? Would your management plan be perceived as adequate by a reasonable member of the public? (What if it were to be released by the media?) Is your management plan something that you would like everybody in similar circumstances to do? If the answer to any of these questions is 'No', you might want to revisit your assessment and plan."
+        },
+        {
+          "id": "TransPotYesActual",
+          "text": "You have answered all the questions about any ACTUAL conflicts of interest. The next section will focus on POTENTIAL conflicts of interest.",
+          "type": "subheader"
+        }
+      ]
+    },
+    {
+      "id": "G5",
+      "type": "section",
+      "title": "Potential conflicts of interest",
+      "items": [
+        {
+          "id": "PotentialYN",
+          "text": "Could the situation change such that a new conflict of interest could arise in the future?",
+          "type": "yesno",
+          "help": "*This might be in addition to current conflicts of interest, if any have been identified.",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        },
+        {
+          "id": "PotentialNo",
+          "text": "There is no POTENTIAL conflict of interest. The next section will focus on PERCEIVED conflicts of interest.",
+          "type": "info",
+          "logic": {
+            "condition": { "questionId": "PotentialYN", "operator": "equals", "value": "2" }
+          }
+        },
+        {
+          "id": "PotentialYesExplan",
+          "text": "Please explain how a new conflict of interest might arise in the future.",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "PotentialYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "PotentialManagement1",
+          "text": "What, if any, steps will you take to prevent the conflict of interest from arising?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "PotentialYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "PotentialManagement2",
+          "text": "What, if any, steps will you take to monitor the situation to determine if and when a conflict of interest does arise?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "PotentialYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        }
+      ]
+    }
+  ]
+}
