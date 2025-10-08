@@ -620,14 +620,14 @@
         },
         {
           "id": "MonitoringHeader",
-          "text": "MONITORING - It is sometimes possible to manage conflicts of interest (at least in part) by putting in place monitoring of roles, activities, or relationships that could be impacted by the conflict of interest. Examples might include: peer review processes, managerial review processes, transparency-enhancing processes. In some cases, those monitoring the role, activity or relationship might be able to assess whether it adheres to formal rules, principles, protocols or standards. Like disclosure, being willing to open your processes up to scrutiny can enhance your credibility and protect you from unfounded claims that conflicts of interest have distorted your reasoning or behaviour. It can also be beneficial to receive independent feedback.",
+          "text": "OVERSIGHT/MONITORING",
           "type": "subheader"
         },
         {
-          "id": "MonitorChoiceYN",
-          "text": "Do you wish to use monitoring in your management plan?",
+          "id": "MonitoringChoiceYN",
+          "text": "Do you wish to use oversight and monitoring processes in your management plan?",
           "type": "yesno",
-          "help": "In answering this question, you should consider whether monitoring is: relevant to, and theoretically possible in your circumstances; feasible (e.g. you would have, or could obtain the authority, knowledge and skills, resources and support to do it); likely to have benefits that outweigh harms (e.g. loss of privacy, loss of expertise, discrimination, misunderstandings)",
+          "help": "Oversight and monitoring can provide firewalls, check compliance, help assess effectiveness, and deter potential harms. You can use internal or external oversight and monitoring systems, which may include audit, review, and appeal processes. For instance, you could open up a conflict-prone decision or activity to peer review, management oversight, or external scrutiny. You may also need to monitor for signs of non-compliance or ineffectiveness.",
           "options": [
             { "label": "Yes", "value": "1" },
             { "label": "No", "value": "2" }
@@ -636,10 +636,10 @@
         },
         {
           "id": "MonitoringDetails",
-          "text": "DETAILS OF MONITORING",
+          "text": "DETAILS OF OVERSIGHT/MONITORING",
           "type": "subheader",
           "logic": {
-            "condition": { "questionId": "MonitorChoiceYN", "operator": "equals", "value": "1" }
+            "condition": { "questionId": "MonitoringChoiceYN", "operator": "equals", "value": "1" }
           }
         },
         {
@@ -647,7 +647,7 @@
           "text": "a) Precisely what will be done (and how, when and by whom)?",
           "type": "textarea",
           "logic": {
-            "condition": { "questionId": "MonitorChoiceYN", "operator": "equals", "value": "1" }
+            "condition": { "questionId": "MonitoringChoiceYN", "operator": "equals", "value": "1" }
           },
           "required": true
         },
@@ -656,7 +656,7 @@
           "text": "b) What resources, structures and processes (e.g. training) will be put in place to support the strategy?",
           "type": "textarea",
           "logic": {
-            "condition": { "questionId": "MonitorChoiceYN", "operator": "equals", "value": "1" }
+            "condition": { "questionId": "MonitoringChoiceYN", "operator": "equals", "value": "1" }
           },
           "required": true
         },
@@ -665,7 +665,7 @@
           "text": "c) How will the strategy be monitored (and revised if needed) for fairness, compliance and effectiveness?",
           "type": "textarea",
           "logic": {
-            "condition": { "questionId": "MonitorChoiceYN", "operator": "equals", "value": "1" }
+            "condition": { "questionId": "MonitoringChoiceYN", "operator": "equals", "value": "1" }
           },
           "required": true
         },
@@ -674,9 +674,260 @@
           "text": "d) What are the potential harms of the strategy and what steps will be taken to ensure that people who might be adversely affected are protected (e.g. protecting privacy)?",
           "type": "textarea",
           "logic": {
-            "condition": { "questionId": "MonitorChoiceYN", "operator": "equals", "value": "1" }
+            "condition": { "questionId": "MonitoringChoiceYN", "operator": "equals", "value": "1" }
           },
           "required": true
+        },
+        {
+          "id": "HarmManagementHeader",
+          "text": "HARM MANAGEMENT",
+          "type": "subheader"
+        },
+        {
+          "id": "HarmManagementChoiceYN",
+          "text": "Do you wish to use harm management in your management plan?",
+          "type": "yesno",
+          "help": "This strategy involves putting in place processes to manage or compensate for harms if they occur. This could include, for example, formal complaints processes, insurance, or provisions for reparations/compensation.",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        },
+        {
+          "id": "HarmManagementDetails",
+          "text": "DETAILS OF HARM MANAGEMENT",
+          "type": "subheader",
+          "logic": {
+            "condition": { "questionId": "HarmManagementChoiceYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "HarmManagementDet1",
+          "text": "a) Precisely what will be done (and how, when and by whom)?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "HarmManagementChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "HarmManagementDet2",
+          "text": "b) What resources, structures and processes (e.g. training) will be put in place to support the strategy?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "HarmManagementChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "HarmManagementDet3",
+          "text": "c) How will the strategy be monitored (and revised if needed) for fairness, compliance and effectiveness?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "HarmManagementChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "HarmManagementDet4",
+          "text": "d) What are the potential harms of the strategy and what steps will be taken to ensure that people who might be adversely affected are protected (e.g. protecting privacy)?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "HarmManagementChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OtherManagementHeader",
+          "text": "OTHER MANAGEMENT",
+          "type": "subheader"
+        },
+        {
+          "id": "OtherManagementChoiceYN",
+          "text": "Do you wish to use other management strategies in your management plan?",
+          "type": "yesno",
+          "help": "Are there other strategies you want to use to manage the conflict of interest?",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        },
+        {
+          "id": "OtherManagementDetails",
+          "text": "DETAILS OF OTHER MANAGEMENT",
+          "type": "subheader",
+          "logic": {
+            "condition": { "questionId": "OtherManagementChoiceYN", "operator": "equals", "value": "1" }
+          }
+        },
+        {
+          "id": "OtherManagementDet1",
+          "text": "a) Precisely what will be done (and how, when and by whom)?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OtherManagementChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OtherManagementDet2",
+          "text": "b) What resources, structures and processes (e.g. training) will be put in place to support the strategy?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OtherManagementChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OtherManagementDet3",
+          "text": "c) How will the strategy be monitored (and revised if needed) for fairness, compliance and effectiveness?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OtherManagementChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "OtherManagementDet4",
+          "text": "d) What are the potential harms of the strategy and what steps will be taken to ensure that people who might be adversely affected are protected (e.g. protecting privacy)?",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "OtherManagementChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "EliminationHeader",
+          "text": "ELIMINATION",
+          "type": "subheader"
+        },
+        {
+          "id": "EliminationChoiceYN",
+          "text": "Do you wish to eliminate the conflict of interest?",
+          "type": "yesno",
+          "help": "The only way to eliminate a conflict of interest is to withdraw from the new activity or role (or the original role). If you do not withdraw, you retain the conflict of interest, and must manage it using other strategies (A-E).",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        },
+        {
+          "id": "EliminationDetails",
+          "text": "DETAILS OF ELIMINATION",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "EliminationChoiceYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        },
+        {
+          "id": "FinalReflectionsHeader",
+          "text": "FINAL REFLECTIONS ON MANAGEMENT PLAN",
+          "type": "subheader"
+        },
+        {
+          "id": "TransitionToPotential",
+          "text": "Does your current management plan give you confidence that you have adequately addressed the identified actual conflict of interest? If you answer no, you should revisit the management options.",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "G5",
+      "type": "section",
+      "title": "Potential Conflict of Interest",
+      "logic": {
+          "condition": {
+            "type": "OR",
+            "clauses": [
+              {
+                "type": "AND",
+                "clauses": [
+                  { "questionId": "NewAffectingOldFinal", "operator": "equals", "value": "2" },
+                  { "questionId": "OldAffectingNewFinal", "operator": "equals", "value": "2" }
+                ]
+              },
+              { "questionId": "TransitionToPotential", "operator": "equals", "value": "1" },
+              { "questionId": "TransitionToPotential", "operator": "equals", "value": "2" }
+            ]
+          }
+      },
+      "items": [
+        {
+          "id": "G5Intro",
+          "text": "You will now consider potential (or perceived) conflicts of interest, which are situations that could reasonably be perceived to lead to a conflict of interest in the future.",
+          "type": "info"
+        },
+        {
+          "id": "Q68_PotentialYN",
+          "text": "Do you identify any potential conflicts of interest that require management?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        },
+        {
+          "id": "Q69_73_PotentialDetails",
+          "text": "Please detail your management plan for the potential conflict(s) of interest you identified:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "Q68_PotentialYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "G6",
+      "type": "section",
+      "title": "Perceived Conflicts of Interest",
+      "items": [
+        {
+          "id": "G6Intro",
+          "text": "Perceived conflicts of interest are those that are not actual or potential, but might be reasonably believed by a third party to be an actual or potential conflict of interest. Addressing these is crucial for maintaining public trust.",
+          "type": "info"
+        },
+        {
+          "id": "Q74_PerceivedYN",
+          "text": "Do you identify any perceived conflicts of interest that require management?",
+          "type": "yesno",
+          "options": [
+            { "label": "Yes", "value": "1" },
+            { "label": "No", "value": "2" }
+          ],
+          "required": true
+        },
+        {
+          "id": "Q75_78_PerceivedDetails",
+          "text": "Please detail your management plan for the perceived conflict(s) of interest you identified:",
+          "type": "textarea",
+          "logic": {
+            "condition": { "questionId": "Q74_PerceivedYN", "operator": "equals", "value": "1" }
+          },
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "G7",
+      "type": "section",
+      "title": "Conclusion",
+      "items": [
+        {
+          "id": "Q79_AdditionalInfo",
+          "text": "Please provide any additional information, notes, or reflections on the overall process.",
+          "type": "textarea",
+          "required": false
         }
       ]
     }
