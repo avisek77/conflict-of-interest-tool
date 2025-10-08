@@ -4,13 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CONTEGRITY - Survey Complete</title>
-    <link rel="stylesheet" href="/david's demo/styles.css" />
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
     <div class="container">
-        <!-- Header for the Final Page -->
         <div class="header">
-            <img src="https://placehold.co/40x40/0077b6/ffffff?text=C" id="C-icon" alt="Contegrity Icon">
+            <img src="C-icon.jpg" id="C-icon" alt="Contegrity Icon">
             <div class="progress-bar">
                 <div id="progress-fill" class="progress-fill" style="width: 100%;"></div>
             </div>
@@ -21,18 +20,26 @@
         
         <div class="info-display" style="text-align: left;">
             <p>Thank you for completing the CONTEGRITY assessment. Your responses are summarized below. You can download a copy for your records.</p>
-            <!-- The 'end.js' script will populate this area with answers -->
             <div id="summary-content"></div>
         </div>
 
-        <!-- Action Buttons -->
+        <div class="email-form-container">
+            <h3>Get Updates</h3>
+            <p>Enter your email to receive updates and be notified about new surveys.</p>
+            <form id="email-subscription-form">
+                <input type="email" id="subscriber-email" name="email" placeholder="your.email@example.com" required />
+                <button type="submit" id="subscribe-button">Subscribe</button>
+            </form>
+            <p id="subscription-message"></p>
+        </div>
         <div class="button-container" style="justify-content: center; gap: 20px;">
             <button id="download-button" class="next-button">Download Responses</button>
-            <a href="index.html" style="text-decoration: none;">
+            <a href="survey.html" id="start-over-link" style="text-decoration: none;">
                 <button class="back-button">Start Over</button>
             </a>
         </div>
     </div>
-    <script src="david's demo\Questions_page\q_page.html"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="end_page.js"></script>
 </body>
 </html>
