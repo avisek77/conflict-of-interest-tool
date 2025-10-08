@@ -215,12 +215,41 @@ h1 {
     gap: 15px;
 }
 
+/* --- REVISED STYLES TO SLIGHTLY ENLARGE CIRCULAR RADIO BUTTONS --- */
+
+/* Reset the label styling, ensuring it correctly wraps the text */
 .options-container label {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 5px;
     font-weight: normal;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    min-width: unset;
+    text-align: left;
+    transition: none;
+    font-size: 1rem; /* standard font size for option text */
 }
+
+/* Target the actual radio input for size increase */
+.options-container input[type="radio"] {
+    /* The key to making the actual circle bigger across browsers */
+    transform: scale(1.5); /* Increased scale factor to 50% bigger */
+    
+    /* Ensure the scale transition is smooth */
+    transition: transform 0.2s ease;
+    
+    /* Ensure it's not absolutely positioned/hidden by previous attempts */
+    position: static;
+    opacity: 1;
+    width: auto;
+    height: auto;
+    margin-right: 5px; /* Add a small space between the circle and the text */
+}
+
+/* --- END REVISED STYLES --- */
 
 /* ADJUSTED: Yes/No legend now uses flex for icon alignment */
 .yesno-legend {
@@ -371,6 +400,11 @@ textarea {
     .options-container {
         flex-direction: column;
         gap: 10px;
+    }
+
+    .options-container label {
+        width: 100%;
+        box-sizing: border-box; 
     }
 
     .section-header {
