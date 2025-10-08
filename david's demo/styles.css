@@ -1,0 +1,738 @@
+/* Base styles for the body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ccffe6, #fff);
+    margin: 0;
+    padding: 20px;
+    color: #222;
+    animation: fadeIn 0.8s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Main container for the form */
+.container {
+    max-width: 900px;
+    width: 95%;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h1 {
+    text-align: center;
+    color: #3dbb38;
+    margin-top: 0;
+}
+
+.highlight {
+    color: #198a02;
+    font-weight: bold;
+}
+
+.intro {
+    text-align: center;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+/* Info box */
+.info-box {
+    background-color: #e6fff2;
+    padding: 25px;
+    border: 2px solid #a8ffb7;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    max-height: 600px;
+    overflow-y: auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    line-height: 1.6;
+    -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.info-box::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+/* Header with progress bar */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Progress bar styling */
+.progress-bar {
+    flex-grow: 1;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: 0 10px;
+    overflow: hidden;
+    min-width: 200px;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #3dbb38;
+    transition: width 0.5s ease-in-out;
+    border-radius: 5px;
+}
+
+.progress-text {
+    font-weight: 600;
+    color: #198a02;
+    white-space: nowrap;
+}
+
+/* Button styles (used on other pages like Start/Disclaimer) */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.button-container button {
+    padding: 12px 28px;
+    font-size: 1rem;
+    background: #198a02;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.button-container button:hover {
+    background: #115e01;
+}
+
+.back-button,
+.next-button {
+    min-width: 150px;
+}
+
+/* Images */
+#C-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+/* Checkbox in disclaimer.html */
+.checkbox-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* disclaimer.html specific styling */
+.g0-container .info-box {
+    text-align: left;
+}
+
+/* Form elements (questions) */
+.form-group,
+.info-display {
+    margin-bottom: 1.25rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+}
+
+/* ADJUSTED: Label now uses flex for icon alignment */
+.form-group label {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    line-height: 1.2;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+    -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.form-group textarea::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+    overflow: hidden;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.12);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+}
+
+.question-container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Radio / Yes/No options */
+.options-container {
+    display: flex;
+    gap: 15px;
+}
+
+.options-container label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: normal;
+}
+
+/* ADJUSTED: Yes/No legend now uses flex for icon alignment */
+.yesno-legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #2c3e50;
+    line-height: 1.2;
+}
+
+.question-item[data-question-type="yesno"] .options-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.section-header {
+    background: #e6fff2;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #3dbb38;
+}
+
+.section-header h2 {
+    margin: 0;
+    color: #198a02;
+}
+
+.form-group {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* MODIFIED: help-text for toggling */
+.help-text {
+    display: none; /* Hidden by default */
+    font-size: 0.9em;
+    color: #666;
+    font-style: italic;
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-left: 3px solid #3dbb38;
+    background-color: #f0fff0;
+    border-radius: 0 4px 4px 0;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Class added by JS to show the help text */
+.help-text.active {
+    display: block;
+}
+
+/* NEW: Help Icon Implementation */
+.help-icon-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 6px;
+    cursor: pointer;
+    line-height: 1; 
+    vertical-align: middle;
+}
+
+.help-icon {
+    width: 18px; 
+    height: 18px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.help-icon:hover {
+    opacity: 1;
+}
+/* END NEW */
+
+
+/* Info/Subheader Styling */
+.info-display {
+    background-color: #eafaea; 
+    border: 1px solid #c8e6c9;
+    padding: 18px;
+    font-size: 0.95rem;
+    color: #385e38;
+}
+
+.sub-section-header {
+    margin-bottom: 0.8rem;
+    padding: 0; 
+    background-color: transparent; 
+    border: none; 
+}
+
+.sub-section-header h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #198a02;
+    border-bottom: 1px dashed #c8e6c9;
+    padding-bottom: 5px;
+}
+
+/* Summary page: ensure answers wrap and respect newlines */
+#summary-content,
+#summary-content .summary-item {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+#summary-content .summary-item p {
+    white-space: pre-wrap; /* preserve newlines and wrap long lines */
+    margin: 0 0 0.8rem 0;
+}
+
+
+/* Auto-resize textareas */
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .progress-bar {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .button-container {
+        flex-direction: column;
+    }
+
+    .back-button,
+    .next-button {
+        width: 100%;
+    }
+
+    .options-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .section-header {
+        padding: 15px;
+    }
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* -----------------------
+    Section card
+    ----------------------- */
+
+/* Section card styles */
+.section-card {
+    background: linear-gradient(180deg, #ffffff, #fbfffb);
+    border: 1px solid #e6f7ea;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform-origin: top center;
+    transform: translateY(10px);
+    transition: max-height 0.6s ease, opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* revealed card expands and fades in */
+.section-card.revealed {
+    max-height: 10000px; /* large enough to show the content */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* hidden (not rendered) */
+.section-card.hidden {
+    display: none !important;
+    max-height: 0;
+    opacity: 0;
+}
+
+/* header for each section card */
+.section-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #eef8ee;
+    padding-bottom: 8px;
+}
+
+.section-card .card-header h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    color: #198a02;
+}
+
+/* card content */
+.section-card .card-content {
+    padding-top: 8px;
+    animation: fadeIn 0.6s ease;
+}
+
+/* subtle indicator of completion */
+.section-card.completed {
+    border-left: 6px solid #3dbb38;
+}
+
+/* small helper for the "complete" hint */
+.section-complete-hint {
+    font-size: 0.9rem;
+    color: #666;
+    margin-left: 8px;
+}
+
+/* Sub-section headers within G4 */
+.sub-section-header {
+    padding: 15px;
+}
+
+.sub-section-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 15px;
+}
+
+/* Collapse toggle styling */
+.collapse-toggle {
+    background: transparent;
+    border: 1px solid #dfeee0;
+    border-radius: 6px;
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #198a02;
+    transition: background 0.15s ease;
+}
+.collapse-toggle:hover { background: rgba(25,138,2,0.06); }
+
+/* When collapsed hide card content */
+.section-card.collapsed .card-content {
+    display: none;
+}
+
+/* provide a slightly different header look when collapsed */
+.section-card.collapsed .card-header {
+    opacity: 0.95;
+}
+
+
+/* Complete Survey Button */
+.complete-survey-button {
+    display: block;
+    margin: 30px auto;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.complete-survey-button:hover {
+    background: #218838;
+}
+
+.complete-survey-button.hidden {
+    display: none;
+}
+
+/* keep a small gap from the page bottom when auto-scrolling into view */
+:target {
+    scroll-margin-top: 90px;
+}
+
+/* small responsive tweak */
+@media (max-width: 768px) {
+    .section-card { padding: 14px; }
+}
+
+/* lightweight error styling */
+.error-message {
+    padding: 20px;
+    border-radius: 8px;
+    background: #fff0f0;
+    border: 1px solid #ffcccc;
+    color: #8a1f1f;
+}
+
+.invalid-input {
+    border: 2px solid #ff4444 !important;
+    background-color: #fff8f8 !important;
+}
+
+/* ADDED/MODIFIED: Clearer Yes/No validation feedback */
+.options-container.invalid {
+    border: 1px solid #cc0000;
+    box-shadow: 0 0 8px rgba(204, 0, 0, 0.4);
+    padding: 10px; 
+    border-radius: 6px;
+    background-color: #fffafa;
+}
+
+/* -------------------
+-- Color Completion --
+----------------------*/
+
+/* Green glow for answered questions when they have content */
+.form-group input:not([type="checkbox"]):not([type="radio"]).has-content,
+.form-group textarea.has-content {
+    box-shadow: 0 0 8px rgba(25, 138, 2, 0.4);
+    border-color: #198a02;
+}
+
+/* Red glow for required fields that are empty — only after user has touched the field */
+.form-group input:not([type="checkbox"]):not([type="radio"]).touched:required:invalid,
+.form-group textarea.touched:required:invalid {
+    box-shadow: 0 0 8px rgba(204, 0, 0, 0.4);
+    border-color: #cc0000;
+}
+
+/* Remove glow from empty non-required fields */
+.form-group input:not([type="checkbox"]):not([type="radio"]):not(.has-content),
+.form-group textarea:not(.has-content) {
+    box-shadow: none;
+    border-color: #ddd;
+}
+
+/* For checkboxes - green when checked */
+.form-group input[type="checkbox"]:checked {
+    box-shadow: 0 0 8px rgba(25, 138, 2, 0.4);
+}
+
+/* For radio buttons - green when checked */
+.options-container input[type="radio"]:checked {
+    box-shadow: 0 0 8px rgba(25, 138, 2, 0.4);
+}
+
+/* Section completion status colors */
+.section-complete-hint {
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.section-status-complete {
+    color: #198a02 !important;
+    text-shadow: 0 0 8px rgba(25, 138, 2, 0.6) !important;
+    font-weight: bold !important;
+}
+
+.section-status-incomplete {
+    color: #cc0000 !important;
+    text-shadow: 0 0 8px rgba(204, 0, 0, 0.4) !important;
+    font-weight: bold !important;
+}
+
+/* --- NEW: Styles for Email Subscription Form --- */
+
+.email-form-container {
+    text-align: center;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 25px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.email-form-container h3 {
+    margin-top: 0;
+    color: #198a02;
+}
+
+#email-subscription-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+
+#subscriber-email {
+    flex-grow: 1;
+    min-width: 250px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+#subscribe-button {
+    padding: 12px 28px;
+    font-size: 1rem;
+    background: #198a02;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#subscribe-button:hover {
+    background: #115e01;
+}
+
+#subscribe-button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+#subscription-message {
+    margin-top: 15px;
+    font-weight: bold;
+    min-height: 1.2em; /* Prevents layout shift when message appears */
+}
+/* --- NEW: Custom Radio Button Styles --- */
+
+/* 1. The container for our new radio button */
+.custom-radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px 0;
+    position: relative;
+    user-select: none; /* Prevents text selection on click */
+}
+
+/* 2. Hide the browser's default radio button */
+.custom-radio-label input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* 3. Create the custom radio button's outer circle */
+.custom-radio-button {
+    position: relative;
+    height: 22px;
+    width: 22px;
+    background-color: #f8f9fa;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-right: 12px;
+    transition: all 0.2s ease;
+}
+
+/* 4. On hover, give a subtle border color change */
+.custom-radio-label:hover .custom-radio-button {
+    border-color: #198a02;
+}
+
+/* 5. When the radio is checked, change the outer circle's border to the theme color */
+.custom-radio-label input[type="radio"]:checked ~ .custom-radio-button {
+    background-color: #f0fff0;
+    border-color: #198a02; /* Main theme green */
+}
+
+/* 6. Create the inner dot, hidden by default */
+.custom-radio-button::after {
+    content: "";
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #198a02; /* Main theme green */
+}
+
+/* 7. Show the inner dot when the radio button is checked */
+.custom-radio-label input[type="radio"]:checked ~ .custom-radio-button::after {
+    display: block;
+}
+
+/* 8. Add a focus style for accessibility */
+.custom-radio-label input[type="radio"]:focus-visible ~ .custom-radio-button {
+    box-shadow: 0 0 0 3px rgba(25, 138, 2, 0.3);
+}
+
+/* ------------------------------------------- */
