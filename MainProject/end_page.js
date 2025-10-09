@@ -2,11 +2,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // --- DOM Elements ---
     const summaryContent = document.getElementById('summary-content');
     const downloadButton = document.getElementById('download-button');
-    // const pageTitle = document.getElementById('page-title'); // Not used, removed for clarity
 
     // --- State ---
-    let surveyConfig;
-    let surveyAnswers;
+    let surveyConfig = {};
+    let surveyAnswers = {};
     let allQuestions = [];
 
     // Primary CDN and fallback CDN for jspdf UMD build
@@ -38,6 +37,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             let i = 0;
             function tryNextCdn() {
                 if (i >= JSPDF_CDNS.length) {
+                    // Display error in the download button area
+                    if (summaryContent) {
+                        summaryContent.insertAdjacentHTML('beforebegin', '<div class="error-message"><strong>Error:</strong> Failed to load jsPDF library. Download feature disabled.</div>');
+                    }
+                    if (downloadButton) downloadButton.disabled = true;
                     return reject(new Error('Failed to load jsPDF from CDN. Please check your network connection.'));
                 }
                 const url = JSPDF_CDNS[i++];
@@ -69,22 +73,23 @@ document.addEventListener('DOMContentLoaded', async () => {
      */
     async function initializeSummary() {
         try {
+            // 1. Load Configuration
             const response = await fetch('main.JSON');
             if (!response.ok) throw new Error('Could not load survey configuration (main.JSON).');
             surveyConfig = await response.json();
 
-            // load answers (may be empty object)
+            // 2. Load Answers
             surveyAnswers = JSON.parse(localStorage.getItem('surveyAnswers')) || {};
 
-            // Flatten questions for lookup
-            // Ensure compatibility even if 'items' is nested deeper or not present
+            // 3. Flatten questions for logic lookup
             allQuestions = surveyConfig.questions.flatMap(page => page.items || []).filter(item => item && item.id);
 
+            // 4. Render and Setup
             renderSummary();
             setupEventListeners();
         } catch (error) {
             console.error('Summary page initialization failed:', error);
-            if (summaryContent) summaryContent.innerHTML = `<p class="error">**Error loading summary:** ${error.message}</p>`;
+            if (summaryContent) summaryContent.innerHTML = `<p class="error-message"><strong>Error loading summary:</strong> ${error.message}</p>`;
         }
     }
 
@@ -93,14 +98,15 @@ document.addEventListener('DOMContentLoaded', async () => {
      */
     function evaluateCondition(condition) {
         if (!condition) return false;
-        const currentValue = surveyAnswers[condition.questionId];
+        // Use String() conversion to ensure consistent comparison (e.g., '1' == 1)
+        const currentValue = String(surveyAnswers[condition.questionId] || '');
+        const targetValue = String(condition.value);
+        
         switch (condition.operator) {
             case 'equals':
-                // Check for exact equality
-                return String(currentValue) === String(condition.value);
+                return currentValue === targetValue;
             case 'not_equals':
-                // Check for inequality
-                return String(currentValue) !== String(condition.value);
+                return currentValue !== targetValue;
             default:
                 return false;
         }
@@ -119,71 +125,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         } else if (condition.type === 'AND') {
             return condition.clauses.every(c => evaluateCondition(c));
         } else {
-            return evaluateCondition(condition);
-        }
-    }
-
-    /**
-     * Renders the final summary of questions and answers.
-     * NOTE: excludes the DateOfCompletion question (by id).
-     */
-    function renderSummary() {
-        if (!summaryContent) return;
-        summaryContent.innerHTML = '';
-
-        // show a header with system date/time
-        const systemDate = new Date();
-        const dateStr = systemDate.toLocaleString(); // browser locale
-        const header = document.createElement('div');
-        header.innerHTML = `<p><strong>Date of completion:</strong> ${dateStr}</p><hr/>`;
-        summaryContent.appendChild(header);
-
-        let shownAny = false;
-
-        for (const id in surveyAnswers) {
-            // Skip DateOfCompletion question entirely to avoid forged dates
-            if (id === 'DateOfCompletion' || id === 'Keep') continue;
-
-            const question = allQuestions.find(q => q.id === id);
-            if (!question) continue;
-            // Original filter: only included textarea, text, date, checkbox, yesno
-            if (!['textarea', 'text', 'date', 'checkbox', 'yesno', 'radiogroup', 'dropdown'].includes(question.type)) continue;
-            if (!isQuestionVisible(question)) continue;
-
-            shownAny = true;
-            let answer = surveyAnswers[id];
-
-            if (question.type === 'checkbox') {
-                answer = answer ? 'Accepted' : 'Not Accepted';
-            } else if (['yesno', 'radiogroup', 'dropdown'].includes(question.type)) {
-                const option = (question.options || []).find(opt => String(opt.value) === String(answer));
-                answer = option ? option.label : 'No Answer';
-            } else if (!answer) {
-                answer = '<em>No answer provided.</em>';
-            }
-            
-            if (answer.includes('No answer provided.')) continue;
-            
-            const summaryItem = document.createElement('div');
-            summaryItem.className = 'summary-item';
-
-            // Escape then convert newlines to <br/> to preserve blank lines and line breaks.
-            const escapedAnswer = escapeHtml(String(answer || ''));
-            const normalized = escapedAnswer.replace(/\r\n|\r|\n/g, '\n');
-            const htmlAnswer = normalized.replace(/\n/g, '<br/>');
-
-            // --- ORIGINAL HTML STRUCTURE (caused the spacing issue in the screen view) ---
-            summaryItem.innerHTML = `
-                <p><strong>${escapeHtml(question.text)}</strong></p>
-                <p style="font-weight: normal;">${htmlAnswer}</p>
-            `;
-            // -----------------------------------------------------------------------------
-            
-            summaryContent.appendChild(summaryItem);
-        }
-
-        if (!shownAny) {
-            summaryContent.insertAdjacentHTML('beforeend', '<p><em>No visible answers to display.</em></p>');
+            return evaluateCondition(condition); // Simple condition
         }
     }
 
@@ -196,23 +138,127 @@ document.addEventListener('DOMContentLoaded', async () => {
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#39;');
     }
-    
+
     /**
      * Helper to retrieve and format the answer based on question type.
      */
     function getFormattedAnswer(question, rawAnswer) {
         let answer = rawAnswer;
-        
+
         if (question.type === 'checkbox') {
             answer = answer ? 'Accepted' : 'Not Accepted';
         } else if (['yesno', 'radiogroup', 'dropdown'].includes(question.type)) {
+            // Attempt to find the human-readable label for radio/dropdown/yesno
             const option = (question.options || []).find(opt => String(opt.value) === String(answer));
             answer = option ? option.label : 'No Answer';
         } else if (!answer) {
             answer = 'No Answer';
         }
-        
-        return answer;
+        // If answer is an array (e.g. from multiselect), join it
+        if (Array.isArray(answer)) {
+            answer = answer.join(', ');
+        }
+
+        return String(answer); // Ensure a string is returned
+    }
+
+    /**
+     * Renders the final summary of questions and answers to the HTML.
+     */
+    function renderSummary() {
+        if (!summaryContent) return;
+        summaryContent.innerHTML = '';
+
+        // Add header with system date/time
+        const systemDate = new Date();
+        const dateStr = systemDate.toLocaleString();
+        const header = document.createElement('div');
+        header.innerHTML = `<p style="margin-bottom: 5px;"><strong>Date of completion:</strong> ${dateStr}</p><hr/>`;
+        summaryContent.appendChild(header);
+
+        let shownAny = false;
+
+        // Iterate through sections from config to maintain order
+        for (const section of surveyConfig.questions || []) {
+            const sectionHeader = document.createElement('div');
+            sectionHeader.className = 'sub-section-header';
+            sectionHeader.innerHTML = `<h3>${escapeHtml(section.title)}</h3>`;
+            summaryContent.appendChild(sectionHeader);
+
+            const sectionContent = document.createElement('div');
+            
+            let sectionHasVisibleAnswers = false;
+            let consumedQuestionIds = new Set(); // Set to track answers already merged
+
+            for (let i = 0; i < (section.items || []).length; i++) {
+                const item = section.items[i];
+                
+                if (consumedQuestionIds.has(item.id)) continue; // Skip if this item was merged into the previous one
+
+                // Skip system/internal keys
+                if (item.id === 'DateOfCompletion' || item.id === 'Keep' || item.type === 'info') continue;
+
+                // Only include answerable types
+                if (!['textarea', 'text', 'date', 'checkbox', 'yesno', 'radiogroup', 'dropdown'].includes(item.type)) continue;
+
+                // Check visibility logic
+                if (!isQuestionVisible(item)) continue;
+
+                const rawAnswer = surveyAnswers[item.id];
+                let answer = getFormattedAnswer(item, rawAnswer); // Use let for modification
+                
+                // Skip if no meaningful answer provided for the primary question
+                if (!rawAnswer || answer === 'No Answer' || (Array.isArray(rawAnswer) && rawAnswer.length === 0)) continue;
+
+                // --- MERGE LOGIC START (HTML) ---
+                if (['yesno', 'radiogroup', 'dropdown'].includes(item.type)) {
+                    const nextItem = section.items[i + 1];
+                    
+                    // Check if the next item is a visible, answered text/textarea intended for merging
+                    if (nextItem && ['text', 'textarea'].includes(nextItem.type) && isQuestionVisible(nextItem)) {
+                        const nextRawAnswer = surveyAnswers[nextItem.id];
+                        if (nextRawAnswer && String(nextRawAnswer).trim() !== '') {
+                            // Merge the answers: "Yes. Explanation text here"
+                            answer += `. ${String(nextRawAnswer).trim()}`;
+                            consumedQuestionIds.add(nextItem.id); // Mark the text field as consumed
+                        }
+                    }
+                }
+                // --- MERGE LOGIC END (HTML) ---
+
+                sectionHasVisibleAnswers = true;
+                shownAny = true;
+
+                const summaryItem = document.createElement('div');
+                summaryItem.className = 'summary-item form-group';
+
+                // Escape HTML for display
+                const escapedQuestionText = escapeHtml(item.text);
+                const escapedAnswer = escapeHtml(answer);
+                
+                // Normalize newlines from textareas for HTML display (<br/>)
+                const htmlAnswer = escapedAnswer.replace(/\n/g, '<br/>');
+
+                summaryItem.innerHTML = `
+                    <p style="margin-bottom: 5px;"><strong>${escapedQuestionText}</strong></p>
+                    <p style="white-space: pre-wrap; margin-top: 0; font-weight: normal;">${htmlAnswer}</p>
+                `;
+
+                sectionContent.appendChild(summaryItem);
+            }
+            
+            // Only append section content if it contained visible answers
+            if (sectionHasVisibleAnswers) {
+                 summaryContent.appendChild(sectionContent);
+            } else {
+                // Remove the section header if no answers were shown in it
+                sectionHeader.remove(); 
+            }
+        }
+
+        if (!shownAny) {
+            summaryContent.insertAdjacentHTML('beforeend', '<p><em>No visible answers to display.</em></p>');
+        }
     }
 
 
@@ -222,25 +268,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function generatePDFasBlob() {
         await ensureJsPDF(); // ensure library loaded
 
-        // locate jsPDF constructor (robust check)
+        // Locate jsPDF constructor (robust check)
         const jspdfGlobal = window.jspdf || window.jsPDF || window.jspdf?.default || null;
         let jsPDFCtor = null;
-        if (jspdfGlobal) {
-            if (typeof jspdfGlobal === 'function') {
-                jsPDFCtor = jspdfGlobal;
-            } else if (jspdfGlobal.jsPDF) {
-                jsPDFCtor = jspdfGlobal.jsPDF;
-            } else if (jspdfGlobal.default && jspdfGlobal.default.jsPDF) {
-                jsPDFCtor = jspdfGlobal.default.jsPDF;
-            } else if (jspdfGlobal.default && typeof jspdfGlobal.default === 'function') {
-                jsPDFCtor = jspdfGlobal.default;
-            }
-        }
-        if (!jsPDFCtor) {
-            throw new Error('jsPDF constructor not found after loading library. Cannot create PDF.');
+        if (jspdfGlobal && typeof jspdfGlobal === 'function') {
+            jsPDFCtor = jspdfGlobal;
+        } else if (jspdfGlobal && jspdfGlobal.jsPDF) {
+            jsPDFCtor = jspdfGlobal.jsPDF;
+        } else if (jspdfGlobal?.default && typeof jspdfGlobal.default === 'function') {
+             jsPDFCtor = jspdfGlobal.default;
+        } else {
+             throw new Error('jsPDF constructor not found after loading library. Cannot create PDF.');
         }
 
-        if (!surveyConfig) throw new Error('Survey configuration missing');
+        if (Object.keys(surveyConfig).length === 0) throw new Error('Survey configuration missing. Cannot create PDF.');
 
         const doc = new jsPDFCtor({ unit: 'pt', format: 'a4' });
         const margin = 40;
@@ -248,7 +289,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const pageHeight = doc.internal.pageSize.getHeight();
         let cursorY = 60;
         
-        // Configuration for question filtering (was expanded in later versions)
+        // Configuration for question filtering
         const supportedTypes = ['textarea', 'text', 'date', 'checkbox', 'yesno', 'radiogroup', 'dropdown'];
 
         // Title
@@ -258,11 +299,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // System date
         const systemDate = new Date();
-        const isoDate = systemDate.toLocaleString(); // display in user's locale
+        const isoDate = systemDate.toLocaleString(); 
         doc.setFontSize(11);
         doc.text(`Date of completion: ${isoDate}`, margin, cursorY);
         cursorY += 18;
 
+        // Separator
         doc.setLineWidth(0.5);
         doc.line(margin, cursorY, pageWidth - margin, cursorY);
         cursorY += 18;
@@ -270,25 +312,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Helper function for page breaks
         function checkPage(neededSpace = 14) {
              if (cursorY + neededSpace > pageHeight - 60) {
-                doc.addPage();
-                cursorY = 60;
-            }
+                 doc.addPage();
+                 cursorY = 60;
+             }
         }
-
 
         // Iterate through sections & items
         for (const section of surveyConfig.questions || []) {
-            const items = section.items || [];
+            let sectionHasVisibleAnswers = false;
             
-            // Filter to check if section should be displayed
-            const sectionHasVisible = items.some(item => 
+            // Pre-check section visibility (only necessary to determine if section header should be printed)
+            const items = section.items || [];
+            if (items.some(item => 
                 item.id !== 'DateOfCompletion' &&
                 supportedTypes.includes(item.type) &&
                 isQuestionVisible(item) && 
-                surveyAnswers[item.id] !== undefined
-            );
-            
-            if (!sectionHasVisible) continue;
+                (surveyAnswers[item.id] !== undefined && getFormattedAnswer(item, surveyAnswers[item.id]) !== 'No Answer')
+            )) {
+                sectionHasVisibleAnswers = true;
+            }
+
+            if (!sectionHasVisibleAnswers) continue;
 
             // Section heading
             doc.setFontSize(13);
@@ -305,17 +349,39 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             doc.setFont(undefined, 'normal');
             cursorY += 4;
+            
+            let consumedQuestionIds = new Set(); // Set to track answers already merged
 
             // Each question
-            for (const item of items) {
-                if (item.id === 'DateOfCompletion' || item.id === 'Keep') continue;
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i];
+                
+                if (consumedQuestionIds.has(item.id)) continue; // Skip if this item was merged into the previous one
+
+                if (item.id === 'DateOfCompletion' || item.id === 'Keep' || item.type === 'info') continue;
                 if (!supportedTypes.includes(item.type)) continue;
                 if (!isQuestionVisible(item)) continue;
                 
                 const rawAnswer = surveyAnswers[item.id];
-                const answer = getFormattedAnswer(item, rawAnswer);
+                let answer = getFormattedAnswer(item, rawAnswer); // Use let for modification
                 
-                if (!rawAnswer || answer === 'No Answer') continue;
+                if (!rawAnswer || answer === 'No Answer' || (Array.isArray(rawAnswer) && rawAnswer.length === 0)) continue;
+
+                // --- MERGE LOGIC START (PDF) ---
+                if (['yesno', 'radiogroup', 'dropdown'].includes(item.type)) {
+                    const nextItem = items[i + 1];
+                    
+                    // Check if the next item is a visible, answered text/textarea intended for merging
+                    if (nextItem && ['text', 'textarea'].includes(nextItem.type) && isQuestionVisible(nextItem)) {
+                        const nextRawAnswer = surveyAnswers[nextItem.id];
+                        if (nextRawAnswer && String(nextRawAnswer).trim() !== '') {
+                            // Merge the answers: "Yes. Explanation text here"
+                            answer += `. ${String(nextRawAnswer).trim()}`; 
+                            consumedQuestionIds.add(nextItem.id); // Mark the text field as consumed
+                        }
+                    }
+                }
+                // --- MERGE LOGIC END (PDF) ---
 
                 // --- 1. Question text ---
                 doc.setFontSize(11);
@@ -395,13 +461,19 @@ document.addEventListener('DOMContentLoaded', async () => {
                 downloadButton.disabled = true;
                 const originalText = downloadButton.textContent;
                 downloadButton.textContent = 'Generating…';
+                
+                // If jsPDF hasn't been guaranteed yet, ensure it loads now
+                await ensureJsPDF();
 
                 const blob = await generatePDFasBlob();
                 downloadBlob(blob, 'CONTEGRITY_Responses.pdf');
 
-                // Per survey logic, if user selects 'No' (value '2') to keeping data, clear it after download.
+                // Check the 'Keep' answer (from the hypothetical last question of the survey)
+                // '2' is assumed to mean 'No, do not keep the data'
                 if (surveyAnswers && String(surveyAnswers['Keep']) === '2') {
+                    // Clear both keys for safety, though only 'surveyAnswers' is used here
                     localStorage.removeItem('surveyAnswers');
+                    localStorage.removeItem('contegrityResponses'); 
                     console.log("Local storage cleared per user request ('Keep' answer was '2').");
                 } else {
                     console.log("Local storage retained.");
@@ -411,7 +483,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 downloadButton.disabled = false;
             } catch (err) {
                 console.error('PDF generation failed:', err);
-                alert('Failed to generate PDF: ' + (err && err.message ? err.message : String(err)));
+                // Use custom message box instead of alert if this were a full application, 
+                // but for a single HTML file, alert is a simple fallback for visibility.
+                if (summaryContent) {
+                     summaryContent.insertAdjacentHTML('beforebegin', `<div class="error-message"><strong>Download Failed:</strong> ${err.message}.</div>`);
+                }
                 downloadButton.disabled = false;
                 downloadButton.textContent = 'Download Responses';
             }
