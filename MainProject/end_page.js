@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // --- DOM Elements ---
     const summaryContent = document.getElementById('summary-content');
     const downloadButton = document.getElementById('download-button');
+    // Note: The 'start-over-button' element is retrieved later in setupEventListeners
 
     // --- State ---
     let surveyConfig = {};
@@ -101,7 +102,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Use String() conversion to ensure consistent comparison (e.g., '1' == 1)
         const currentValue = String(surveyAnswers[condition.questionId] || '');
         const targetValue = String(condition.value);
-        
+
         switch (condition.operator) {
             case 'equals':
                 return currentValue === targetValue;
@@ -186,13 +187,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             summaryContent.appendChild(sectionHeader);
 
             const sectionContent = document.createElement('div');
-            
+
             let sectionHasVisibleAnswers = false;
             let consumedQuestionIds = new Set(); // Set to track answers already merged
 
             for (let i = 0; i < (section.items || []).length; i++) {
                 const item = section.items[i];
-                
+
                 if (consumedQuestionIds.has(item.id)) continue; // Skip if this item was merged into the previous one
 
                 // Skip system/internal keys
@@ -206,14 +207,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 const rawAnswer = surveyAnswers[item.id];
                 let answer = getFormattedAnswer(item, rawAnswer); // Use let for modification
-                
+
                 // Skip if no meaningful answer provided for the primary question
                 if (!rawAnswer || answer === 'No Answer' || (Array.isArray(rawAnswer) && rawAnswer.length === 0)) continue;
 
                 // --- MERGE LOGIC START (HTML) ---
                 if (['yesno', 'radiogroup', 'dropdown'].includes(item.type)) {
                     const nextItem = section.items[i + 1];
-                    
+
                     // Check if the next item is a visible, answered text/textarea intended for merging
                     if (nextItem && ['text', 'textarea'].includes(nextItem.type) && isQuestionVisible(nextItem)) {
                         const nextRawAnswer = surveyAnswers[nextItem.id];
@@ -235,7 +236,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // Escape HTML for display
                 const escapedQuestionText = escapeHtml(item.text);
                 const escapedAnswer = escapeHtml(answer);
-                
+
                 // Normalize newlines from textareas for HTML display (<br/>)
                 const htmlAnswer = escapedAnswer.replace(/\n/g, '<br/>');
 
@@ -246,13 +247,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 sectionContent.appendChild(summaryItem);
             }
-            
+
             // Only append section content if it contained visible answers
             if (sectionHasVisibleAnswers) {
-                 summaryContent.appendChild(sectionContent);
+                summaryContent.appendChild(sectionContent);
             } else {
                 // Remove the section header if no answers were shown in it
-                sectionHeader.remove(); 
+                sectionHeader.remove();
             }
         }
 
@@ -288,7 +289,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const pageWidth = doc.internal.pageSize.getWidth();
         const pageHeight = doc.internal.pageSize.getHeight();
         let cursorY = 60;
-        
+
         // Configuration for question filtering
         const supportedTypes = ['textarea', 'text', 'date', 'checkbox', 'yesno', 'radiogroup', 'dropdown'];
 
@@ -299,7 +300,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // System date
         const systemDate = new Date();
-        const isoDate = systemDate.toLocaleString(); 
+        const isoDate = systemDate.toLocaleString();
         doc.setFontSize(11);
         doc.text(`Date of completion: ${isoDate}`, margin, cursorY);
         cursorY += 18;
@@ -320,13 +321,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Iterate through sections & items
         for (const section of surveyConfig.questions || []) {
             let sectionHasVisibleAnswers = false;
-            
+
             // Pre-check section visibility (only necessary to determine if section header should be printed)
             const items = section.items || [];
-            if (items.some(item => 
+            if (items.some(item =>
                 item.id !== 'DateOfCompletion' &&
                 supportedTypes.includes(item.type) &&
-                isQuestionVisible(item) && 
+                isQuestionVisible(item) &&
                 (surveyAnswers[item.id] !== undefined && getFormattedAnswer(item, surveyAnswers[item.id]) !== 'No Answer')
             )) {
                 sectionHasVisibleAnswers = true;
@@ -339,44 +340,44 @@ document.addEventListener('DOMContentLoaded', async () => {
             doc.setFont(undefined, 'bold');
             const sectionTitle = section.title || section.id;
             const sectLines = doc.splitTextToSize(sectionTitle, pageWidth - margin * 2);
-            
+
             // Page check before printing section title
             for (const line of sectLines) {
                 checkPage(16);
                 doc.text(line, margin, cursorY);
                 cursorY += 16;
             }
-            
+
             doc.setFont(undefined, 'normal');
             cursorY += 4;
-            
+
             let consumedQuestionIds = new Set(); // Set to track answers already merged
 
             // Each question
             for (let i = 0; i < items.length; i++) {
                 const item = items[i];
-                
+
                 if (consumedQuestionIds.has(item.id)) continue; // Skip if this item was merged into the previous one
 
                 if (item.id === 'DateOfCompletion' || item.id === 'Keep' || item.type === 'info') continue;
                 if (!supportedTypes.includes(item.type)) continue;
                 if (!isQuestionVisible(item)) continue;
-                
+
                 const rawAnswer = surveyAnswers[item.id];
                 let answer = getFormattedAnswer(item, rawAnswer); // Use let for modification
-                
+
                 if (!rawAnswer || answer === 'No Answer' || (Array.isArray(rawAnswer) && rawAnswer.length === 0)) continue;
 
                 // --- MERGE LOGIC START (PDF) ---
                 if (['yesno', 'radiogroup', 'dropdown'].includes(item.type)) {
                     const nextItem = items[i + 1];
-                    
+
                     // Check if the next item is a visible, answered text/textarea intended for merging
                     if (nextItem && ['text', 'textarea'].includes(nextItem.type) && isQuestionVisible(nextItem)) {
                         const nextRawAnswer = surveyAnswers[nextItem.id];
                         if (nextRawAnswer && String(nextRawAnswer).trim() !== '') {
                             // Merge the answers: "Yes. Explanation text here"
-                            answer += `. ${String(nextRawAnswer).trim()}`; 
+                            answer += `. ${String(nextRawAnswer).trim()}`;
                             consumedQuestionIds.add(nextItem.id); // Mark the text field as consumed
                         }
                     }
@@ -386,10 +387,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // --- 1. Question text ---
                 doc.setFontSize(11);
                 doc.setFont(undefined, 'bold');
-                
+
                 // Add a small gap before the new question
-                if (cursorY > 60) cursorY += 4; 
-                
+                if (cursorY > 60) cursorY += 4;
+
                 const qLines = doc.splitTextToSize(item.text, pageWidth - margin * 2);
                 for (const line of qLines) {
                     checkPage(14);
@@ -400,17 +401,17 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // --- 2. Answer formatting and printing ---
                 doc.setFontSize(11);
                 doc.setFont(undefined, 'normal');
-                
+
                 const answerPadding = 10; // indentation for answer
-                
+
                 // Normalize and respect newlines: split answer into paragraphs by newline,
-                const normalizedAnswer = String(answer).replace(/\r\n|\r/g, '\n'); 
+                const normalizedAnswer = String(answer).replace(/\r\n|\r/g, '\n');
                 const paragraphs = normalizedAnswer.split('\n');
 
                 for (const para of paragraphs) {
                     // treat empty paragraph as an intentional blank line
                     if (para.trim() === '') {
-                        cursorY += 10; 
+                        cursorY += 10;
                         checkPage(10);
                         continue;
                     }
@@ -447,51 +448,83 @@ document.addEventListener('DOMContentLoaded', async () => {
         a.click();
         a.remove();
         // Clean up the object URL after a short delay
-        setTimeout(() => URL.revokeObjectURL(url), 2000); 
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
     }
 
     /**
-     * Sets up the event listener for the download button and handles data cleanup.
+     * Sets up the event listeners for the download and start-over buttons.
      */
     function setupEventListeners() {
-        if (!downloadButton) return;
+        // --- DOWNLOAD BUTTON LOGIC ---
+        if (downloadButton) {
+            downloadButton.addEventListener('click', async () => {
+                try {
+                    downloadButton.disabled = true;
+                    const originalText = downloadButton.textContent;
+                    downloadButton.textContent = 'Generating…';
 
-        downloadButton.addEventListener('click', async () => {
-            try {
-                downloadButton.disabled = true;
-                const originalText = downloadButton.textContent;
-                downloadButton.textContent = 'Generating…';
+                    // If jsPDF hasn't been guaranteed yet, ensure it loads now
+                    await ensureJsPDF();
+
+                    const blob = await generatePDFasBlob();
+                    downloadBlob(blob, 'CONTEGRITY_Responses.pdf');
+
+                    // Check the 'Keep' answer (if user chose not to keep data)
+                    // '2' is assumed to mean 'No, do not keep the data'
+                    if (surveyAnswers && String(surveyAnswers['Keep']) === '2') {
+                        // Clear both keys for safety
+                        localStorage.removeItem('surveyAnswers');
+                        localStorage.removeItem('contegrityResponses');
+                        console.log("Local storage cleared per user request ('Keep' answer was '2').");
+                    } else {
+                        console.log("Local storage retained.");
+                    }
+
+                    downloadButton.textContent = originalText;
+                    downloadButton.disabled = false;
+                } catch (err) {
+                    console.error('PDF generation failed:', err);
+                    if (summaryContent) {
+                         // Insert a visible error message above the summary
+                         const errorMessage = document.createElement('div');
+                         errorMessage.className = 'error-message';
+                         errorMessage.innerHTML = `<strong>Download Failed:</strong> ${err.message}.`;
+                         summaryContent.insertAdjacentElement('beforebegin', errorMessage);
+                    }
+                    downloadButton.disabled = false;
+                    downloadButton.textContent = 'Download Responses';
+                }
+            });
+        }
+
+        // --- START OVER BUTTON LOGIC (MODIFIED: Added Confirmation) ---
+        const startOverButton = document.getElementById('start-over-button');
+
+        if (startOverButton) {
+            startOverButton.addEventListener('click', () => {
                 
-                // If jsPDF hasn't been guaranteed yet, ensure it loads now
-                await ensureJsPDF();
+                // Show confirmation dialog 
+                const confirmed = window.confirm(
+                    "Are you sure you want to start over? This will permanently erase all your saved answers and return you to the first page of the survey."
+                );
 
-                const blob = await generatePDFasBlob();
-                downloadBlob(blob, 'CONTEGRITY_Responses.pdf');
+                if (confirmed) {
+                    // User clicked OK
 
-                // Check the 'Keep' answer (from the hypothetical last question of the survey)
-                // '2' is assumed to mean 'No, do not keep the data'
-                if (surveyAnswers && String(surveyAnswers['Keep']) === '2') {
-                    // Clear both keys for safety, though only 'surveyAnswers' is used here
+                    // 1. Clear the keys used to store answers/progress
                     localStorage.removeItem('surveyAnswers');
                     localStorage.removeItem('contegrityResponses'); 
-                    console.log("Local storage cleared per user request ('Keep' answer was '2').");
-                } else {
-                    console.log("Local storage retained.");
-                }
+                    
+                    console.log("All survey data cleared from local storage. Redirecting to start page.");
 
-                downloadButton.textContent = originalText;
-                downloadButton.disabled = false;
-            } catch (err) {
-                console.error('PDF generation failed:', err);
-                // Use custom message box instead of alert if this were a full application, 
-                // but for a single HTML file, alert is a simple fallback for visibility.
-                if (summaryContent) {
-                     summaryContent.insertAdjacentHTML('beforebegin', `<div class="error-message"><strong>Download Failed:</strong> ${err.message}.</div>`);
+                    // 2. Redirect to the first page of the survey
+                    window.location.href = 'survey.html'; 
+                } else {
+                    // User clicked Cancel
+                    console.log("Start over cancelled by user.");
                 }
-                downloadButton.disabled = false;
-                downloadButton.textContent = 'Download Responses';
-            }
-        });
+            });
+        }
     }
 
     // --- Start the Application ---

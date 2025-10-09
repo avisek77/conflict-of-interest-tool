@@ -641,3 +641,11 @@ textarea {
     text-shadow: 0 0 8px rgba(204, 0, 0, 0.4) !important;
     font-weight: bold !important;
 }
+
+.red-button {
+    background: #cc0000 !important; /* Force red color */
+}
+
+.red-button:hover {
+    background: #990000 !important; /* Darker red on hover */
+}
