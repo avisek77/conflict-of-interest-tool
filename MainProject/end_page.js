@@ -452,6 +452,62 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     /**
+     * Sets up the email subscription form submission logic.
+     */
+    function setupSubscriptionForm() {
+        const form = document.getElementById('email-subscription-form');
+        const emailInput = document.getElementById('subscriber-email');
+        const submitButton = document.getElementById('subscribe-button');
+        const messageEl = document.getElementById('subscription-message');
+        
+        if (!form) return;
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // This is the crucial line that stops the page refresh
+
+            const email = emailInput.value.trim();
+            if (!email) {
+                messageEl.textContent = 'Please enter a valid email address.';
+                messageEl.style.color = '#cc0000';
+                return;
+            }
+
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            messageEl.textContent = '';
+
+            try {
+                // NOTE: Using the Formspree URL from your provided file.
+                // Replace this if you have a different one.
+                const response = await fetch('https://formspree.io/f/xgvnlwdo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email }),
+                });
+
+                if (response.ok) {
+                    messageEl.textContent = 'Thank you for subscribing!';
+                    messageEl.style.color = '#198a02';
+                    emailInput.value = ''; // Clear the input on success
+                } else {
+                    throw new Error('Submission failed. The server responded with an error.');
+                }
+            } catch (error) {
+                console.error('Subscription form error:', error);
+                messageEl.textContent = 'Something went wrong. Please try again later.';
+                messageEl.style.color = '#cc0000';
+            } finally {
+                // Re-enable the button
+                submitButton.disabled = false;
+                submitButton.textContent = 'Subscribe';
+            }
+        });
+    }
+
+    /**
      * Sets up the event listeners for the download and start-over buttons.
      */
     function setupEventListeners() {

@@ -649,3 +649,63 @@ textarea {
 .red-button:hover {
     background: #990000 !important; /* Darker red on hover */
 }
+
+/* Styles for Email Subscription Form --- */
+
+.email-form-container {
+    text-align: center;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 25px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.email-form-container h3 {
+    margin-top: 0;
+    color: #198a02;
+}
+
+#email-subscription-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+#subscriber-email {
+    flex-grow: 1;
+    min-width: 250px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+#subscribe-button {
+    padding: 12px 28px;
+    font-size: 1rem;
+    background: #198a02;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#subscribe-button:hover {
+    background: #115e01;
+}
+
+#subscribe-button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+#subscription-message {
+    margin-top: 15px;
+    font-weight: bold;
+    min-height: 1.2em;
+}
