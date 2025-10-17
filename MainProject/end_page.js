@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // 4. Render and Setup
             renderSummary();
             setupEventListeners();
+            setupSubscriptionForm();
         } catch (error) {
             console.error('Summary page initialization failed:', error);
             if (summaryContent) summaryContent.innerHTML = `<p class="error-message"><strong>Error loading summary:</strong> ${error.message}</p>`;
@@ -463,7 +464,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!form) return;
 
         form.addEventListener('submit', async (event) => {
-            event.preventDefault(); // This is the crucial line that stops the page refresh
+                event.preventDefault(); // This is the crucial line that stops the page refresh
 
             const email = emailInput.value.trim();
             if (!email) {
