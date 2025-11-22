@@ -709,3 +709,211 @@ textarea {
     font-weight: bold;
     min-height: 1.2em;
 }
+
+/* ==================== */
+/* Dark Mode Styles     */
+/* ==================== */
+
+/* Dark mode variables */
+:root {
+  --bg-color: white;
+  --text-color: #222;
+  --container-bg: white;
+  --header-bg: linear-gradient(135deg, #ccffe6, #fff);
+  --info-box-bg: #e6fff2;
+  --info-box-border: #a8ffb7;
+  --highlight-color: #198a02;
+  --button-bg: #198a02;
+  --button-hover: #115e01;
+  --form-bg: #f8f9fa;
+  --form-border: #e9ecef;
+  --progress-bg: #e0e0e0;
+  --progress-fill: #3dbb38;
+}
+
+/* Dark mode overrides */
+body.dark-mode {
+  --bg-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --container-bg: #2d2d2d;
+  --header-bg: linear-gradient(135deg, #1a3d2a, #2d2d2d);
+  --info-box-bg: #2a3d2a;
+  --info-box-border: #3d5a3d;
+  --highlight-color: #4CAF50;
+  --button-bg: #4CAF50;
+  --button-hover: #45a049;
+  --form-bg: #3d3d3d;
+  --form-border: #5a5a5a;
+  --progress-bg: #5a5a5a;
+  --progress-fill: #4CAF50;
+}
+
+/* Apply variables */
+body {
+  background: var(--header-bg);
+  color: var(--text-color);
+}
+
+.container {
+  background: var(--container-bg);
+  position: relative; /* Added for toggle positioning */
+}
+
+.info-box {
+  background-color: var(--info-box-bg);
+  border-color: var(--info-box-border);
+}
+
+.highlight {
+  color: var(--highlight-color);
+}
+
+.button-container button,
+.next-button,
+.back-button,
+.Start_Survey-button,
+#subscribe-button {
+  background: var(--button-bg);
+}
+
+.button-container button:hover,
+.next-button:hover,
+.back-button:hover,
+.Start_Survey-button:hover,
+#subscribe-button:hover {
+  background: var(--button-hover);
+}
+
+.progress-bar {
+  background-color: var(--progress-bg);
+}
+
+.progress-fill {
+  background-color: var(--progress-fill);
+}
+
+.form-group,
+.info-display {
+  background-color: var(--form-bg);
+  border-color: var(--form-border);
+}
+
+/* Dark mode toggle switch */
+.dark-mode-toggle {
+  position: absolute;
+  top: 35px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 100;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: var(--highlight-color);
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(30px);
+}
+
+.toggle-label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+/* Dark mode specific adjustments */
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea {
+  background-color: #3d3d3d;
+  color: var(--text-color);
+  border-color: #5a5a5a;
+}
+
+body.dark-mode .form-group input:focus,
+body.dark-mode .form-group textarea:focus {
+  border-color: var(--highlight-color);
+}
+
+body.dark-mode .email-form-container {
+  background-color: #3d3d3d;
+  border-color: #5a5a5a;
+}
+
+body.dark-mode .section-card {
+  background: linear-gradient(180deg, #3d3d3d, #2d2d2d);
+  border-color: #5a5a5a;
+}
+
+body.dark-mode .red-button {
+  background: #ff4444 !important;
+}
+
+body.dark-mode .red-button:hover {
+  background: #cc0000 !important;
+}
+
+/* NEW: Dark mode improvements as requested */
+body.dark-mode .intro {
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .form-group label {
+  color: #4CAF50 !important;
+}
+
+body.dark-mode .help-text {
+  background-color: #333 !important;
+  color: #77b079 !important;
+  border-left-color: #4CAF50 !important;
+}
+
+body.dark-mode .sub-section-header h3 {
+  color: #4CAF50 !important;
+}
+
+body.dark-mode .info-display {
+  color: #5ddf5d !important;
+}
+
+body.dark-mode .yesno-legend {
+  color: #4CAF50 !important;
+}
